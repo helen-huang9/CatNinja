@@ -10,8 +10,18 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            NavigationLink(destination: GameSceneView()) {
-                Label("New Game", systemImage: /*@START_MENU_TOKEN@*/"42.circle"/*@END_MENU_TOKEN@*/)
+            ZStack {
+                Image("orange_cat_button")
+                    .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
+                    .padding(.bottom, 20.0)
+                    .foregroundColor(Color.black)
+                NavigationLink(destination: GameSceneView()) {
+                    Text("New Game")
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.black)
+                        .font(.title)
+                        .frame(width: 200.0, height: 50.0)
+                }
             }
         }
     }
