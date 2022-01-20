@@ -9,10 +9,10 @@ import SwiftUI
 import SpriteKit
 
 struct GameSceneView: View {
-    let scene = SKScene(size: CGSize(width: 50, height: 50))
+    let scene = SKScene(fileNamed: "GameScene")!
+    
     var body: some View {
         SpriteView(scene: scene)
-            .background(Color.red)
     }
 }
 
