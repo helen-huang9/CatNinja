@@ -30,6 +30,19 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        print(self.children)
+        self.children.forEach { node in
+            guard let view = self.view else {
+                return
+            }
+            let minX = view.bounds.minX
+            let minY = view.bounds.minY
+            let maxX = view.bounds.maxX
+            let maxY = view.bounds.maxY
+            
+            let x = CGFloat.random(in: minX ... maxX) - view.bounds.midX
+            let y = CGFloat.random(in: minY ... maxY) - view.bounds.midY
+            
+            node.position = CGPoint(x: x, y: y)
+        }
     }
 }
