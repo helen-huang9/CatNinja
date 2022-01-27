@@ -9,8 +9,7 @@ import SwiftUI
 import SpriteKit
 
 struct GameSceneView: View {
-    let scene = SKScene(fileNamed: "GameScene")!
-    
+    let scene = GameScene(fileNamed: "GameScene")!
     
     var body: some View {
         SpriteView(scene: scene)
