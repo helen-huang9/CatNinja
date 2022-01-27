@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View {    
     var body: some View {
         NavigationView {
             ZStack {
+                Color.pink
+                    .ignoresSafeArea()
                 Image("orange_cat_button")
                     .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
                     .padding(.bottom, 20.0)
