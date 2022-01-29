@@ -19,12 +19,12 @@ class GameScene: SKScene {
         
         let secondHalf = SKSpriteNode(imageNamed: "yarn-half-1")
         secondHalf.name = "second half"
-        secondHalf.setScale(0.2)
+//        secondHalf.setScale(0.2)
         secondHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "yarn-half-1"), size: secondHalf.size)
         secondHalf.anchorPoint = CGPoint(x: 0.5, y: 1)
         
         self.addChild(firstHalf)
-        self.addChild(secondHalf)
+        firstHalf.addChild(secondHalf)
         
         let mid = CGPoint(x: 0, y: 0)
         let firstHalfJoint = SKPhysicsJointFixed.joint(withBodyA: firstHalf.physicsBody!, bodyB: secondHalf.physicsBody!, anchor: mid)
@@ -47,9 +47,34 @@ class GameScene: SKScene {
         
         let location = touch.location(in: self)
         
-        self.children.forEach { node in
-            node.position = location
+        let touchedNodes = nodes(at: location)
+        
+        touchedNodes.forEach { node in
+            if let spriteNode = node as? SKSpriteNode {
+                let root = getRootNode(node: spriteNode)
+                explode(node: root)
+            }
         }
+    }
+    
+    func explode(node: SKSpriteNode) {
+        node.physicsBody?.joints.forEach { joint in
+            self.physicsWorld.remove(joint)
+        }
+        node.physicsBody?.velocity = CGVector(dx: CGFloat.random(in: -50 ... 50), dy: CGFloat.random(in: -50 ... 50))
+        
+        node.children.forEach { child in
+            if let spriteChild = child as? SKSpriteNode {
+                explode(node: spriteChild)
+            }
+        }
+    }
+    
+    func getRootNode(node: SKSpriteNode) -> SKSpriteNode {
+        guard let parent = node.parent as? SKSpriteNode else {
+            return node
+        }
+        return getRootNode(node: parent)
     }
     
     override func update(_ currentTime: TimeInterval) {
