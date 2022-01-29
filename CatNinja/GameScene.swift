@@ -9,6 +9,10 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    override func sceneDidLoad() {
+        self.addChild(SKSpriteNode(imageNamed: "yarn"))
+    }
+    
     override var isUserInteractionEnabled: Bool {
         get {
             return true
