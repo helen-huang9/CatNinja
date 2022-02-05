@@ -61,10 +61,12 @@ class GameScene: SKScene {
         node.physicsBody?.joints.forEach { joint in
             self.physicsWorld.remove(joint)
         }
-        node.physicsBody?.velocity = CGVector(dx: CGFloat.random(in: -50 ... 50), dy: CGFloat.random(in: -50 ... 50))
+        node.physicsBody?.velocity = CGVector(dx: CGFloat.random(in: -100 ... 100), dy: CGFloat.random(in: -100 ... 100))
         
         node.children.forEach { child in
             if let spriteChild = child as? SKSpriteNode {
+                spriteChild.setScale(0.2)
+                spriteChild.move(toParent: self)
                 explode(node: spriteChild)
             }
         }
@@ -77,20 +79,23 @@ class GameScene: SKScene {
         return getRootNode(node: parent)
     }
     
+    func deleteObjects(bufferFrame: CGRect) {
+        self.children.forEach { node in
+            let pos = self.convertPoint(toView: node.position);
+            if (!bufferFrame.contains(pos)) {
+                node.removeFromParent();
+            }
+        }
+    }
+    
+    func getBuffer(buffer: CGFloat) -> CGRect {
+        let view = self.view!
+        return CGRect(x: view.frame.origin.x, y: view.frame.origin.y,
+                      width: view.frame.width + buffer, height: view.frame.height + buffer);
+    }
+    
     override func update(_ currentTime: TimeInterval) {
-//        self.children.forEach { node in
-//            guard let view = self.view else {
-//                return
-//            }
-//            let minX = view.bounds.minX
-//            let minY = view.bounds.minY
-//            let maxX = view.bounds.maxX
-//            let maxY = view.bounds.maxY
-//
-//            let x = CGFloat.random(in: minX ... maxX) - view.bounds.midX
-//            let y = CGFloat.random(in: minY ... maxY) - view.bounds.midY
-//
-//            node.position = CGPoint(x: x, y: y)
-//        }
+        let bufferFrame = getBuffer(buffer: 20.0);
+        deleteObjects(bufferFrame: bufferFrame);
     }
 }
