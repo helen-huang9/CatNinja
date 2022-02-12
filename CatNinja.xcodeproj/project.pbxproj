@@ -14,6 +14,7 @@
 		BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4FB2798F067003570B9 /* GameSceneView.swift */; };
 		BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4FF2798F7FB003570B9 /* GameScene.sks */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
+		BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		BF5FB4FB2798F067003570B9 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		BF5FB4FF2798F7FB003570B9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteNodeFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				BF5FB4F12798F00B003570B9 /* Assets.xcassets */,
 				BF5FB4F32798F00B003570B9 /* Preview Content */,
 				BF5FB4FB2798F067003570B9 /* GameSceneView.swift */,
+				BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
 			);
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */,
 				BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */,
 				BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */,
 				BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */,
