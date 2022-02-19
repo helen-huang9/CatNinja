@@ -7,26 +7,37 @@
 
 import SwiftUI
 
-struct ContentView: View {    
+struct ContentView: View {
+    @State private var buttonPushed = false
     var body: some View {
         NavigationView {
             ZStack {
                 Color.pink
                     .ignoresSafeArea()
-                Image("orange_cat_button")
-                    .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
-                    .padding(.bottom, 20.0)
-                    .foregroundColor(Color.black)
-                NavigationLink(destination: { GameSceneView() })
-                {
-                    Text("New Game")
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.black)
-                        .font(.title)
-                        .frame(width: 200.0, height: 50.0)
-                }
+                Button(action: {
+                    buttonPushed.toggle()
+                }, label: {
+                    ZStack {
+                        Image("orange_cat_button")
+                            .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
+                            .padding(.bottom, 20.0)
+                            .foregroundColor(Color.black)
+                        Text("New Game")
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.black)
+                            .font(.title)
+                            .frame(width: 200.0, height: 50.0)
+                    }})
+                    .fullScreenCover(isPresented: $buttonPushed, onDismiss: didDismiss) {
+                        GameSceneView()
+                        .ignoresSafeArea(edges: .all)
+                    }
             }
         }
+    }
+    
+    func didDismiss() {
+        buttonPushed.toggle()
     }
 }
 

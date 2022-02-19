@@ -9,6 +9,7 @@ import SwiftUI
 import SpriteKit
 
 struct GameSceneView: View {
+    @Environment(\.dismiss) private var dismiss
     let scene = GameScene(fileNamed: "GameScene")!
     
     var body: some View {
