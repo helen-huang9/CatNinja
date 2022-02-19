@@ -17,7 +17,8 @@ struct ContentView: View {
                     .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
                     .padding(.bottom, 20.0)
                     .foregroundColor(Color.black)
-                NavigationLink(destination: GameSceneView()) {
+                NavigationLink(destination: { GameSceneView() })
+                {
                     Text("New Game")
                         .fontWeight(.semibold)
                         .foregroundColor(Color.black)

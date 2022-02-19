@@ -9,7 +9,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    override func sceneDidLoad() {
+    override func didMove(to view: SKView) {
+        self.removeAllChildren()
         addYarnToScene(scene: self)
         addSardineToScene(scene: self)
         addBottleToScene(scene: self)
