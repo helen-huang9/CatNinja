@@ -28,16 +28,12 @@ struct ContentView: View {
                             .font(.title)
                             .frame(width: 200.0, height: 50.0)
                     }})
-                    .fullScreenCover(isPresented: $buttonPushed, onDismiss: didDismiss) {
+                    .fullScreenCover(isPresented: $buttonPushed, onDismiss: {}) {
                         GameSceneView()
                         .ignoresSafeArea(edges: .all)
                     }
             }
         }
-    }
-    
-    func didDismiss() {
-        buttonPushed.toggle()
     }
 }
 

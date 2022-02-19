@@ -13,7 +13,13 @@ struct GameSceneView: View {
     let scene = GameScene(fileNamed: "GameScene")!
     
     var body: some View {
-        SpriteView(scene: scene)
+        ZStack {
+            SpriteView(scene: scene)
+            Button("Back to Title Screen") {
+                dismiss()
+            }
+            .position(x: 60, y: 50) // Kinda hacky for now
+        }
     }
 }
 
