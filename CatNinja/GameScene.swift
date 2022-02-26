@@ -41,10 +41,12 @@ class GameScene: SKScene {
     }
     
     func explode(node: SKSpriteNode) {
-        node.physicsBody?.joints.forEach { joint in
+        node.physicsBody!.joints.forEach { joint in
             self.physicsWorld.remove(joint)
         }
-        node.physicsBody?.velocity = CGVector(dx: CGFloat.random(in: -100 ... 100), dy: CGFloat.random(in: -100 ... 100))
+        node.physicsBody!.velocity = CGVector(dx: CGFloat.random(in: -100 ... 100), dy: CGFloat.random(in: -100 ... 100))
+        node.physicsBody!.collisionBitMask = 0
+        
         
         node.children.forEach { child in
             if let spriteChild = child as? SKSpriteNode {

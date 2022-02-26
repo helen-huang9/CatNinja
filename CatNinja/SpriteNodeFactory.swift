@@ -23,6 +23,7 @@ func addBottleToSceneWithRandomization(scene: SKScene) {
 }
 
 func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, anchor1: CGPoint, scale: CGFloat, imgName2: String, anchor2: CGPoint, scene: SKScene) {
+    // Create first half
     let firstHalf = SKSpriteNode(imageNamed: imgName1)
     firstHalf.name = "first half"
     firstHalf.setScale(scale)
@@ -30,18 +31,24 @@ func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, an
     firstHalf.anchorPoint = anchor1
     firstHalf.position = pos
     firstHalf.physicsBody!.velocity = vel
+    firstHalf.physicsBody!.restitution = 1.0
     
+    // Create second half
     let secondHalf = SKSpriteNode(imageNamed: imgName2)
     secondHalf.name = "second half"
     secondHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imgName2), size: secondHalf.size)
     secondHalf.anchorPoint = anchor2
+    secondHalf.physicsBody!.velocity = vel
     
+    // Make second half a child of first half
     scene.addChild(firstHalf)
     firstHalf.addChild(secondHalf)
     
+    // Add second half to first half with a joint
     let mid = CGPoint(x: 0, y: 0)
     let firstHalfJoint = SKPhysicsJointFixed.joint(withBodyA: firstHalf.physicsBody!, bodyB: secondHalf.physicsBody!, anchor: mid)
     
+    // Add the joint to physics world
     scene.physicsWorld.add(firstHalfJoint)
 }
 
@@ -70,8 +77,8 @@ func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
     var velocity = CGVector(dx: 0.0 - pos.x, dy: 0.0 - pos.y)
     velocity.dx += Double.random(in: -10.0...10.0)
     velocity.dy += Double.random(in: -10.0...10.0)
-    velocity.dx *= 10
-    velocity.dy *= 10
+    velocity.dx *= 0.5
+    velocity.dy *= 0.5
     print("Velocity:", velocity)
     return velocity
 }
