@@ -9,11 +9,10 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var lastTimeObjSpawned:Int?
+    
     override func didMove(to view: SKView) {
         self.removeAllChildren()
-        addYarnToScene(scene: self)
-        addSardineToScene(scene: self)
-        addBottleToScene(scene: self)
     }
     
     override var isUserInteractionEnabled: Bool {
@@ -79,6 +78,26 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        // Spawn objects into scene
+        let intTime = Int(currentTime)
+        if (intTime % 2 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
+            let obj = Int.random(in: 0...2)
+            lastTimeObjSpawned = intTime
+            print("System time:", intTime)
+            print("New Object Spawned:", obj)
+            switch obj {
+            case 0:
+                addYarnToSceneWithRandomization(scene: self)
+            case 1:
+                addBottleToSceneWithRandomization(scene: self)
+            case 2:
+                addSardineToSceneWithRandomization(scene: self)
+            default:
+                addYarnToSceneWithRandomization(scene: self)
+            }
+        }
+        
+        // Delete objects when they go out of our buffer frame
         let bufferFrame = getBuffer(buffer: 20.0);
         deleteObjects(bufferFrame: bufferFrame);
     }

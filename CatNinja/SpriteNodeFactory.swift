@@ -7,28 +7,29 @@
 
 import SpriteKit
 
-func addYarnToScene(scene: SKScene) {
-    combineAndAddFragsToScene(pos: getRandPointInScene(scene: scene), imgName1: "yarn-half-2", anchor1: CGPoint(x: 0.5, y: 0), scale: 0.2,
-                              imgName2: "yarn-half-1", anchor2: CGPoint(x: 0.5, y: 1), scene: scene)
+func addYarnToSceneWithRandomization(scene: SKScene) {
+    let pos = getRandPointInScene(scene: scene)
+    combineAndAddFragsToScene(pos: pos, vel: getRandVelocityTowardsCenterOfScene(pos: pos), imgName1: "yarn-half-2", anchor1: CGPoint(x: 0.5, y: 0), scale: 0.2, imgName2: "yarn-half-1", anchor2: CGPoint(x: 0.5, y: 1), scene: scene)
 }
 
-func addSardineToScene(scene: SKScene) {
-    combineAndAddFragsToScene(pos: getRandPointInScene(scene: scene), imgName1: "sardine_first_half", anchor1: CGPoint(x: 1, y: 0.5), scale: 0.2,
-                              imgName2: "sardine_second_half", anchor2: CGPoint(x: 0, y: 0.5), scene: scene)
+func addSardineToSceneWithRandomization(scene: SKScene) {
+    let pos = getRandPointInScene(scene: scene)
+    combineAndAddFragsToScene(pos: pos, vel: getRandVelocityTowardsCenterOfScene(pos: pos), imgName1: "sardine_first_half", anchor1: CGPoint(x: 1, y: 0.5), scale: 0.2, imgName2: "sardine_second_half", anchor2: CGPoint(x: 0, y: 0.5), scene: scene)
 }
 
-func addBottleToScene(scene: SKScene) {
-    combineAndAddFragsToScene(pos: getRandPointInScene(scene: scene), imgName1: "spray_bottle_top_half", anchor1: CGPoint(x: 0.5, y: 0), scale: 0.2,
-                              imgName2: "spray_bottle_bottom_half", anchor2: CGPoint(x: 0.50, y: 0.38), scene: scene)
+func addBottleToSceneWithRandomization(scene: SKScene) {
+    let pos = getRandPointInScene(scene: scene)
+    combineAndAddFragsToScene(pos: pos, vel: getRandVelocityTowardsCenterOfScene(pos: pos), imgName1: "spray_bottle_top_half", anchor1: CGPoint(x: 0.5, y: 0), scale: 0.2, imgName2: "spray_bottle_bottom_half", anchor2: CGPoint(x: 0.50, y: 0.38), scene: scene)
 }
 
-func combineAndAddFragsToScene(pos: CGPoint, imgName1: String, anchor1: CGPoint, scale: CGFloat, imgName2: String, anchor2: CGPoint, scene: SKScene) {
+func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, anchor1: CGPoint, scale: CGFloat, imgName2: String, anchor2: CGPoint, scene: SKScene) {
     let firstHalf = SKSpriteNode(imageNamed: imgName1)
     firstHalf.name = "first half"
     firstHalf.setScale(scale)
     firstHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imgName1), size: firstHalf.size)
     firstHalf.anchorPoint = anchor1
     firstHalf.position = pos
+    firstHalf.physicsBody!.velocity = vel
     
     let secondHalf = SKSpriteNode(imageNamed: imgName2)
     secondHalf.name = "second half"
@@ -45,9 +46,32 @@ func combineAndAddFragsToScene(pos: CGPoint, imgName1: String, anchor1: CGPoint,
 }
 
 func getRandPointInScene(scene: SKScene) -> CGPoint {
-    var randFramePt = CGPoint(x: Double.random(in: -200...200),
-                              y: Double.random(in: -200...200))
-//    randFramePt.x -= scene.frame.midX
-//    randFramePt.y -= scene.frame.midY
-    return randFramePt
+    let location = Int.random(in: 0...3)
+    let buffer = 20.0
+    var randPt: CGPoint?
+    switch location {
+    case 0: // Left
+        randPt = CGPoint(x: Double.random(in: (scene.frame.minX - buffer)...scene.frame.minX),
+                         y: Double.random(in: (scene.frame.minY + buffer)...(scene.frame.maxY - buffer)))
+    case 1: // Right
+        randPt = CGPoint(x: Double.random(in: (scene.frame.maxX - buffer)...scene.frame.maxX),
+                         y: Double.random(in: (scene.frame.minY + buffer)...(scene.frame.maxY - buffer)))
+    case 2: // Top
+        randPt = CGPoint(x: Double.random(in: (scene.frame.minX + buffer)...(scene.frame.maxX - buffer)),
+                         y: Double.random(in: (scene.frame.minY)...(scene.frame.minY + buffer)))
+    default: // Bottom
+        randPt = CGPoint(x: Double.random(in: (scene.frame.minX + buffer)...(scene.frame.maxX - buffer)),
+                         y: Double.random(in: (scene.frame.maxY - buffer)...(scene.frame.maxY)))
+    }
+    return randPt!
+}
+
+func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
+    var velocity = CGVector(dx: 0.0 - pos.x, dy: 0.0 - pos.y)
+    velocity.dx += Double.random(in: -10.0...10.0)
+    velocity.dy += Double.random(in: -10.0...10.0)
+    velocity.dx *= 10
+    velocity.dy *= 10
+    print("Velocity:", velocity)
+    return velocity
 }
