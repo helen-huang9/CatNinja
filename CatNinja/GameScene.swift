@@ -9,10 +9,15 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var lastTimeObjSpawned:Int?
+    var lastTimeObjSpawned: Int?
+    var score = SKLabelNode(text: "Score: 0")
     
     override func didMove(to view: SKView) {
         self.removeAllChildren()
+        score.verticalAlignmentMode = .top
+        score.horizontalAlignmentMode = .right
+        score.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
+        self.addChild(score)
     }
     
     override var isUserInteractionEnabled: Bool {
