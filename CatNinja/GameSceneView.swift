@@ -15,10 +15,17 @@ struct GameSceneView: View {
     var body: some View {
         ZStack {
             SpriteView(scene: scene)
-            Button("Back to Title Screen") {
-                dismiss()
+            VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    Button("Back to Title Screen") {
+                        dismiss()
+                    }
+                    .padding(.top, 40)
+                    .padding(.leading, 20)
+                    Spacer()
+                }
+                Spacer()
             }
-            .position(x: 60, y: 50) // Kinda hacky for now
         }
     }
 }
