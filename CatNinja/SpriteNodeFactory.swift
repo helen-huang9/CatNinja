@@ -25,7 +25,7 @@ func addBottleToSceneWithRandomization(scene: SKScene) {
 func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, anchor1: CGPoint, scale: CGFloat, imgName2: String, anchor2: CGPoint, scene: SKScene) {
     // Create first half
     let firstHalf = SKSpriteNode(imageNamed: imgName1)
-    firstHalf.name = "first half"
+    firstHalf.name = imgName1
     firstHalf.setScale(scale)
     firstHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imgName1), size: firstHalf.size)
     firstHalf.anchorPoint = anchor1
@@ -35,7 +35,7 @@ func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, an
     
     // Create second half
     let secondHalf = SKSpriteNode(imageNamed: imgName2)
-    secondHalf.name = "second half"
+    secondHalf.name = imgName2
     secondHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imgName2), size: secondHalf.size)
     secondHalf.anchorPoint = anchor2
     secondHalf.physicsBody!.velocity = vel
@@ -79,6 +79,5 @@ func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
     velocity.dy += Double.random(in: -10.0...10.0)
     velocity.dx *= 0.5
     velocity.dy *= 0.5
-    print("Velocity:", velocity)
     return velocity
 }

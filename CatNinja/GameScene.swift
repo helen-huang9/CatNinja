@@ -10,14 +10,15 @@ import SpriteKit
 class GameScene: SKScene {
     
     var lastTimeObjSpawned: Int?
-    var score = SKLabelNode(text: "Score: 0")
+    var scoreLabel = SKLabelNode(text: "Score: 0")
+    var scoreValue = 0
     
     override func didMove(to view: SKView) {
         self.removeAllChildren()
-        score.verticalAlignmentMode = .top
-        score.horizontalAlignmentMode = .right
-        score.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
-        self.addChild(score)
+        scoreLabel.verticalAlignmentMode = .top
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
+        self.addChild(scoreLabel)
     }
     
     override var isUserInteractionEnabled: Bool {
@@ -28,6 +29,10 @@ class GameScene: SKScene {
         }
     }
     
+    /// Touch-screen actionable events
+    /// - Parameters:
+    ///   - touches: Set of touches by the user
+    ///   - event: (type of touch?)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return
@@ -39,12 +44,17 @@ class GameScene: SKScene {
         
         touchedNodes.forEach { node in
             if let spriteNode = node as? SKSpriteNode {
+                if let name = node.name {
+                    updateScore(name: name)
+                }
                 let root = getRootNode(node: spriteNode)
                 explode(node: root)
             }
         }
     }
     
+    /// Recursively "explode" all fragments of a node; makes each fragment a node child to the scene
+    /// - Parameter node: NodeSprite, represented as a yarn, sardine, etc.
     func explode(node: SKSpriteNode) {
         node.physicsBody!.joints.forEach { joint in
             self.physicsWorld.remove(joint)
@@ -62,6 +72,9 @@ class GameScene: SKScene {
         }
     }
     
+    /// Get the root/parent fragment of a node object
+    /// - Parameter node: NodeSprite, represented as a yarn, sardine, etc.
+    /// - Returns: The parent fragment node of the inputted node
     func getRootNode(node: SKSpriteNode) -> SKSpriteNode {
         guard let parent = node.parent as? SKSpriteNode else {
             return node
@@ -69,16 +82,33 @@ class GameScene: SKScene {
         return getRootNode(node: parent)
     }
     
+    
+    /// Delete the nodes that move outside of the buffer frame
+    /// - Parameter bufferFrame: CGRect frame that outlines the buffer frame
     func deleteObjects(bufferFrame: CGRect) {
         self.children.forEach { node in
             let pos = self.convertPoint(toView: node.position);
             if (!bufferFrame.contains(pos)) {
-                node.removeFromParent();
+                node.removeFromParent()
             }
         }
     }
     
-    func getBuffer(buffer: CGFloat) -> CGRect {
+    func updateScore(name: String) {
+        if name.contains("yarn") {
+            scoreValue += 10
+        }
+        else if name.contains("sardine") {
+            scoreValue += 20
+        }
+        else {
+            scoreValue -= 30
+        }
+        scoreLabel.text = "Score: \(scoreValue)"
+    }
+    
+    // Gets the frame buffer used for spawning nodes within the frame but out of sight and deleting nodes outside of buffer frame
+    func getFrameBuffer(buffer: CGFloat) -> CGRect {
         let view = self.view!
         return CGRect(x: view.frame.origin.x, y: view.frame.origin.y,
                       width: view.frame.width + buffer, height: view.frame.height + buffer);
@@ -90,8 +120,6 @@ class GameScene: SKScene {
         if (intTime % 2 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
             let obj = Int.random(in: 0...2)
             lastTimeObjSpawned = intTime
-            print("System time:", intTime)
-            print("New Object Spawned:", obj)
             switch obj {
             case 0:
                 addYarnToSceneWithRandomization(scene: self)
@@ -105,7 +133,7 @@ class GameScene: SKScene {
         }
         
         // Delete objects when they go out of our buffer frame
-        let bufferFrame = getBuffer(buffer: 20.0);
+        let bufferFrame = getFrameBuffer(buffer: 20.0);
         deleteObjects(bufferFrame: bufferFrame);
     }
 }
