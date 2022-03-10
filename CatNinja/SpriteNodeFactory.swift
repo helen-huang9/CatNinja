@@ -7,38 +7,85 @@
 
 import SpriteKit
 
+/// Defines a set of components needed to create a sliceable bject (e.g. yarn, sardine, spraybottle)
+struct SliceableObject {
+    var pos: CGPoint /// Position in the scene where the SliceableObject will spawn
+    var velocity: CGVector /// Initial velocity of SliceableObject
+    var imgName1: String /// Image name of top/first half of object
+    var anchor1: CGPoint /// Position of imgName1's anchor
+    var imgName2: String /// Image name of bottom/second half of object
+    var anchor2: CGPoint /// Position of imgName2's anchor
+    var scale: CGFloat /// Size of SliceableObject
+    init(pos: CGPoint, velocity: CGVector, imgName1: String, anchor1: CGPoint, imgName2: String, anchor2: CGPoint, scale: CGFloat) {
+        self.pos = pos
+        self.velocity = velocity
+        self.imgName1 = imgName1
+        self.anchor1 = anchor1
+        self.imgName2 = imgName2
+        self.anchor2 = anchor2
+        self.scale = scale
+    }
+}
+
+/// Spawns a yarn SliceableObject into the given scene
+/// - Parameter scene: SKScene to spawn the yarn into. The scene will be the parent of the yarn.
 func addYarnToSceneWithRandomization(scene: SKScene) {
     let pos = getRandPointInScene(scene: scene)
-    combineAndAddFragsToScene(pos: pos, vel: getRandVelocityTowardsCenterOfScene(pos: pos), imgName1: "yarn-half-2", anchor1: CGPoint(x: 0.5, y: 0), scale: 0.2, imgName2: "yarn-half-1", anchor2: CGPoint(x: 0.5, y: 1), scene: scene)
+    let yarn = SliceableObject(pos: pos,
+                               velocity: getRandVelocityTowardsCenterOfScene(pos: pos),
+                               imgName1: "yarn-half-2", anchor1: CGPoint(x: 0.5, y: 0),
+                               imgName2: "yarn-half-1", anchor2: CGPoint(x: 0.5, y: 1),
+                               scale: 0.2)
+    combineAndAddFragsToScene(sliceableObj: yarn, scene: scene)
 }
 
+/// Spawns a sardine SliceableObject into the given scene
+/// - Parameter scene: SKScene to spawn the sardine into. The scene will be the parent of the sardine.
 func addSardineToSceneWithRandomization(scene: SKScene) {
     let pos = getRandPointInScene(scene: scene)
-    combineAndAddFragsToScene(pos: pos, vel: getRandVelocityTowardsCenterOfScene(pos: pos), imgName1: "sardine_first_half", anchor1: CGPoint(x: 1, y: 0.5), scale: 0.2, imgName2: "sardine_second_half", anchor2: CGPoint(x: 0, y: 0.5), scene: scene)
+    let sardine = SliceableObject(pos: pos,
+                                  velocity: getRandVelocityTowardsCenterOfScene(pos: pos),
+                                  imgName1: "sardine_first_half", anchor1: CGPoint(x: 1, y: 0.5),
+                                  imgName2: "sardine_second_half", anchor2: CGPoint(x: 0, y: 0.5),
+                                  scale: 0.2)
+    combineAndAddFragsToScene(sliceableObj: sardine, scene: scene)
 }
 
+/// Spawns a spray bottle SliceableObject into the given scene
+/// - Parameter scene: SKScene to spawn the spray bottle into. The scene will be the parent of the spray bottle.
 func addBottleToSceneWithRandomization(scene: SKScene) {
     let pos = getRandPointInScene(scene: scene)
-    combineAndAddFragsToScene(pos: pos, vel: getRandVelocityTowardsCenterOfScene(pos: pos), imgName1: "spray_bottle_top_half", anchor1: CGPoint(x: 0.5, y: 0), scale: 0.2, imgName2: "spray_bottle_bottom_half", anchor2: CGPoint(x: 0.50, y: 0.38), scene: scene)
+    let sprayBottle = SliceableObject(pos: pos,
+                                      velocity: getRandVelocityTowardsCenterOfScene(pos: pos),
+                                      imgName1: "spray_bottle_top_half", anchor1: CGPoint(x: 0.5, y: 0),
+                                      imgName2: "spray_bottle_bottom_half", anchor2: CGPoint(x: 0.50, y: 0.38),
+                                      scale: 0.2)
+    combineAndAddFragsToScene(sliceableObj: sprayBottle, scene: scene)
 }
 
-func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, anchor1: CGPoint, scale: CGFloat, imgName2: String, anchor2: CGPoint, scene: SKScene) {
-    // Create first half
-    let firstHalf = SKSpriteNode(imageNamed: imgName1)
-    firstHalf.name = imgName1
-    firstHalf.setScale(scale)
-    firstHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imgName1), size: firstHalf.size)
-    firstHalf.anchorPoint = anchor1
-    firstHalf.position = pos
-    firstHalf.physicsBody!.velocity = vel
+
+/// Assembles the components specified in SliceableObject to create two SKNodes that represent the two halfs of a SliceableObject. It assembles both the visual and physics aspects
+/// of the SliceableObject. The second SKNode is the child of the first SKNode, and the first SKNode is the child of the inputted scene.
+/// - Parameters:
+///   - sliceableObj: a SliceableObject (e.g. yarn, sardine, or spray bottle)
+///   - scene: the SKScene to spawn the SliceableObject into
+func combineAndAddFragsToScene(sliceableObj: SliceableObject, scene: SKScene) {
+    // Create the first SKNode (represented as the top/first image of SliceableObject)
+    let firstHalf = SKSpriteNode(imageNamed: sliceableObj.imgName1)
+    firstHalf.name = sliceableObj.imgName1
+    firstHalf.setScale(sliceableObj.scale)
+    firstHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: sliceableObj.imgName1), size: firstHalf.size)
+    firstHalf.anchorPoint = sliceableObj.anchor1
+    firstHalf.position = sliceableObj.pos
+    firstHalf.physicsBody!.velocity = sliceableObj.velocity
     firstHalf.physicsBody!.restitution = 1.0
     
-    // Create second half
-    let secondHalf = SKSpriteNode(imageNamed: imgName2)
-    secondHalf.name = imgName2
-    secondHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: imgName2), size: secondHalf.size)
-    secondHalf.anchorPoint = anchor2
-    secondHalf.physicsBody!.velocity = vel
+    // Create the second SKNode (represented as the bottom/second image of SliceableObject)
+    let secondHalf = SKSpriteNode(imageNamed: sliceableObj.imgName2)
+    secondHalf.name = sliceableObj.imgName2
+    secondHalf.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: sliceableObj.imgName2), size: secondHalf.size)
+    secondHalf.anchorPoint = sliceableObj.anchor2
+    secondHalf.physicsBody!.velocity = sliceableObj.velocity
     
     // Make second half a child of first half
     scene.addChild(firstHalf)
@@ -52,6 +99,10 @@ func combineAndAddFragsToScene(pos: CGPoint, vel: CGVector, imgName1: String, an
     scene.physicsWorld.add(firstHalfJoint)
 }
 
+
+/// Returns a random point in the SKScene.frame
+/// - Parameter scene: SKScene
+/// - Returns: CGPoint representing a random point in the scene
 func getRandPointInScene(scene: SKScene) -> CGPoint {
     let location = Int.random(in: 0...3)
     let buffer = 20.0
@@ -73,6 +124,10 @@ func getRandPointInScene(scene: SKScene) -> CGPoint {
     return randPt!
 }
 
+
+/// Given a point in the scene, returns a velocity in the general direction of the center of the scene. The velocity will have slight noise.
+/// - Parameter pos: CGPoint point in the scene
+/// - Returns: CGVector representing a velocity that points to the center of the scene
 func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
     var velocity = CGVector(dx: 0.0 - pos.x, dy: 0.0 - pos.y)
     velocity.dx += Double.random(in: -10.0...10.0)
