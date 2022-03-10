@@ -120,7 +120,6 @@ extension GameScene {
         return randPt!
     }
     
-    
     /// Given a point in the scene, returns a velocity in the general direction of the center of the scene. The velocity will have slight noise.
     /// - Parameter pos: CGPoint point in the scene
     /// - Returns: CGVector representing a velocity that points to the center of the scene
@@ -128,8 +127,8 @@ extension GameScene {
         var velocity = CGVector(dx: 0.0 - pos.x, dy: 0.0 - pos.y)
         velocity.dx += Double.random(in: -10.0...10.0)
         velocity.dy += Double.random(in: -10.0...10.0)
-        velocity.dx *= 0.5
-        velocity.dy *= 0.5
+        velocity.dx *= 0.8
+        velocity.dy *= 1
         return velocity
     }
 }
