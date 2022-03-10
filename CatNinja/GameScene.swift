@@ -122,13 +122,13 @@ class GameScene: SKScene {
             lastTimeObjSpawned = intTime
             switch obj {
             case 0:
-                addYarnToSceneWithRandomization(scene: self)
+                addYarnToSceneWithRandomization()
             case 1:
-                addBottleToSceneWithRandomization(scene: self)
+                addBottleToSceneWithRandomization()
             case 2:
-                addSardineToSceneWithRandomization(scene: self)
+                addSardineToSceneWithRandomization()
             default:
-                addYarnToSceneWithRandomization(scene: self)
+                addYarnToSceneWithRandomization()
             }
         }
         
