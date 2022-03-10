@@ -17,11 +17,23 @@ struct GameSceneView: View {
             SpriteView(scene: scene)
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
-                    Button("Back to Title Screen") {
+                    Button(action: {
                         dismiss()
-                    }
+                    }, label: {
+                        ZStack {
+                            Image("cat_paw")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 150, height: 50, alignment: .topLeading)
+                                .rotationEffect(Angle(degrees: 180))
+                                .foregroundColor(Color.black)
+                            Text("Back")
+                                .foregroundColor(Color.black)
+                                .font(.system(.body, design: .rounded))
+                        }
+                    })
+                    .offset(x: -20, y: 0)
                     .padding(.top, 40)
-                    .padding(.leading, 20)
                     Spacer()
                 }
                 Spacer()
