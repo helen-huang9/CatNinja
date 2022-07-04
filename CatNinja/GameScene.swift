@@ -12,6 +12,8 @@ class GameScene: SKScene {
     var lastTimeObjSpawned: Int?
     var scoreLabel = SKLabelNode(text: "Score: 0")
     var scoreValue = 0
+    var bufferFrame: CGRect?
+    let spriteAtlas = SKTextureAtlas(named: "sprites")
     
     override func didMove(to view: SKView) {
         self.removeAllChildren()
@@ -19,14 +21,15 @@ class GameScene: SKScene {
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
         self.addChild(scoreLabel)
+        
+        self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
+                                  width: self.view!.frame.width + 30.0, height: self.view!.frame.height + 30.0);
+        self.spriteAtlas.preload {}
+        self.physicsWorld.speed = 0.9999
     }
     
     override var isUserInteractionEnabled: Bool {
-        get {
-            return true
-        } set {
-            
-        }
+        get { return true } set { }
     }
     
     /// Touch-screen actionable events
@@ -34,106 +37,45 @@ class GameScene: SKScene {
     ///   - touches: Set of touches by the user
     ///   - event: (type of touch?)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        
+        guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        
         let touchedNodes = nodes(at: location)
         
         touchedNodes.forEach { node in
             if let spriteNode = node as? SKSpriteNode {
-                if let name = node.name {
+                if let name = spriteNode.name {
                     updateScore(name: name)
+                    spriteNode.removeFromParent()
                 }
-                let root = getRootNode(node: spriteNode)
-                explode(node: root)
             }
         }
     }
-    
-    /// Recursively "explode" all fragments of a node; makes each fragment a node child to the scene
-    /// - Parameter node: NodeSprite, represented as a yarn, sardine, etc.
-    func explode(node: SKSpriteNode) {
-        node.physicsBody!.joints.forEach { joint in
-            self.physicsWorld.remove(joint)
-        }
-        node.physicsBody!.velocity = CGVector(dx: CGFloat.random(in: -100 ... 100), dy: CGFloat.random(in: -100 ... 100))
-        node.physicsBody!.collisionBitMask = 0
-        
-        
-        node.children.forEach { child in
-            if let spriteChild = child as? SKSpriteNode {
-                spriteChild.setScale(0.2)
-                spriteChild.move(toParent: self)
-                explode(node: spriteChild)
-            }
-        }
-    }
-    
-    /// Get the root/parent fragment of a node object
-    /// - Parameter node: NodeSprite, represented as a yarn, sardine, etc.
-    /// - Returns: The parent fragment node of the inputted node
-    func getRootNode(node: SKSpriteNode) -> SKSpriteNode {
-        guard let parent = node.parent as? SKSpriteNode else {
-            return node
-        }
-        return getRootNode(node: parent)
-    }
-    
     
     /// Delete the nodes that move outside of the buffer frame
     /// - Parameter bufferFrame: CGRect frame that outlines the buffer frame
-    func deleteObjects(bufferFrame: CGRect) {
+    func deleteObjects() {
         self.children.forEach { node in
             let pos = self.convertPoint(toView: node.position);
-            if (!bufferFrame.contains(pos)) {
+            if (!self.bufferFrame!.contains(pos)) {
                 node.removeFromParent()
             }
         }
     }
     
+    // Update score
     func updateScore(name: String) {
-        if name.contains("yarn") {
-            scoreValue += 10
-        }
-        else if name.contains("sardine") {
-            scoreValue += 20
-        }
-        else {
-            scoreValue -= 30
-        }
+        if name.contains("yarn") { scoreValue += 10 }
+        else { scoreValue -= 30 }
         scoreLabel.text = "Score: \(scoreValue)"
-    }
-    
-    // Gets the frame buffer used for spawning nodes within the frame but out of sight and deleting nodes outside of buffer frame
-    func getFrameBuffer(buffer: CGFloat) -> CGRect {
-        let view = self.view!
-        return CGRect(x: view.frame.origin.x, y: view.frame.origin.y,
-                      width: view.frame.width + buffer, height: view.frame.height + buffer);
     }
     
     override func update(_ currentTime: TimeInterval) {
         // Spawn objects into scene
         let intTime = Int(currentTime)
         if (intTime % 2 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
-            let obj = Int.random(in: 0...2)
             lastTimeObjSpawned = intTime
-            switch obj {
-            case 0:
-                addYarnToSceneWithRandomization()
-            case 1:
-                addBottleToSceneWithRandomization()
-            case 2:
-                addSardineToSceneWithRandomization()
-            default:
-                addYarnToSceneWithRandomization()
-            }
+            addWholeYarnToSceneWithRandomization()
         }
-        
-        // Delete objects when they go out of our buffer frame
-        let bufferFrame = getFrameBuffer(buffer: 20.0);
-        deleteObjects(bufferFrame: bufferFrame);
+        deleteObjects(); // Delete objects that go out of frame
     }
 }
