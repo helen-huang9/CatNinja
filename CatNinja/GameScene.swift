@@ -9,23 +9,32 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var lastTimeObjSpawned: Int?
     var scoreLabel = SKLabelNode(text: "Score: 0")
     var scoreValue = 0
     var bufferFrame: CGRect?
     let spriteAtlas = SKTextureAtlas(named: "sprites")
     
+    var lastTimeObjSpawned: Int?
+    
     override func didMove(to view: SKView) {
+        // Texture loading for sprites
+        self.spriteAtlas.preload {}
+        
+        // Respawn sprites
         self.removeAllChildren()
+        let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
+        background.size = CGSize(width: 1000, height: 1000)
+        background.position = CGPoint(x: frame.midX + 30, y:frame.midY)
+        self.addChild(background)
         scoreLabel.verticalAlignmentMode = .top
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
         self.addChild(scoreLabel)
         
+        
+        // Define buffer frame used for spawning/deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
                                   width: self.view!.frame.width + 30.0, height: self.view!.frame.height + 30.0);
-        self.spriteAtlas.preload {}
-        self.physicsWorld.speed = 0.9999
     }
     
     override var isUserInteractionEnabled: Bool {

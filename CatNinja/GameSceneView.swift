@@ -15,6 +15,7 @@ struct GameSceneView: View {
     var body: some View {
         ZStack {
             SpriteView(scene: scene)
+                .ignoresSafeArea()
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     Button(action: {
