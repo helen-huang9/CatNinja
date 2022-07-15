@@ -47,21 +47,21 @@ extension GameScene {
     /// - Returns: CGPoint representing a random point within the scene's frame and buffer
     func getRandPointInScene() -> CGPoint {
         let location = Int.random(in: 0...3)
-        let buffer = 20.0
+        let buffer = 30.0
         var randPt: CGPoint?
         switch location {
         case 0: // Left
-            randPt = CGPoint(x: Double.random(in: (self.frame.minX - buffer)...self.frame.minX),
+            randPt = CGPoint(x: self.frame.minX,
                              y: Double.random(in: (self.frame.minY + buffer)...(self.frame.maxY - buffer)))
         case 1: // Right
-            randPt = CGPoint(x: Double.random(in: (self.frame.maxX - buffer)...self.frame.maxX),
+            randPt = CGPoint(x: self.frame.maxX,
                              y: Double.random(in: (self.frame.minY + buffer)...(self.frame.maxY - buffer)))
         case 2: // Top
             randPt = CGPoint(x: Double.random(in: (self.frame.minX + buffer)...(self.frame.maxX - buffer)),
-                             y: Double.random(in: (self.frame.minY)...(self.frame.minY + buffer)))
+                             y: self.frame.maxY)
         default: // Bottom
             randPt = CGPoint(x: Double.random(in: (self.frame.minX + buffer)...(self.frame.maxX - buffer)),
-                             y: Double.random(in: (self.frame.maxY - buffer)...(self.frame.maxY)))
+                             y: self.frame.minY)
         }
         return randPt!
     }
@@ -71,8 +71,11 @@ extension GameScene {
     /// - Parameter pos: CGPoint point in the scene
     /// - Returns: CGVector representing a velocity that points to the center of the scene
     func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
-        let noiseX = Double.random(in: -200.0...200.0)
-        let noiseY = Double.random(in: -200.0...200.0)
+        let magX = self.frame.width / 3
+        let magY = self.frame.height / 3
+        let noiseX = Double.random(in: -magX...magX)
+        let noiseY = Double.random(in: -magY...magY)
+        
         var velocity = CGVector(dx: noiseX - pos.x, dy: noiseY - pos.y)
         velocity.dx *= 1.5
         velocity.dy *= 1.5
