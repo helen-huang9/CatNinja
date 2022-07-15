@@ -9,7 +9,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var scoreLabel = SKLabelNode(text: "Score: 0")
+    var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
     var bufferFrame: CGRect?
     let spriteAtlas = SKTextureAtlas(named: "sprites")
@@ -20,17 +20,8 @@ class GameScene: SKScene {
         // Texture loading for sprites
         self.spriteAtlas.preload {}
         
-        // Respawn sprites
-        self.removeAllChildren()
-        let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
-        background.size = CGSize(width: 1000, height: 1000)
-        background.position = CGPoint(x: frame.midX + 30, y:frame.midY)
-        self.addChild(background)
-        scoreLabel.verticalAlignmentMode = .top
-        scoreLabel.horizontalAlignmentMode = .right
-        scoreLabel.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
-        self.addChild(scoreLabel)
-        
+        // Spawn UI sprites
+        deleteAllChildrenAndRespawnUIElements()
         
         // Define buffer frame used for spawning/deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
@@ -60,6 +51,20 @@ class GameScene: SKScene {
         }
     }
     
+    /// Spawns the background and score label
+    func deleteAllChildrenAndRespawnUIElements() {
+        self.removeAllChildren()
+        let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
+//        let background = SKSpriteNode(texture: self.spriteAtlas.textureNamed("CatNinja_Background"))
+        background.size = CGSize(width: 1000, height: 1000)
+        background.position = CGPoint(x: frame.midX + 30, y:frame.midY)
+        self.addChild(background)
+        scoreLabel.verticalAlignmentMode = .top
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
+        self.addChild(scoreLabel)
+    }
+    
     /// Delete the nodes that move outside of the buffer frame
     /// - Parameter bufferFrame: CGRect frame that outlines the buffer frame
     func deleteObjects() {
@@ -73,9 +78,9 @@ class GameScene: SKScene {
     
     // Update score
     func updateScore(name: String) {
-        if name.contains("yarn") { scoreValue += 10 }
+        if name.contains("Yarn") { scoreValue += 10 }
         else { scoreValue -= 30 }
-        scoreLabel.text = "Score: \(scoreValue)"
+        scoreLabel.text = "\(scoreValue)"
     }
     
     override func update(_ currentTime: TimeInterval) {

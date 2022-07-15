@@ -26,7 +26,7 @@ extension GameScene {
     /// A whole yarn into the scene
     func addWholeYarnToSceneWithRandomization() {
         let pos = getRandPointInScene()
-        let yarn = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos), imgName: "yarn", scale: 0.2)
+        let yarn = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos), imgName: "Yarn_Pixel_Art", scale: 3.0)
         addSpriteToScene(obj: yarn)
     }
     
@@ -35,7 +35,7 @@ extension GameScene {
         spriteNode.name = obj.imgName
         spriteNode.setScale(obj.scale)
         spriteNode.position = obj.pos
-        spriteNode.physicsBody = SKPhysicsBody(texture: self.spriteAtlas.textureNamed("yarn"), size: spriteNode.size)
+        spriteNode.physicsBody = SKPhysicsBody(texture: self.spriteAtlas.textureNamed(obj.imgName), size: spriteNode.size)
         spriteNode.physicsBody!.velocity = obj.velocity
         spriteNode.physicsBody!.collisionBitMask = 0x0 // prevents collision with other sprites
         self.addChild(spriteNode)
