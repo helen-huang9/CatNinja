@@ -13,14 +13,12 @@ class GameScene: SKScene {
     var scoreValue = 0
     var bufferFrame: CGRect?
     let spriteAtlas = SKTextureAtlas(named: "sprites")
+    let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art"]
     
     var lastTimeObjSpawned: Int?
     
     override func didMove(to view: SKView) {
-        // Texture loading for sprites
         self.spriteAtlas.preload {}
-        
-        // Spawn UI sprites
         deleteAllChildrenAndRespawnUIElements()
         
         // Define buffer frame used for spawning/deleting sprites off screen
@@ -55,13 +53,12 @@ class GameScene: SKScene {
     func deleteAllChildrenAndRespawnUIElements() {
         self.removeAllChildren()
         let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
-//        let background = SKSpriteNode(texture: self.spriteAtlas.textureNamed("CatNinja_Background"))
         background.size = CGSize(width: 1000, height: 1000)
-        background.position = CGPoint(x: frame.midX + 30, y:frame.midY)
+        background.position = CGPoint(x: frame.midX + 35, y:frame.midY)
         self.addChild(background)
-        scoreLabel.verticalAlignmentMode = .top
-        scoreLabel.horizontalAlignmentMode = .right
-        scoreLabel.position = CGPoint(x: frame.maxX - 30, y: frame.maxY - 40)
+        scoreLabel.position = CGPoint(x: frame.minX + 85, y: frame.maxY - 60)
+        scoreLabel.fontColor = .black
+        scoreLabel.fontName = "SFPro-Black"
         self.addChild(scoreLabel)
     }
     
@@ -78,8 +75,9 @@ class GameScene: SKScene {
     
     // Update score
     func updateScore(name: String) {
-        if name.contains("Yarn") { scoreValue += 10 }
-        else { scoreValue -= 30 }
+        if name.contains("Yarn") { scoreValue += 20 }
+        else if name.contains("Yellow") { scoreValue += 5 }
+        else if name.contains("Red") { scoreValue -= 30 }
         scoreLabel.text = "\(scoreValue)"
     }
     
@@ -88,7 +86,7 @@ class GameScene: SKScene {
         let intTime = Int(currentTime)
         if (intTime % 2 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
             lastTimeObjSpawned = intTime
-            addWholeYarnToSceneWithRandomization()
+            addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
         }
         deleteObjects(); // Delete objects that go out of frame
     }

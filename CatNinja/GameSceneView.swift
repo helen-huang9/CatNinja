@@ -22,15 +22,12 @@ struct GameSceneView: View {
                         dismiss()
                     }, label: {
                         ZStack {
-                            Image("cat_paw")
+                            Image("Paw_Pixel_Art")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 150, height: 50, alignment: .topLeading)
-                                .rotationEffect(Angle(degrees: 180))
-                                .foregroundColor(Color.black)
-                            Text("Back")
-                                .foregroundColor(Color.black)
-                                .font(.system(.body, design: .rounded))
+                                .frame(width: 90, height: 90, alignment: .topLeading)
+                                .ignoresSafeArea()
+                                .padding(.leading, 10.0)
                         }
                     })
                     .offset(x: -20, y: 0)
@@ -40,6 +37,7 @@ struct GameSceneView: View {
                 Spacer()
             }
         }
+        .statusBar(hidden: true)
     }
 }
 

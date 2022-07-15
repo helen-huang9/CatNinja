@@ -24,10 +24,10 @@ struct Sprite {
 
 extension GameScene {
     /// A whole yarn into the scene
-    func addWholeYarnToSceneWithRandomization() {
+    func addSpriteToSceneWithRandomization(num: Int) {
         let pos = getRandPointInScene()
-        let yarn = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos), imgName: "Yarn_Pixel_Art", scale: 3.0)
-        addSpriteToScene(obj: yarn)
+        let sprite = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos), imgName: self.spriteNames[num], scale: 3.0)
+        addSpriteToScene(obj: sprite)
     }
     
     func addSpriteToScene(obj: Sprite) {
