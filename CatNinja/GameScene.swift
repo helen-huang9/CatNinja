@@ -79,7 +79,7 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         let intTime = Int(currentTime)
-        if (intTime % 2 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
+        if (intTime % 1 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
             lastTimeObjSpawned = intTime
             addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
         }

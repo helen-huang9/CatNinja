@@ -38,6 +38,7 @@ extension GameScene {
         spriteNode.position = obj.pos
         spriteNode.physicsBody = SKPhysicsBody(texture: self.spriteAtlas.textureNamed(obj.imgName), size: spriteNode.size)
         spriteNode.physicsBody!.velocity = obj.velocity
+        spriteNode.physicsBody!.angularVelocity = CGFloat.random(in: -3.0...3.0)
         spriteNode.physicsBody!.collisionBitMask = 0x0 // prevents collision with other sprites
         self.addChild(spriteNode)
     }
@@ -70,11 +71,11 @@ extension GameScene {
     /// - Parameter pos: CGPoint point in the scene
     /// - Returns: CGVector representing a velocity that points to the center of the scene
     func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
-        var velocity = CGVector(dx: 0.0 - pos.x, dy: 0.0 - pos.y)
-        velocity.dx += Double.random(in: -10.0...10.0)
-        velocity.dy += Double.random(in: -10.0...10.0)
-        velocity.dx *= 1.2
-        velocity.dy *= 1.2
+        let noiseX = Double.random(in: -200.0...200.0)
+        let noiseY = Double.random(in: -200.0...200.0)
+        var velocity = CGVector(dx: noiseX - pos.x, dy: noiseY - pos.y)
+        velocity.dx *= 1.5
+        velocity.dy *= 1.5
         return velocity
     }
 }
