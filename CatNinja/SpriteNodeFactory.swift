@@ -23,13 +23,14 @@ struct Sprite {
 }
 
 extension GameScene {
-    /// A whole yarn into the scene
+    /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
     func addSpriteToSceneWithRandomization(num: Int) {
         let pos = getRandPointInScene()
         let sprite = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos), imgName: self.spriteNames[num], scale: 3.0)
         addSpriteToScene(obj: sprite)
     }
     
+    /// Add inputed Sprite to Scene
     func addSpriteToScene(obj: Sprite) {
         let spriteNode = SKSpriteNode(imageNamed: obj.imgName)
         spriteNode.name = obj.imgName

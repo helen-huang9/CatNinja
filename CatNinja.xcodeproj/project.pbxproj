@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2792881C86500C62C1C /* sprites.atlas */; };
+		BF2FA2842881E6F600C62C1C /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2832881E6F600C62C1C /* spark.sks */; };
 		BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */; };
 		BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4EF2798F00A003570B9 /* ContentView.swift */; };
 		BF5FB4F22798F00B003570B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4F12798F00B003570B9 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		BF2FA2792881C86500C62C1C /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
+		BF2FA2832881E6F600C62C1C /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		BF5FB4EA2798F00A003570B9 /* CatNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatNinjaApp.swift; sourceTree = "<group>"; };
 		BF5FB4EF2798F00A003570B9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				BF5FB4FB2798F067003570B9 /* GameSceneView.swift */,
 				BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
+				BF2FA2832881E6F600C62C1C /* spark.sks */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
 			);
 			path = CatNinja;
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF5FB4F52798F00B003570B9 /* Preview Assets.xcassets in Resources */,
+				BF2FA2842881E6F600C62C1C /* spark.sks in Resources */,
 				BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */,
 				BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */,
 				BF5FB4F22798F00B003570B9 /* Assets.xcassets in Resources */,

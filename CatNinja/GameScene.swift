@@ -30,10 +30,6 @@ class GameScene: SKScene {
         get { return true } set { }
     }
     
-    /// Touch-screen actionable events
-    /// - Parameters:
-    ///   - touches: Set of touches by the user
-    ///   - event: (type of touch?)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
@@ -43,13 +39,16 @@ class GameScene: SKScene {
             if let spriteNode = node as? SKSpriteNode {
                 if let name = spriteNode.name {
                     updateScore(name: name)
+                    if let emitter = SKEmitterNode(fileNamed: "spark") {
+                        emitter.position = spriteNode.position
+                        self.addChild(emitter)
+                    }
                     spriteNode.removeFromParent()
                 }
             }
         }
     }
     
-    /// Spawns the background and score label
     func deleteAllChildrenAndRespawnUIElements() {
         self.removeAllChildren()
         let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
@@ -62,9 +61,7 @@ class GameScene: SKScene {
         self.addChild(scoreLabel)
     }
     
-    /// Delete the nodes that move outside of the buffer frame
-    /// - Parameter bufferFrame: CGRect frame that outlines the buffer frame
-    func deleteObjects() {
+    func deleteObjectsOutOfFrame() {
         self.children.forEach { node in
             let pos = self.convertPoint(toView: node.position);
             if (!self.bufferFrame!.contains(pos)) {
@@ -73,21 +70,19 @@ class GameScene: SKScene {
         }
     }
     
-    // Update score
     func updateScore(name: String) {
-        if name.contains("Yarn") { scoreValue += 20 }
-        else if name.contains("Yellow") { scoreValue += 5 }
-        else if name.contains("Red") { scoreValue -= 30 }
+        if name.contains("Yarn") { scoreValue += 100 }
+        else if name.contains("Yellow") { scoreValue += 20 }
+        else if name.contains("Red") { scoreValue -= 50 }
         scoreLabel.text = "\(scoreValue)"
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Spawn objects into scene
         let intTime = Int(currentTime)
         if (intTime % 2 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
             lastTimeObjSpawned = intTime
             addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
         }
-        deleteObjects(); // Delete objects that go out of frame
+        deleteObjectsOutOfFrame();
     }
 }
