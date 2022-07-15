@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import SwiftUI
 
 class GameScene: SKScene {
     var gameStatus = "isPlaying"
@@ -17,6 +18,9 @@ class GameScene: SKScene {
     var bufferFrame: CGRect?
     let spriteAtlas = SKTextureAtlas(named: "sprites")
     let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art"]
+    let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),
+                        UIColor(red: 0.902, green: 0.3294, blue: 0.3294, alpha: 1.0),
+                        UIColor(red: 0.9647, green: 0.863, blue: 0.365, alpha: 1.0)]
     
     var lastTimeObjSpawned: Int?
     
@@ -43,14 +47,20 @@ class GameScene: SKScene {
                 if let name = spriteNode.name {
                     updateScore(name: name)
                     updateLives(name: name)
-                    if let emitter = SKEmitterNode(fileNamed: "spark") {
-                        emitter.position = spriteNode.position
-                        self.addChild(emitter)
-                    }
-                    spriteNode.removeFromParent()
+                    explodeSprite(node: spriteNode)
                 }
             }
         }
+    }
+    
+    func explodeSprite(node: SKSpriteNode) {
+        if let emitter = SKEmitterNode(fileNamed: "spark") {
+            emitter.position = node.position
+            emitter.particleColorSequence = nil
+            emitter.particleColor = node.color
+            self.addChild(emitter)
+        }
+        node.removeFromParent()
     }
     
     func deleteAllChildrenAndRespawnUIElements() {
@@ -93,6 +103,8 @@ class GameScene: SKScene {
     }
     
     func showLossScreen() {
+        self.livesValue = 0
+        self.livesLabel.text = "x\(self.livesValue)"
         createLossLabel()
         createFinalScoreLabel()
     }

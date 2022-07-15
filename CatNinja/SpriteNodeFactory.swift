@@ -12,12 +12,14 @@ struct Sprite {
     var pos: CGPoint
     var velocity: CGVector
     var imgName: String
+    var texColor: UIColor
     var scale: CGFloat
     
-    init(pos: CGPoint, velocity: CGVector, imgName: String, scale: CGFloat) {
+    init(pos: CGPoint, velocity: CGVector, imgName: String, texColor: UIColor, scale: CGFloat) {
         self.pos = pos
         self.velocity = velocity
         self.imgName = imgName
+        self.texColor = texColor
         self.scale = scale
     }
 }
@@ -26,13 +28,15 @@ extension GameScene {
     /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
     func addSpriteToSceneWithRandomization(num: Int) {
         let pos = getRandPointInScene()
-        let sprite = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos), imgName: self.spriteNames[num], scale: 3.0)
+        let sprite = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos),
+                            imgName: self.spriteNames[num], texColor: self.spriteColors[num], scale: 3.0)
         addSpriteToScene(obj: sprite)
     }
     
     /// Add inputed Sprite to Scene
     func addSpriteToScene(obj: Sprite) {
         let spriteNode = SKSpriteNode(imageNamed: obj.imgName)
+        spriteNode.color = obj.texColor
         spriteNode.name = obj.imgName
         spriteNode.setScale(obj.scale)
         spriteNode.position = obj.pos
