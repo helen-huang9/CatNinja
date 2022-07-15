@@ -8,12 +8,9 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    
     var gameStatus = "isPlaying"
-    
     var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
-    
     var livesLabel = SKLabelNode(text: "x3")
     var livesValue = 3
     
@@ -27,7 +24,7 @@ class GameScene: SKScene {
         self.spriteAtlas.preload {}
         deleteAllChildrenAndRespawnUIElements()
         
-        // Define buffer frame used for spawning/deleting sprites off screen
+        // Define buffer frame used for deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
                                   width: self.view!.frame.width + 50.0, height: self.view!.frame.height + 50.0);
     }
@@ -58,26 +55,9 @@ class GameScene: SKScene {
     
     func deleteAllChildrenAndRespawnUIElements() {
         self.removeAllChildren()
-        // Background
-        let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
-        background.size = CGSize(width: 1000, height: 1000)
-        background.position = CGPoint(x: frame.midX + 35, y:frame.midY)
-        self.addChild(background)
-        // Score
-        scoreLabel.verticalAlignmentMode = .top
-        scoreLabel.horizontalAlignmentMode = .left
-        scoreLabel.position = CGPoint(x: frame.minX + 65, y: frame.maxY - 35.0)
-        scoreLabel.fontColor = .black
-        scoreLabel.fontName = "SFPro-Black"
-        self.addChild(scoreLabel)
-        // Lives
-        livesLabel.verticalAlignmentMode = .top
-        livesLabel.horizontalAlignmentMode = .right
-        livesLabel.position = CGPoint(x: frame.maxX - 30.0, y: frame.maxY - 30.0)
-        livesLabel.fontColor = .white
-        livesLabel.fontName = "SFPro-Black"
-        livesLabel.fontSize = 24
-        self.addChild(livesLabel)
+        createBackground()
+        createScoreLabel()
+        createLivesLabel()
     }
     
     func deleteObjectsOutOfFrame() {
@@ -113,16 +93,8 @@ class GameScene: SKScene {
     }
     
     func showLossScreen() {
-        let lossLabel = SKLabelNode(text: "GAME OVER")
-        lossLabel.position.y += 50.0
-        lossLabel.fontName = "SFPro-Black"
-        lossLabel.fontSize = 48
-        self.addChild(lossLabel)
-        
-        let finalScore = SKLabelNode(text: "Final Score: \(self.scoreValue)")
-        finalScore.fontName = "SFPro-Black"
-        finalScore.fontSize = 24
-        self.addChild(finalScore)
+        createLossLabel()
+        createFinalScoreLabel()
     }
     
     override func update(_ currentTime: TimeInterval) {

@@ -16,6 +16,7 @@
 		BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4FB2798F067003570B9 /* GameSceneView.swift */; };
 		BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4FF2798F7FB003570B9 /* GameScene.sks */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
+		BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GameSceneLabels.swift */; };
 		BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		BF5FB4FB2798F067003570B9 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		BF5FB4FF2798F7FB003570B9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		BFA583432882171F009E7FB7 /* GameSceneLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneLabels.swift; sourceTree = "<group>"; };
 		BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteNodeFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
 				BF2FA2832881E6F600C62C1C /* spark.sks */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
+				BFA583432882171F009E7FB7 /* GameSceneLabels.swift */,
 			);
 			path = CatNinja;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			files = (
 				BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */,
 				BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */,
+				BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */,
 				BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */,
 				BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */,
 				BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */,
