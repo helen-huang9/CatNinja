@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2792881C86500C62C1C /* sprites.atlas */; };
+		BF2FA2842881E6F600C62C1C /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2832881E6F600C62C1C /* spark.sks */; };
 		BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */; };
 		BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4EF2798F00A003570B9 /* ContentView.swift */; };
 		BF5FB4F22798F00B003570B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4F12798F00B003570B9 /* Assets.xcassets */; };
@@ -14,10 +16,13 @@
 		BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4FB2798F067003570B9 /* GameSceneView.swift */; };
 		BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4FF2798F7FB003570B9 /* GameScene.sks */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
+		BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GameSceneLabels.swift */; };
 		BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF2FA2792881C86500C62C1C /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
+		BF2FA2832881E6F600C62C1C /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		BF5FB4EA2798F00A003570B9 /* CatNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatNinjaApp.swift; sourceTree = "<group>"; };
 		BF5FB4EF2798F00A003570B9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,6 +31,7 @@
 		BF5FB4FB2798F067003570B9 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		BF5FB4FF2798F7FB003570B9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		BFA583432882171F009E7FB7 /* GameSceneLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneLabels.swift; sourceTree = "<group>"; };
 		BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteNodeFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +65,7 @@
 		BF5FB4EC2798F00A003570B9 /* CatNinja */ = {
 			isa = PBXGroup;
 			children = (
+				BF2FA2792881C86500C62C1C /* sprites.atlas */,
 				BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */,
 				BF5FB4EF2798F00A003570B9 /* ContentView.swift */,
 				BF5FB4F12798F00B003570B9 /* Assets.xcassets */,
@@ -66,7 +73,9 @@
 				BF5FB4FB2798F067003570B9 /* GameSceneView.swift */,
 				BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
+				BF2FA2832881E6F600C62C1C /* spark.sks */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
+				BFA583432882171F009E7FB7 /* GameSceneLabels.swift */,
 			);
 			path = CatNinja;
 			sourceTree = "<group>";
@@ -138,7 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF5FB4F52798F00B003570B9 /* Preview Assets.xcassets in Resources */,
+				BF2FA2842881E6F600C62C1C /* spark.sks in Resources */,
 				BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */,
+				BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */,
 				BF5FB4F22798F00B003570B9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +163,7 @@
 			files = (
 				BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */,
 				BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */,
+				BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */,
 				BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */,
 				BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */,
 				BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */,
