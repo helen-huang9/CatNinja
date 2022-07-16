@@ -8,21 +8,22 @@
 import SpriteKit
 import SwiftUI
 
-class GameScene: SKScene {
-    var gameStatus = "isPlaying"
+class GameScene: SKScene, ObservableObject {
+    @Published var gameStatus: String = "isPlaying"
     var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
     var livesLabel = SKLabelNode(text: "x3")
     var livesValue = 3
     
     var bufferFrame: CGRect?
+    var lastTimeObjSpawned: Int?
+        
     let spriteAtlas = SKTextureAtlas(named: "sprites")
     let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art"]
     let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),
                         UIColor(red: 0.902, green: 0.3294, blue: 0.3294, alpha: 1.0),
                         UIColor(red: 0.9647, green: 0.863, blue: 0.365, alpha: 1.0)]
     
-    var lastTimeObjSpawned: Int?
     
     override func didMove(to view: SKView) {
         self.spriteAtlas.preload {}

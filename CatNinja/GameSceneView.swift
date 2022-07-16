@@ -10,7 +10,7 @@ import SpriteKit
 
 struct GameSceneView: View {
     @Environment(\.dismiss) private var dismiss
-    let scene = GameScene(fileNamed: "GameScene")!
+    @ObservedObject private var scene = GameScene(fileNamed: "GameScene")!
     
     var body: some View {
         ZStack {
@@ -35,6 +35,13 @@ struct GameSceneView: View {
                     Spacer()
                 }
                 Spacer()
+            }
+            if scene.gameStatus == "loss" {
+                Button("Return to Home Screen") {
+                    dismiss()
+                }
+                .offset(y:10)
+                .foregroundColor(Color(red: 31/255.0, green: 47/255.0, blue: 54/255.0))
             }
         }
         .statusBar(hidden: true)

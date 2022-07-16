@@ -46,6 +46,7 @@ extension GameScene {
         let finalScore = SKLabelNode(text: "Final Score: \(self.scoreValue)")
         finalScore.fontName = "SFPro-Black"
         finalScore.fontSize = 24
+        finalScore.position.y += 10.0
         self.addChild(finalScore)
     }
 }
