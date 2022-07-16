@@ -39,6 +39,14 @@ class GameScene: SKScene, ObservableObject {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        explodeTouchedSprites(touches: touches)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        explodeTouchedSprites(touches: touches)
+    }
+    
+    func explodeTouchedSprites(touches: Set<UITouch>) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
@@ -118,7 +126,9 @@ class GameScene: SKScene, ObservableObject {
             let intTime = Int(currentTime)
             if (intTime % 1 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
                 lastTimeObjSpawned = intTime
-                addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
+                for _ in 0...Int.random(in: 0...1) {
+                    addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
+                }
             }
         }
     }
