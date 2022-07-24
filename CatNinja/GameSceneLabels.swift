@@ -49,4 +49,11 @@ extension GameScene {
         finalScore.position.y += 10.0
         self.addChild(finalScore)
     }
+    
+    func positionAndAddGameStartCountdownLabel(label: SKLabelNode) {
+        label.fontName = "SFPro-Black"
+        label.fontSize = 48
+        label.position.y += 10.0
+        self.addChild(label)
+    }
 }

@@ -12,8 +12,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.pink
+                // Background Image
+                Image("Home_Background")
+                    .resizable()
+                    .frame(width: 650, height: 850, alignment: .center)
                     .ignoresSafeArea()
+                // New Game Button
                 Button(action: {
                     buttonPushed.toggle()
                 }, label: {
@@ -22,10 +26,9 @@ struct ContentView: View {
                             .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
                             .padding(.bottom, 20.0)
                             .foregroundColor(Color.black)
-                        Text("New Game")
-                            .fontWeight(.semibold)
+                        Text("Play")
                             .foregroundColor(Color.black)
-                            .font(.title)
+                            .font(.system(size: 30, weight: .semibold, design: .rounded))
                             .frame(width: 200.0, height: 50.0)
                     }})
                     .fullScreenCover(isPresented: $buttonPushed, onDismiss: {}) {
@@ -34,6 +37,7 @@ struct ContentView: View {
                     }
             }
         }
+        .statusBar(hidden: true)
     }
 }
 

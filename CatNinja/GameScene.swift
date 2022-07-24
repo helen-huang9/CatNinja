@@ -8,12 +8,23 @@
 import SpriteKit
 import SwiftUI
 
+enum GameState {
+    case start
+    case isPlaying
+    case lose
+}
+
 class GameScene: SKScene, ObservableObject {
-    @Published var gameStatus: String = "isPlaying"
-    var scoreLabel = SKLabelNode(text: "0")
+    @Published var gameStatus: GameState = GameState.start
+    var gameStartTime: Date = Date.now
+    var isShowingLossScreen = false
+    
+    var scoreLabel = SKLabelNode()
     var scoreValue = 0
-    var livesLabel = SKLabelNode(text: "x3")
+    var livesLabel = SKLabelNode()
     var livesValue = 3
+    var gameStartCountdownLabel = SKLabelNode()
+    let gameStartCountdownDuration = 2
     
     var bufferFrame: CGRect?
     var lastTimeObjSpawned: Int?
@@ -77,6 +88,7 @@ class GameScene: SKScene, ObservableObject {
         createBackground()
         createScoreLabel()
         createLivesLabel()
+        positionAndAddGameStartCountdownLabel(label: gameStartCountdownLabel)
     }
     
     func deleteObjectsOutOfFrame() {
@@ -104,32 +116,42 @@ class GameScene: SKScene, ObservableObject {
         livesLabel.text = "x\(livesValue)"
     }
     
-    func updateGameStatus() {
-        if (livesValue < 0 && self.gameStatus != "loss") {
-            self.gameStatus = "loss"
-            showLossScreen()
-        }
-    }
-    
     func showLossScreen() {
+        self.isShowingLossScreen = true
         self.livesValue = 0
         self.livesLabel.text = "x\(self.livesValue)"
         createLossLabel()
         createFinalScoreLabel()
     }
     
+    func updateGameStatus() {
+        if (self.gameStatus == GameState.start && Int(self.gameStartTime.timeIntervalSinceNow) < -self.gameStartCountdownDuration) {
+            self.gameStatus = GameState.isPlaying
+            self.gameStartCountdownLabel.removeFromParent()
+        }
+        else if (livesValue < 0 && self.gameStatus != GameState.lose) {
+            self.gameStatus = GameState.lose
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         updateGameStatus()
         
-        if (self.gameStatus == "isPlaying") {
-            deleteObjectsOutOfFrame()
+        if (self.gameStatus == GameState.isPlaying) {
             let intTime = Int(currentTime)
+            deleteObjectsOutOfFrame()
             if (intTime % 1 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
                 lastTimeObjSpawned = intTime
                 for _ in 0...Int.random(in: 0...1) {
                     addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
                 }
             }
+        }
+        else if (self.gameStatus == GameState.lose && !self.isShowingLossScreen) {
+            showLossScreen()
+        }
+        else if (self.gameStatus == GameState.start) {
+            self.gameStartCountdownLabel.text = "\(self.gameStartCountdownDuration + Int(self.gameStartTime.timeIntervalSinceNow) + 1)"
         }
     }
 }
