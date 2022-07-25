@@ -24,6 +24,17 @@ extension GameScene {
         self.addChild(self.scoreLabel)
     }
     
+    func createTimerLabel() {
+        self.timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
+        self.timerLabel.verticalAlignmentMode = .top
+        self.timerLabel.horizontalAlignmentMode = .left
+        self.timerLabel.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 75.0)
+        self.timerLabel.fontColor = .white
+        self.timerLabel.fontName = "SFPro-Black"
+        self.timerLabel.fontSize = 18
+        self.addChild(self.timerLabel)
+    }
+    
     func createLivesLabel() {
         self.livesLabel.verticalAlignmentMode = .top
         self.livesLabel.horizontalAlignmentMode = .right

@@ -25,6 +25,26 @@ struct Sprite {
 }
 
 extension GameScene {
+    func spawnSprites() {
+        let block = SKAction.run {
+            for _ in 0...Int.random(in: 0...1) {
+                self.addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
+            }
+        }
+        let wait = SKAction.wait(forDuration: 1)
+        let sequence = SKAction.sequence([block, wait])
+        self.run(SKAction.repeatForever(sequence), withKey: "spawnSprites")
+    }
+    
+    func deleteSpritesOutOfFrame() {
+        self.children.forEach { node in
+            let pos = self.convertPoint(toView: node.position);
+            if (!self.bufferFrame!.contains(pos)) {
+                node.removeFromParent()
+            }
+        }
+    }
+    
     /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
     func addSpriteToSceneWithRandomization(num: Int) {
         let pos = getRandPointInScene()

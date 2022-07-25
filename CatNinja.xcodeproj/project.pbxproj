@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF127C2A288EF3F100849D38 /* GameSceneGamePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */; };
 		BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2792881C86500C62C1C /* sprites.atlas */; };
 		BF2FA2842881E6F600C62C1C /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2832881E6F600C62C1C /* spark.sks */; };
 		BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneGamePlay.swift; sourceTree = "<group>"; };
 		BF2FA2792881C86500C62C1C /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		BF2FA2832881E6F600C62C1C /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		BF5FB4EA2798F00A003570B9 /* CatNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,7 @@
 				BF2FA2832881E6F600C62C1C /* spark.sks */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
 				BFA583432882171F009E7FB7 /* GameSceneLabels.swift */,
+				BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */,
 			);
 			path = CatNinja;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */,
 				BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */,
 				BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */,
+				BF127C2A288EF3F100849D38 /* GameSceneGamePlay.swift in Sources */,
 				BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */,
 				BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */,
 				BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */,

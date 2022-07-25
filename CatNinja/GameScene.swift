@@ -10,8 +10,9 @@ import SwiftUI
 
 enum GameState {
     case start
+    case countdown
     case isPlaying
-    case lose
+    case end
 }
 
 class GameScene: SKScene, ObservableObject {
@@ -22,9 +23,11 @@ class GameScene: SKScene, ObservableObject {
     var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
     var livesLabel = SKLabelNode(text: "x3")
-    var livesValue = 3
+    var livesValue = 2
+    var timerLabel = SKLabelNode()
+    var timerValue = 30 // in seconds
     var gameStartCountdownLabel = SKLabelNode()
-    let gameStartCountdownDuration = 2
+    var gameStartCountdownValue = 3 // in seconds
     
     var bufferFrame: CGRect?
     var lastTimeObjSpawned: Int?
@@ -42,72 +45,57 @@ class GameScene: SKScene, ObservableObject {
         
         // Define buffer frame used for deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
-                                  width: self.view!.frame.width + 50.0, height: self.view!.frame.height + 50.0);
-    }
-    
-    override var isUserInteractionEnabled: Bool {
-        get { return true } set { }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        explodeTouchedSprites(touches: touches)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        explodeTouchedSprites(touches: touches)
-    }
-    
-    func explodeTouchedSprites(touches: Set<UITouch>) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        let touchedNodes = nodes(at: location)
-        
-        touchedNodes.forEach { node in
-            if let spriteNode = node as? SKSpriteNode {
-                if let name = spriteNode.name {
-                    updateScore(name: name)
-                    updateLives(name: name)
-                    explodeSprite(node: spriteNode)
-                }
-            }
-        }
-    }
-    
-    func explodeSprite(node: SKSpriteNode) {
-        if let emitter = SKEmitterNode(fileNamed: "spark") {
-            emitter.position = node.position
-            emitter.particleColorSequence = nil
-            emitter.particleColor = node.color
-            self.addChild(emitter)
-        }
-        node.removeFromParent()
+                                  width: self.view!.frame.width + 50.0, height: self.view!.frame.height + 50.0)
     }
     
     func deleteAllChildrenAndRespawnUIElements() {
         self.removeAllChildren()
         createBackground()
         createScoreLabel()
+        createTimerLabel()
         createLivesLabel()
         positionAndAddGameStartCountdownLabel(label: gameStartCountdownLabel)
     }
     
-    func deleteObjectsOutOfFrame() {
-        self.children.forEach { node in
-            let pos = self.convertPoint(toView: node.position);
-            if (!self.bufferFrame!.contains(pos)) {
-                if let name = node.name {
-                    if !name.contains("Red") { updateScore(name: "OutOfBounds") }
-                }
-                node.removeFromParent()
-            }
+    func showLossScreen() {
+        self.isShowingLossScreen = true
+        self.livesValue = max(self.livesValue, 0)
+        self.livesLabel.text = "x\(self.livesValue)"
+        createLossLabel()
+        createFinalScoreLabel()
+    }
+    
+    func playCountdownThenSpawnNodesAndBeginTimer() {
+        let block = SKAction.run {
+            self.gameStartCountdownLabel.text = "\(self.gameStartCountdownValue)"
+            self.gameStartCountdownValue -= 1
         }
+        let wait = SKAction.wait(forDuration: 1)
+        let sequence = SKAction.sequence([block, wait])
+        self.run(SKAction.repeat(sequence, count: self.gameStartCountdownValue)) {
+            self.gameStartCountdownLabel.removeFromParent()
+            self.gameStatus = GameState.isPlaying
+            self.beginTimer()
+            self.spawnSprites()
+        }
+    }
+    
+    func beginTimer() {
+        let block = SKAction.run {
+            if (self.timerValue == 10) {
+                self.timerLabel.fontColor = UIColor(red: 0.8, green: 0.08, blue: 0.07, alpha: 1.0)
+            }
+            self.timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
+            self.timerValue -= 1
+        }
+        let wait = SKAction.wait(forDuration: 1)
+        let sequence = SKAction.sequence([block, wait])
+        self.run(SKAction.repeatForever(sequence), withKey: "timer")
     }
     
     func updateScore(name: String) {
         if name.contains("Yarn") { scoreValue += 100 }
         else if name.contains("Yellow") { scoreValue += 20 }
-        else if name.contains("Red") { scoreValue -= 50 }
-        else if name.contains("OutOfBounds") { scoreValue -= 30}
         scoreLabel.text = "\(scoreValue)"
     }
     
@@ -116,42 +104,20 @@ class GameScene: SKScene, ObservableObject {
         livesLabel.text = "x\(livesValue)"
     }
     
-    func showLossScreen() {
-        self.isShowingLossScreen = true
-        self.livesValue = 0
-        self.livesLabel.text = "x\(self.livesValue)"
-        createLossLabel()
-        createFinalScoreLabel()
-    }
-    
-    func updateGameStatus() {
-        if (self.gameStatus == GameState.start && Int(self.gameStartTime.timeIntervalSinceNow) < -self.gameStartCountdownDuration) {
-            self.gameStatus = GameState.isPlaying
-            self.gameStartCountdownLabel.removeFromParent()
-        }
-        else if (livesValue < 0 && self.gameStatus != GameState.lose) {
-            self.gameStatus = GameState.lose
-        }
-    }
-    
     override func update(_ currentTime: TimeInterval) {
-        updateGameStatus()
+        deleteSpritesOutOfFrame()
         
-        if (self.gameStatus == GameState.isPlaying) {
-            let intTime = Int(currentTime)
-            deleteObjectsOutOfFrame()
-            if (intTime % 1 == 0 && (lastTimeObjSpawned == nil || lastTimeObjSpawned! < intTime)) {
-                lastTimeObjSpawned = intTime
-                for _ in 0...Int.random(in: 0...1) {
-                    addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
-                }
-            }
+        // Update countdown and timer. Starts node spawning
+        if (self.gameStatus == GameState.start) {
+            self.gameStatus = GameState.countdown
+            playCountdownThenSpawnNodesAndBeginTimer()
         }
-        else if (self.gameStatus == GameState.lose && !self.isShowingLossScreen) {
+        // Check for end condition
+        else if ((self.livesValue < 0 || self.timerValue < 0) && self.gameStatus != GameState.end) {
+            self.gameStatus = GameState.end
+            self.removeAction(forKey: "spawnSprites")
+            self.removeAction(forKey: "timer")
             showLossScreen()
-        }
-        else if (self.gameStatus == GameState.start) {
-            self.gameStartCountdownLabel.text = "\(self.gameStartCountdownDuration + Int(self.gameStartTime.timeIntervalSinceNow) + 1)"
         }
     }
 }

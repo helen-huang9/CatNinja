@@ -36,7 +36,7 @@ struct GameSceneView: View {
                 }
                 Spacer()
             }
-            if scene.gameStatus == GameState.lose {
+            if scene.gameStatus == GameState.end {
                 Button("Return to Home Screen") {
                     dismiss()
                 }
