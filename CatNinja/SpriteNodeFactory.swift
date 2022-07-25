@@ -28,7 +28,7 @@ extension GameScene {
     func spawnSprites() {
         let block = SKAction.run {
             for _ in 0...Int.random(in: 0...1) {
-                self.addSpriteToSceneWithRandomization(num: Int.random(in: 0..<self.spriteNames.count))
+                self.addSpriteToSceneWithRandomization(num: Int.random(in: 1...100))
             }
         }
         let wait = SKAction.wait(forDuration: 1)
@@ -47,9 +47,23 @@ extension GameScene {
     
     /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
     func addSpriteToSceneWithRandomization(num: Int) {
+        var index = 0
+        switch num {
+        case 1...30:
+            index = 2 // Yellow Ball
+        case 31...60:
+            index = 1 // Red Ball
+        case 61...85:
+            index = 4 // Splash Bomb
+        case 86...95:
+            index = 0 // Yarn Ball
+        default:
+            index = 3 // Treat
+        }
+        
         let pos = getRandPointInScene()
         let sprite = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos),
-                            imgName: self.spriteNames[num], texColor: self.spriteColors[num], scale: 3.0)
+                            imgName: self.spriteNames[index], texColor: self.spriteColors[index], scale: 3.0)
         addSpriteToScene(obj: sprite)
     }
     
@@ -64,6 +78,17 @@ extension GameScene {
         spriteNode.physicsBody!.velocity = obj.velocity
         spriteNode.physicsBody!.angularVelocity = CGFloat.random(in: -3.0...3.0)
         spriteNode.physicsBody!.collisionBitMask = 0x0 // prevents collision with other sprites
+        
+        if (obj.imgName.contains("Bomb")) {
+            if let emitter = SKEmitterNode(fileNamed: "smoke") {
+                spriteNode.addChild(emitter)
+            }
+        } else if (obj.imgName.contains("Treat")) {
+            if let emitter = SKEmitterNode(fileNamed: "magic") {
+                spriteNode.addChild(emitter)
+            }
+        }
+        
         self.addChild(spriteNode)
     }
     

@@ -30,6 +30,7 @@ extension GameScene {
                 if let name = spriteNode.name {
                     updateScore(name: name)
                     updateLives(name: name)
+                    updateTime(name: name)
                     explodeSprite(node: spriteNode)
                 }
             }

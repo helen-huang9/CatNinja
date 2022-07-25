@@ -22,10 +22,10 @@ class GameScene: SKScene, ObservableObject {
     
     var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
-    var livesLabel = SKLabelNode(text: "x3")
+    var livesLabel = SKLabelNode(text: "x2")
     var livesValue = 2
     var timerLabel = SKLabelNode()
-    var timerValue = 30 // in seconds
+    var timerValue = 60 // in seconds
     var gameStartCountdownLabel = SKLabelNode()
     var gameStartCountdownValue = 3 // in seconds
     
@@ -33,10 +33,12 @@ class GameScene: SKScene, ObservableObject {
     var lastTimeObjSpawned: Int?
         
     let spriteAtlas = SKTextureAtlas(named: "sprites")
-    let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art"]
+    let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art", "Treat", "Splash_Bomb"]
     let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),
                         UIColor(red: 0.902, green: 0.3294, blue: 0.3294, alpha: 1.0),
-                        UIColor(red: 0.9647, green: 0.863, blue: 0.365, alpha: 1.0)]
+                        UIColor(red: 0.9647, green: 0.863, blue: 0.365, alpha: 1.0),
+                        UIColor(red: 0.68, green: 0.56, blue: 0.43, alpha: 1.0),
+                        UIColor(red: 0.19, green: 0.39, blue: 0.254, alpha: 1.0)]
     
     
     override func didMove(to view: SKView) {
@@ -82,8 +84,10 @@ class GameScene: SKScene, ObservableObject {
     
     func beginTimer() {
         let block = SKAction.run {
-            if (self.timerValue == 10) {
+            if (self.timerValue <= 10) {
                 self.timerLabel.fontColor = UIColor(red: 0.8, green: 0.08, blue: 0.07, alpha: 1.0)
+            } else {
+                self.timerLabel.fontColor = .white
             }
             self.timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
             self.timerValue -= 1
@@ -93,15 +97,25 @@ class GameScene: SKScene, ObservableObject {
         self.run(SKAction.repeatForever(sequence), withKey: "timer")
     }
     
+    func updateTime(name: String) {
+        if name.contains("Treat") {
+            timerValue += 10
+            timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
+        }
+    }
+    
     func updateScore(name: String) {
         if name.contains("Yarn") { scoreValue += 100 }
         else if name.contains("Yellow") { scoreValue += 20 }
+        else if name.contains("Red") { scoreValue += 10 }
         scoreLabel.text = "\(scoreValue)"
     }
     
     func updateLives(name: String) {
-        if name.contains("Red") { livesValue -= 1 }
-        livesLabel.text = "x\(livesValue)"
+        if name.contains("Bomb") {
+            livesValue -= 1
+            livesLabel.text = "x\(livesValue)"
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
