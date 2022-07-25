@@ -35,6 +35,7 @@ struct ContentView: View {
                         GameSceneView()
                         .ignoresSafeArea(edges: .all)
                     }
+                    .transition(.opacity)
             }
         }
         .statusBar(hidden: true)

@@ -19,9 +19,9 @@ class GameScene: SKScene, ObservableObject {
     var gameStartTime: Date = Date.now
     var isShowingLossScreen = false
     
-    var scoreLabel = SKLabelNode()
+    var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
-    var livesLabel = SKLabelNode()
+    var livesLabel = SKLabelNode(text: "x3")
     var livesValue = 3
     var gameStartCountdownLabel = SKLabelNode()
     let gameStartCountdownDuration = 2
