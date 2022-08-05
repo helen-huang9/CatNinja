@@ -16,10 +16,15 @@ enum GameState {
 }
 
 class GameScene: SKScene, ObservableObject {
+    // Game State
     @Published var gameStatus: GameState = GameState.start
     var gameStartTime: Date = Date.now
     var isShowingLossScreen = false
     
+    // Game Screen size
+    var bufferFrame: CGRect?
+    
+    // Labels
     var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
     var livesLabel = SKLabelNode(text: "x2")
@@ -28,10 +33,8 @@ class GameScene: SKScene, ObservableObject {
     var timerValue = 60 // in seconds
     var gameStartCountdownLabel = SKLabelNode()
     var gameStartCountdownValue = 3 // in seconds
-    
-    var bufferFrame: CGRect?
-    var lastTimeObjSpawned: Int?
         
+    // Textures
     let spriteAtlas = SKTextureAtlas(named: "sprites")
     let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art", "Treat", "Splash_Bomb"]
     let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),
@@ -42,6 +45,7 @@ class GameScene: SKScene, ObservableObject {
     
     
     override func didMove(to view: SKView) {
+        self.isUserInteractionEnabled = true
         self.spriteAtlas.preload {}
         deleteAllChildrenAndRespawnUIElements()
         
@@ -63,6 +67,7 @@ class GameScene: SKScene, ObservableObject {
         self.isShowingLossScreen = true
         self.livesValue = max(self.livesValue, 0)
         self.livesLabel.text = "x\(self.livesValue)"
+        self.run(SKAction.playSoundFileNamed("game_over.wav", waitForCompletion: false))
         createLossLabel()
         createFinalScoreLabel()
     }
@@ -72,7 +77,7 @@ class GameScene: SKScene, ObservableObject {
             self.gameStartCountdownLabel.text = "\(self.gameStartCountdownValue)"
             self.gameStartCountdownValue -= 1
         }
-        let wait = SKAction.wait(forDuration: 1)
+        let wait = SKAction.wait(forDuration: 0.5)
         let sequence = SKAction.sequence([block, wait])
         self.run(SKAction.repeat(sequence, count: self.gameStartCountdownValue)) {
             self.gameStartCountdownLabel.removeFromParent()
@@ -101,20 +106,6 @@ class GameScene: SKScene, ObservableObject {
         if name.contains("Treat") {
             timerValue += 10
             timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
-        }
-    }
-    
-    func updateScore(name: String) {
-        if name.contains("Yarn") { scoreValue += 100 }
-        else if name.contains("Yellow") { scoreValue += 20 }
-        else if name.contains("Red") { scoreValue += 10 }
-        scoreLabel.text = "\(scoreValue)"
-    }
-    
-    func updateLives(name: String) {
-        if name.contains("Bomb") {
-            livesValue -= 1
-            livesLabel.text = "x\(livesValue)"
         }
     }
     

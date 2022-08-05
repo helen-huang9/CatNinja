@@ -18,6 +18,10 @@
 		BF5FB4F52798F00B003570B9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4F42798F00B003570B9 /* Preview Assets.xcassets */; };
 		BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4FB2798F067003570B9 /* GameSceneView.swift */; };
 		BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4FF2798F7FB003570B9 /* GameScene.sks */; };
+		BF6099DA289D911D0026F3FE /* game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BF6099D9289D911D0026F3FE /* game_over.wav */; };
+		BF6099DE289D9BD90026F3FE /* item_acquired.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DD289D91880026F3FE /* item_acquired.m4a */; };
+		BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */; };
+		BF6099E0289D9BE00026F3FE /* glass_break.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DB289D914D0026F3FE /* glass_break.m4a */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
 		BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GameSceneLabels.swift */; };
 		BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */; };
@@ -36,6 +40,10 @@
 		BF5FB4F42798F00B003570B9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BF5FB4FB2798F067003570B9 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		BF5FB4FF2798F7FB003570B9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		BF6099D9289D911D0026F3FE /* game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = game_over.wav; sourceTree = "<group>"; };
+		BF6099DB289D914D0026F3FE /* glass_break.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = glass_break.m4a; sourceTree = "<group>"; };
+		BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprite_destroyed.m4a; sourceTree = "<group>"; };
+		BF6099DD289D91880026F3FE /* item_acquired.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = item_acquired.m4a; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		BFA583432882171F009E7FB7 /* GameSceneLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneLabels.swift; sourceTree = "<group>"; };
 		BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteNodeFactory.swift; sourceTree = "<group>"; };
@@ -71,6 +79,7 @@
 		BF5FB4EC2798F00A003570B9 /* CatNinja */ = {
 			isa = PBXGroup;
 			children = (
+				BF6099D6289D90FF0026F3FE /* SoundEffects */,
 				BF2FA2792881C86500C62C1C /* sprites.atlas */,
 				BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */,
 				BF5FB4EF2798F00A003570B9 /* ContentView.swift */,
@@ -78,10 +87,8 @@
 				BF5FB4F32798F00B003570B9 /* Preview Content */,
 				BF5FB4FB2798F067003570B9 /* GameSceneView.swift */,
 				BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */,
-				BF127C2B288F2DD800849D38 /* smoke.sks */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
-				BF127C2D288F31D300849D38 /* magic.sks */,
-				BF2FA2832881E6F600C62C1C /* spark.sks */,
+				BFFA523728904A27002D3C45 /* ParticleEffects */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
 				BFA583432882171F009E7FB7 /* GameSceneLabels.swift */,
 				BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */,
@@ -95,6 +102,27 @@
 				BF5FB4F42798F00B003570B9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BF6099D6289D90FF0026F3FE /* SoundEffects */ = {
+			isa = PBXGroup;
+			children = (
+				BF6099DD289D91880026F3FE /* item_acquired.m4a */,
+				BF6099D9289D911D0026F3FE /* game_over.wav */,
+				BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */,
+				BF6099DB289D914D0026F3FE /* glass_break.m4a */,
+			);
+			path = SoundEffects;
+			sourceTree = "<group>";
+		};
+		BFFA523728904A27002D3C45 /* ParticleEffects */ = {
+			isa = PBXGroup;
+			children = (
+				BF127C2D288F31D300849D38 /* magic.sks */,
+				BF127C2B288F2DD800849D38 /* smoke.sks */,
+				BF2FA2832881E6F600C62C1C /* spark.sks */,
+			);
+			path = ParticleEffects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,8 +183,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF6099DE289D9BD90026F3FE /* item_acquired.m4a in Resources */,
+				BF6099E0289D9BE00026F3FE /* glass_break.m4a in Resources */,
+				BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */,
 				BF127C2E288F31D300849D38 /* magic.sks in Resources */,
 				BF5FB4F52798F00B003570B9 /* Preview Assets.xcassets in Resources */,
+				BF6099DA289D911D0026F3FE /* game_over.wav in Resources */,
 				BF127C2C288F2DD800849D38 /* smoke.sks in Resources */,
 				BF2FA2842881E6F600C62C1C /* spark.sks in Resources */,
 				BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */,
@@ -315,8 +347,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -345,8 +377,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

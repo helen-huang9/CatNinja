@@ -47,7 +47,7 @@ extension GameScene {
     
     /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
     func addSpriteToSceneWithRandomization(num: Int) {
-        var index = 0
+        var index = 4
         switch num {
         case 1...30:
             index = 2 // Yellow Ball
@@ -81,10 +81,12 @@ extension GameScene {
         
         if (obj.imgName.contains("Bomb")) {
             if let emitter = SKEmitterNode(fileNamed: "smoke") {
+                emitter.name = "smoke"
                 spriteNode.addChild(emitter)
             }
         } else if (obj.imgName.contains("Treat")) {
             if let emitter = SKEmitterNode(fileNamed: "magic") {
+                emitter.isUserInteractionEnabled = false
                 spriteNode.addChild(emitter)
             }
         }
