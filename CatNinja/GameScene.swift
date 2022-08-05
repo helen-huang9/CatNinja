@@ -26,9 +26,9 @@ class GameScene: SKScene, ObservableObject {
     
     // Labels
     let font = "Copperplate"
-    var scoreLabel = SKLabelNode(text: "0")
+    var scoreLabel = SKLabelNode()
     var scoreValue = 0
-    var livesLabel = SKLabelNode(text: "x2")
+    var livesLabel = SKLabelNode()
     var livesValue = 2
     var timerLabel = SKLabelNode()
     var timerValue = 60 // in seconds
@@ -53,6 +53,17 @@ class GameScene: SKScene, ObservableObject {
         // Define buffer frame used for deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
                                   width: self.view!.frame.width + 50.0, height: self.view!.frame.height + 50.0)
+    }
+    
+    func restartGame() {
+        self.scoreValue = 0
+        self.livesValue = 2
+        self.timerValue = 60
+        self.gameStartCountdownValue = 3
+        self.gameStartTime = Date.now
+        self.gameStatus = GameState.start
+        self.isShowingLossScreen = false
+        deleteAllChildrenAndRespawnUIElements()
     }
     
     func deleteAllChildrenAndRespawnUIElements() {

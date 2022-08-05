@@ -35,6 +35,7 @@ struct ContentView: View {
                             .frame(width: 200.0, height: 50.0)
                     }
                 }
+                .buttonStyle(IndentButtonStyle())
             }
             // Game Scene
             else {

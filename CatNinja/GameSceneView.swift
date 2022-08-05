@@ -32,19 +32,26 @@ struct GameSceneView: View {
                     })
                     .offset(x: -20, y: 0)
                     .padding(.top, 40)
+                    .buttonStyle(IndentButtonStyle())
                     .transition(.opacity)
                     Spacer()
                 }
                 Spacer()
             }
             if scene.gameStatus == GameState.end {
-                Button("Return to Home Screen") {
-                    withAnimation{ showingGame = false }
+                VStack {
+                    Button("Return to Home Screen") {
+                        withAnimation{ showingGame = false }
+                    }
+                    .buttonStyle(EndGameButtonStyle())
+                    .offset(y: 40)
+                    
+                    Button("Play Again") {
+                        scene.restartGame()
+                    }
+                    .buttonStyle(EndGameButtonStyle())
+                    .offset(y: 50)
                 }
-                .offset(y:10)
-                .font(Font.custom("Copperplate", size: 16))
-                .foregroundColor(Color(red: 31/255.0, green: 47/255.0, blue: 54/255.0))
-                .transition(.opacity)
             }
         }
         .statusBar(hidden: true)

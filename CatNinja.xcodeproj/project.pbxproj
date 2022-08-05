@@ -10,6 +10,7 @@
 		BF127C2A288EF3F100849D38 /* GameSceneGamePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */; };
 		BF127C2C288F2DD800849D38 /* smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF127C2B288F2DD800849D38 /* smoke.sks */; };
 		BF127C2E288F31D300849D38 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF127C2D288F31D300849D38 /* magic.sks */; };
+		BF28A30F289DD47E0053A3C7 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A30E289DD47E0053A3C7 /* ButtonStyles.swift */; };
 		BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2792881C86500C62C1C /* sprites.atlas */; };
 		BF2FA2842881E6F600C62C1C /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2832881E6F600C62C1C /* spark.sks */; };
 		BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */; };
@@ -31,6 +32,7 @@
 		BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneGamePlay.swift; sourceTree = "<group>"; };
 		BF127C2B288F2DD800849D38 /* smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smoke.sks; sourceTree = "<group>"; };
 		BF127C2D288F31D300849D38 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
+		BF28A30E289DD47E0053A3C7 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		BF2FA2792881C86500C62C1C /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		BF2FA2832881E6F600C62C1C /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		BF5FB4EA2798F00A003570B9 /* CatNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 				BF5FB4F12798F00B003570B9 /* Assets.xcassets */,
 				BF5FB4F32798F00B003570B9 /* Preview Content */,
 				BF5FB4FB2798F067003570B9 /* GameSceneView.swift */,
+				BF28A30E289DD47E0053A3C7 /* ButtonStyles.swift */,
 				BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
 				BFFA523728904A27002D3C45 /* ParticleEffects */,
@@ -209,6 +212,7 @@
 				BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */,
 				BF127C2A288EF3F100849D38 /* GameSceneGamePlay.swift in Sources */,
 				BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */,
+				BF28A30F289DD47E0053A3C7 /* ButtonStyles.swift in Sources */,
 				BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */,
 				BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */,
 			);
