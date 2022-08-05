@@ -25,6 +25,7 @@ class GameScene: SKScene, ObservableObject {
     var bufferFrame: CGRect?
     
     // Labels
+    let font = "Copperplate"
     var scoreLabel = SKLabelNode(text: "0")
     var scoreValue = 0
     var livesLabel = SKLabelNode(text: "x2")

@@ -9,7 +9,7 @@ import SwiftUI
 import SpriteKit
 
 struct GameSceneView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Binding public var showingGame: Bool
     @ObservedObject private var scene = GameScene(fileNamed: "GameScene")!
     
     var body: some View {
@@ -19,7 +19,7 @@ struct GameSceneView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     Button(action: {
-                        dismiss()
+                        withAnimation{ showingGame = false }
                     }, label: {
                         ZStack {
                             Image("Paw_Pixel_Art")
@@ -32,24 +32,21 @@ struct GameSceneView: View {
                     })
                     .offset(x: -20, y: 0)
                     .padding(.top, 40)
+                    .transition(.opacity)
                     Spacer()
                 }
                 Spacer()
             }
             if scene.gameStatus == GameState.end {
                 Button("Return to Home Screen") {
-                    dismiss()
+                    withAnimation{ showingGame = false }
                 }
                 .offset(y:10)
+                .font(Font.custom("Copperplate", size: 16))
                 .foregroundColor(Color(red: 31/255.0, green: 47/255.0, blue: 54/255.0))
+                .transition(.opacity)
             }
         }
         .statusBar(hidden: true)
-    }
-}
-
-struct GameSceneView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameSceneView()
     }
 }
