@@ -29,7 +29,9 @@ class GameScene: SKScene, ObservableObject {
     var scoreLabel = SKLabelNode()
     var scoreValue = 0
     var livesLabel = SKLabelNode()
-    var livesValue = 2
+    var livesValue = 3
+    let lives = [SKSpriteNode(imageNamed: "Cat_Life_0"), SKSpriteNode(imageNamed: "Cat_Life_1"),
+                 SKSpriteNode(imageNamed: "Cat_Life_2"), SKSpriteNode(imageNamed: "Cat_Life_3")]
     var timerLabel = SKLabelNode()
     var timerValue = 60 // in seconds
     var gameStartCountdownLabel = SKLabelNode()
@@ -57,7 +59,7 @@ class GameScene: SKScene, ObservableObject {
     
     func restartGame() {
         self.scoreValue = 0
-        self.livesValue = 2
+        self.livesValue = 3
         self.timerValue = 60
         self.gameStartCountdownValue = 3
         self.gameStartTime = Date.now
@@ -130,7 +132,7 @@ class GameScene: SKScene, ObservableObject {
             playCountdownThenSpawnNodesAndBeginTimer()
         }
         // Check for end condition
-        else if ((self.livesValue < 0 || self.timerValue < 0) && self.gameStatus != GameState.end) {
+        else if ((self.livesValue <= 0 || self.timerValue < 0) && self.gameStatus != GameState.end) {
             self.gameStatus = GameState.end
             self.removeAction(forKey: "spawnSprites")
             self.removeAction(forKey: "timer")

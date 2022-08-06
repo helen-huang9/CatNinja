@@ -64,8 +64,10 @@ extension GameScene {
     
     func updateLives(name: String) {
         if name.contains("Bomb") {
+            self.lives[self.livesValue].removeFromParent()
             livesValue -= 1
-            livesLabel.text = "x\(livesValue)"
+            self.lives[self.livesValue].position = CGPoint(x: frame.maxX - 45.0, y: frame.maxY - 40.0)
+            self.addChild(self.lives[self.livesValue])
         }
     }
 }

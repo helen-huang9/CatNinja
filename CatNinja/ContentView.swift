@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingGame = false
+    let height: CGFloat = 850
+    let width: CGFloat = 650
     
     var body: some View {
         ZStack {
@@ -17,25 +19,34 @@ struct ContentView: View {
                 // Background Image
                 Image("Home_Background")
                     .resizable()
-                    .frame(width: 650, height: 850, alignment: .center)
+                    .frame(width: width, height: height, alignment: .center)
                     .ignoresSafeArea()
                 
-                // Play game button
+                // New Game button
                 Button(action: {
                     withAnimation{showingGame = true}
                 }) {
-                    ZStack {
-                        Image("orange_cat_button")
-                            .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
-                            .padding(.bottom, 20.0)
-                            .foregroundColor(Color.black)
-                        Text("Play")
-                            .foregroundColor(Color.black)
-                            .font(Font.custom("Copperplate-Bold", size: 36))
-                            .frame(width: 200.0, height: 50.0)
-                    }
+                    Image("New_Game_Button")
+                        .scaleEffect(x: 0.25, y: 0.25, anchor: .center)
                 }
                 .buttonStyle(IndentButtonStyle())
+                .position(x: width/2, y: height/2)
+                
+                // Claws button
+                Button(action: {}) {
+                    Image("Claws_Button")
+                        .scaleEffect(x: 0.15, y: 0.15, anchor: .center)
+                }
+                .buttonStyle(IndentButtonStyle())
+                .position(x: width/2 - 85, y: height/2 + 100)
+                
+                // Settings button
+                Button(action: {}) {
+                    Image("Settings_Button")
+                        .scaleEffect(x: 0.15, y: 0.15, anchor: .center)
+                }
+                .buttonStyle(IndentButtonStyle())
+                .position(x: width/2 + 85, y: height/2 + 100)
             }
             // Game Scene
             else {

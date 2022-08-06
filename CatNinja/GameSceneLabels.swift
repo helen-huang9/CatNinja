@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import SwiftUI
 
 extension GameScene {
     
@@ -22,8 +23,8 @@ extension GameScene {
         self.scoreLabel.horizontalAlignmentMode = .left
         self.scoreLabel.fontColor = .black
         self.scoreLabel.fontName = self.font
-        
         self.scoreLabel.position = CGPoint(x: frame.minX + 65, y: frame.maxY - 35.0)
+        self.scoreLabel.fontSize = 36
         self.addChild(self.scoreLabel)
     }
     
@@ -33,22 +34,14 @@ extension GameScene {
         self.timerLabel.horizontalAlignmentMode = .left
         self.timerLabel.fontColor = .white
         self.timerLabel.fontName = self.font
-        
         self.timerLabel.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 75.0)
         self.timerLabel.fontSize = 18
         self.addChild(self.timerLabel)
     }
     
     func createLivesLabel() {
-        self.livesLabel.text = "x\(self.livesValue)"
-        self.livesLabel.verticalAlignmentMode = .top
-        self.livesLabel.horizontalAlignmentMode = .right
-        self.livesLabel.fontColor = .white
-        self.livesLabel.fontName = self.font
-        
-        self.livesLabel.position = CGPoint(x: frame.maxX - 30.0, y: frame.maxY - 30.0)
-        self.livesLabel.fontSize = 24
-        self.addChild(self.livesLabel)
+        self.lives[self.livesValue].position = CGPoint(x: frame.maxX - 45.0, y: frame.maxY - 40.0)
+        self.addChild(self.lives[self.livesValue])
     }
     
     func createLossLabel() {
