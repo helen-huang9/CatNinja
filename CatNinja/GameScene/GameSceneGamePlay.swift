@@ -7,6 +7,12 @@
 
 import SpriteKit
 
+enum TouchState {
+    case began
+    case moved
+    case ended
+}
+
 extension GameScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -14,9 +20,10 @@ extension GameScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        clawSlice(touches: touches)
         explodeTouchedSprites(touches: touches)
     }
-    
+
     func beginTimer() {
         let block = SKAction.run {
             if (self.timerValue <= 10) {
@@ -32,8 +39,60 @@ extension GameScene {
         self.run(SKAction.repeatForever(sequence), withKey: "timer")
     }
     
+    func clawSlice(touches: Set<UITouch>) {
+        if self.gameStatus == GameState.isPlaying {
+            guard let touch = touches.first else { return }
+            let currLocation = touch.location(in: self)
+            let prevLocation = touch.previousLocation(in: self)
+            drawClaw(start: currLocation, end: prevLocation)
+//            drawThreeClaws(currLocation: currLocation, prevLocation: prevLocation)
+        }
+    }
+    
+    func drawClaw(start: CGPoint, end: CGPoint) {
+        let path = CGMutablePath()
+        path.move(to: start)
+        path.addLine(to: end)
+        let claw = SKShapeNode(path: path)
+        claw.lineWidth = 2
+        claw.strokeColor = .white
+        claw.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
+        self.addChild(claw)
+    }
+    
+    func drawThreeClaws(currLocation: CGPoint, prevLocation: CGPoint) {
+        // Parallel
+        let paraTemp = simd_float2(x: Float(currLocation.x - prevLocation.x), y: Float(currLocation.y - prevLocation.y))
+        var para = simd_normalize(paraTemp)
+        para *= 10
+        
+        // Perpendicular
+        let perpTemp = simd_float2(x: Float(currLocation.y - prevLocation.y), y: Float(prevLocation.x - currLocation.x))
+        var perp = simd_normalize(perpTemp)
+        perp *= 10
+        
+        // Middle Claw
+        var x = CGFloat(para.x)
+        var y = CGFloat(para.y)
+        let middleStart = CGPoint(x: currLocation.x + x, y: currLocation.y + y)
+        let middleEnd = CGPoint(x: prevLocation.x + x, y: prevLocation.y + y)
+        drawClaw(start: middleStart, end: middleEnd)
+        
+        // Left Claw
+        x = CGFloat(perp.x)
+        y = CGFloat(perp.y)
+        let leftStart = CGPoint(x: currLocation.x - x, y: currLocation.y - y)
+        let leftEnd = CGPoint(x: prevLocation.x - x, y: prevLocation.y - y)
+        drawClaw(start: leftStart, end: leftEnd)
+        
+        // Right Claw
+        let rightStart = CGPoint(x: currLocation.x + x, y: currLocation.y + y)
+        let rightEnd = CGPoint(x: prevLocation.x + x, y: prevLocation.y + y)
+        drawClaw(start: rightStart, end: rightEnd)
+    }
+    
     func explodeTouchedSprites(touches: Set<UITouch>) {
-        if (self.gameStatus == GameState.isPlaying) {
+        if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
             let location = touch.location(in: self)
             let touchedNodes = nodes(at: location)
@@ -44,7 +103,6 @@ extension GameScene {
                         updateScore(name: name)
                         updateLives(name: name)
                         updateTime(name: name)
-                        playSpriteDestroyedAudio(name: name)
                         explodeSprite(node: spriteNode)
                     }
                 }
@@ -54,29 +112,21 @@ extension GameScene {
     
     func explodeSprite(node: SKSpriteNode) {
         if let emitter = SKEmitterNode(fileNamed: "spark") {
-            let add = SKAction.run {
-                emitter.position = node.position
-                emitter.particleColorSequence = nil
-                emitter.particleColor = node.color
-                self.addChild(emitter)
-            }
+            let sound = node.name!.contains("Bomb") ? SKAction.playSoundFileNamed("glass_break.m4a", waitForCompletion: false) : SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false)
+            
+            emitter.position = node.position
+            emitter.particleColorSequence = nil
+            emitter.particleColor = node.color
+            self.addChild(emitter)
             
             let wait = SKAction.wait(forDuration: emitter.particleLifetime)
-            let remove = SKAction.run { emitter.removeFromParent() }
-            let sequence = SKAction.sequence([add, wait, remove])
-            self.run(sequence)
+            let remove = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([sound, wait, remove])
+            emitter.run(sequence)
         }
         
         // Remove object sprite
         node.removeFromParent()
-    }
-    
-    func playSpriteDestroyedAudio(name: String) {
-        if name.contains("Bomb") {
-            self.run(SKAction.playSoundFileNamed("glass_break.m4a", waitForCompletion: false))
-        } else {
-            self.run(SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false))
-        }
     }
     
     func updateTime(name: String) {
