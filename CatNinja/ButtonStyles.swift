@@ -20,6 +20,18 @@ struct EndGameButtonStyle: ButtonStyle {
     }
 }
 
+struct PauseScreenButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 1.0))
+            .padding([.top, .bottom], 5)
+            .padding([.leading, .trailing], 10)
+            .font(Font.custom("Copperplate", size: 32))
+            .background(Color(red: 0.85, green: 0.85, blue: 0.9, opacity: 0.85).cornerRadius(20))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+    }
+}
+
 struct IndentButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

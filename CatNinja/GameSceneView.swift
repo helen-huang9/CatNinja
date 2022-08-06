@@ -19,7 +19,11 @@ struct GameSceneView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     Button(action: {
-                        withAnimation{ showingGame = false }
+                        withAnimation{
+                            if (scene.gameStatus == GameState.isPlaying || scene.gameStatus == GameState.countdown) {
+                                scene.gameStatus = GameState.pause
+                            }
+                        }
                     }, label: {
                         ZStack {
                             Image("Paw_Pixel_Art")
@@ -38,17 +42,31 @@ struct GameSceneView: View {
                 }
                 Spacer()
             }
+            if scene.gameStatus == GameState.isPaused {
+                Text("PAUSED")
+                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 1.0))
+                    .font(Font.custom("Copperplate", size: 56))
+                    .offset(y: -150)
+                
+                Button("Resume") { scene.resumeGamePlay() }
+                .buttonStyle(PauseScreenButtonStyle())
+                .offset(y: -30)
+                
+                Button("Restart") { scene.restartGame() }
+                .buttonStyle(PauseScreenButtonStyle())
+                .offset(y: 30)
+                
+                Button("Quit Game") { showingGame = false }
+                .buttonStyle(PauseScreenButtonStyle())
+                .offset(y: 90)
+            }
             if scene.gameStatus == GameState.end {
                 VStack {
-                    Button("Return to Home Screen") {
-                        withAnimation{ showingGame = false }
-                    }
+                    Button("Play Again") { scene.restartGame() }
                     .buttonStyle(EndGameButtonStyle())
                     .offset(y: 40)
                     
-                    Button("Play Again") {
-                        scene.restartGame()
-                    }
+                    Button("Return to Home Screen") { withAnimation{ showingGame = false } }
                     .buttonStyle(EndGameButtonStyle())
                     .offset(y: 50)
                 }
