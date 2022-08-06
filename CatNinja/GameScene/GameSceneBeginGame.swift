@@ -17,6 +17,8 @@ extension GameScene {
         // Define buffer frame used for deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
                                   width: self.view!.frame.width + 50.0, height: self.view!.frame.height + 50.0)
+        
+        self.beginGameCountDown()
     }
     
     func deleteAllChildrenAndRespawnUIElements() {
@@ -26,10 +28,11 @@ extension GameScene {
         createScoreLabel()
         createTimerLabel()
         createLivesLabel()
-        positionAndAddGameStartCountdownLabel(label: gameStartCountdownLabel)
+        createGameStartCountdownLabel(label: gameStartCountdownLabel)
     }
     
-    func playCountdownThenSpawnNodesAndBeginTimer() {
+    func beginGameCountDown() {
+        self.gameStatus = GameState.countdown
         let block = SKAction.run {
             self.gameStartCountdownLabel.text = "\(self.gameStartCountdownValue)"
             self.gameStartCountdownValue -= 1
@@ -38,9 +41,14 @@ extension GameScene {
         let sequence = SKAction.sequence([block, wait])
         self.run(SKAction.repeat(sequence, count: self.gameStartCountdownValue)) {
             self.gameStartCountdownLabel.removeFromParent()
-            self.gameStatus = GameState.isPlaying
-            self.beginTimer()
-            self.spawnSprites()
+            self.beginGame()
         }
+    }
+    
+    func beginGame() {
+        self.gameStatus = GameState.isPlaying
+        self.beginTimer()
+        self.continuouslySpawnSprites()
+        self.continuouslyDeleteSpritesOutOfFrame()
     }
 }

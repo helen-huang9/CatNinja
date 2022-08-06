@@ -25,7 +25,7 @@ struct Sprite {
 }
 
 extension GameScene {
-    func spawnSprites() {
+    func continuouslySpawnSprites() {
         let block = SKAction.run {
             for _ in 0...Int.random(in: 0...1) {
                 self.addSpriteToSceneWithRandomization(num: Int.random(in: 1...100))
@@ -36,13 +36,18 @@ extension GameScene {
         self.run(SKAction.repeatForever(sequence), withKey: "spawnSprites")
     }
     
-    func deleteSpritesOutOfFrame() {
-        self.children.forEach { node in
-            let pos = self.convertPoint(toView: node.position);
-            if (!self.bufferFrame!.contains(pos)) {
-                node.removeFromParent()
+    func continuouslyDeleteSpritesOutOfFrame() {
+        let remove = SKAction.run {
+            self.children.forEach { node in
+                let pos = self.convertPoint(toView: node.position);
+                if (!self.bufferFrame!.contains(pos)) {
+                    node.removeFromParent()
+                }
             }
         }
+        let wait = SKAction.wait(forDuration: 1)
+        let sequence = SKAction.sequence([wait, remove])
+        self.run(SKAction.repeatForever(sequence), withKey: "removeSprites")
     }
     
     /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
@@ -82,6 +87,7 @@ extension GameScene {
         if (obj.imgName.contains("Bomb")) {
             if let emitter = SKEmitterNode(fileNamed: "smoke") {
                 emitter.name = "smoke"
+                emitter.isUserInteractionEnabled = false
                 spriteNode.addChild(emitter)
             }
         } else if (obj.imgName.contains("Treat")) {

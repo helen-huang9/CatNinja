@@ -21,7 +21,9 @@ struct GameSceneView: View {
                     Button(action: {
                         withAnimation{
                             if (scene.gameStatus == GameState.isPlaying || scene.gameStatus == GameState.countdown) {
-                                scene.gameStatus = GameState.pause
+                                scene.pauseGamePlay()
+                            } else if (scene.gameStatus == GameState.isPaused) {
+                                scene.resumeGamePlay()
                             }
                         }
                     }, label: {

@@ -13,6 +13,7 @@ extension GameScene {
         let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
         background.size = CGSize(width: 1000, height: 1000)
         background.position = CGPoint(x: frame.midX + 35, y:frame.midY)
+        background.blendMode = .replace
         self.addChild(background)
     }
     
@@ -24,6 +25,7 @@ extension GameScene {
         self.scoreLabel.fontName = self.font
         self.scoreLabel.position = CGPoint(x: frame.minX + 65, y: frame.maxY - 35.0)
         self.scoreLabel.fontSize = 36
+        self.scoreLabel.blendMode = .replace
         self.addChild(self.scoreLabel)
     }
     
@@ -35,6 +37,7 @@ extension GameScene {
         self.timerLabel.fontName = self.font
         self.timerLabel.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 75.0)
         self.timerLabel.fontSize = 18
+        self.timerLabel.blendMode = .replace
         self.addChild(self.timerLabel)
     }
     
@@ -49,6 +52,7 @@ extension GameScene {
         lossLabel.position.y += 50.0
         lossLabel.fontName = self.font
         lossLabel.fontSize = 48
+        lossLabel.blendMode = .replace
         self.addChild(lossLabel)
     }
     
@@ -58,13 +62,15 @@ extension GameScene {
         finalScore.position.y += 10.0
         finalScore.fontName = self.font
         finalScore.fontSize = 24
+        finalScore.blendMode = .replace
         self.addChild(finalScore)
     }
     
-    func positionAndAddGameStartCountdownLabel(label: SKLabelNode) {
+    func createGameStartCountdownLabel(label: SKLabelNode) {
         label.position.y += 10.0
         label.fontName = self.font
         label.fontSize = 48
+        label.blendMode = .replace
         self.addChild(label)
     }
 }

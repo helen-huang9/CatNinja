@@ -26,8 +26,8 @@ extension GameScene {
         self.gameStartTime = Date.now
         deleteAllChildrenAndRespawnUIElements()
         
-        self.gameStatus = GameState.start
         self.isShowingLossScreen = false
         if let view = self.view { view.isPaused = false }
+        self.beginGameCountDown()
     }
 }

@@ -32,13 +32,6 @@ extension GameScene {
         self.run(SKAction.repeatForever(sequence), withKey: "timer")
     }
     
-    func updateTime(name: String) {
-        if name.contains("Treat") {
-            timerValue += 10
-            timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
-        }
-    }
-    
     func explodeTouchedSprites(touches: Set<UITouch>) {
         if (self.gameStatus == GameState.isPlaying) {
             guard let touch = touches.first else { return }
@@ -61,11 +54,20 @@ extension GameScene {
     
     func explodeSprite(node: SKSpriteNode) {
         if let emitter = SKEmitterNode(fileNamed: "spark") {
-            emitter.position = node.position
-            emitter.particleColorSequence = nil
-            emitter.particleColor = node.color
-            self.addChild(emitter)
+            let add = SKAction.run {
+                emitter.position = node.position
+                emitter.particleColorSequence = nil
+                emitter.particleColor = node.color
+                self.addChild(emitter)
+            }
+            
+            let wait = SKAction.wait(forDuration: emitter.particleLifetime)
+            let remove = SKAction.run { emitter.removeFromParent() }
+            let sequence = SKAction.sequence([add, wait, remove])
+            self.run(sequence)
         }
+        
+        // Remove object sprite
         node.removeFromParent()
     }
     
@@ -74,6 +76,13 @@ extension GameScene {
             self.run(SKAction.playSoundFileNamed("glass_break.m4a", waitForCompletion: false))
         } else {
             self.run(SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false))
+        }
+    }
+    
+    func updateTime(name: String) {
+        if name.contains("Treat") {
+            timerValue += 10
+            timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
         }
     }
     
@@ -90,6 +99,15 @@ extension GameScene {
             livesValue -= 1
             self.lives[self.livesValue].position = CGPoint(x: frame.maxX - 45.0, y: frame.maxY - 40.0)
             self.addChild(self.lives[self.livesValue])
+        }
+    }
+    
+    func checkForEndCondition() {
+        if ((self.livesValue <= 0 || self.timerValue < 0) && self.gameStatus != GameState.end) {
+            self.gameStatus = GameState.end
+            self.removeAction(forKey: "spawnSprites")
+            self.removeAction(forKey: "timer")
+            showLossScreen()
         }
     }
 }
