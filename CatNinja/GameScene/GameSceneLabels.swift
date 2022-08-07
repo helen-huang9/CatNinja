@@ -30,12 +30,17 @@ extension GameScene {
     }
     
     func createTimerLabel() {
+        let clock = SKSpriteNode(imageNamed: "Clock")
+        clock.setScale(0.75)
+        clock.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 82.0)
+        self.addChild(clock)
+        
         self.timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
         self.timerLabel.verticalAlignmentMode = .top
         self.timerLabel.horizontalAlignmentMode = .left
         self.timerLabel.fontColor = .white
         self.timerLabel.fontName = self.font
-        self.timerLabel.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 75.0)
+        self.timerLabel.position = CGPoint(x: frame.minX + 32, y: frame.maxY - 75.0)
         self.timerLabel.fontSize = 18
         self.timerLabel.blendMode = .replace
         self.addChild(self.timerLabel)

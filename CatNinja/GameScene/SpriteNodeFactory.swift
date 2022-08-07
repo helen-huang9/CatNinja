@@ -74,7 +74,7 @@ extension GameScene {
     
     /// Add inputed Sprite to Scene
     func addSpriteToScene(obj: Sprite) {
-        let spriteNode = SKSpriteNode(imageNamed: obj.imgName)
+        let spriteNode = SKSpriteNode(texture: self.spriteAtlas.textureNamed(obj.imgName))
         spriteNode.color = obj.texColor
         spriteNode.name = obj.imgName
         spriteNode.setScale(obj.scale)

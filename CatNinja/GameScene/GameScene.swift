@@ -40,7 +40,7 @@ class GameScene: SKScene, ObservableObject {
         
     // Textures
     let spriteAtlas = SKTextureAtlas(named: "sprites")
-    let spriteNames = ["Yarn_Pixel_Art", "Red_Ball_Pixel_Art", "Yellow_Ball_Pixel_Art", "Treat", "Splash_Bomb"]
+    let spriteNames = ["Yarn_Ball", "Red_Ball", "Yellow_Ball", "Treat", "Bomb"]
     let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),
                         UIColor(red: 0.902, green: 0.3294, blue: 0.3294, alpha: 1.0),
                         UIColor(red: 0.9647, green: 0.863, blue: 0.365, alpha: 1.0),

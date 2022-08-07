@@ -54,8 +54,7 @@ extension GameScene {
         path.move(to: start)
         path.addLine(to: end)
         let claw = SKShapeNode(path: path)
-        claw.lineWidth = 2
-        claw.strokeColor = .white
+        claw.lineWidth = 4
         claw.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
         self.addChild(claw)
     }
