@@ -29,10 +29,23 @@ extension GameScene {
         self.addChild(self.scoreLabel)
     }
     
+    func createHighScoreLabel() {
+        let highscoreVal = UserDefaults.standard.integer(forKey: "high_score")
+        let highscoreLabel = SKLabelNode(text: "High score: \(highscoreVal)")
+        highscoreLabel.verticalAlignmentMode = .top
+        highscoreLabel.horizontalAlignmentMode = .left
+        highscoreLabel.fontColor = .black
+        highscoreLabel.fontName = self.font
+        highscoreLabel.position = CGPoint(x: frame.minX + 13, y: frame.maxY - 75.0)
+        highscoreLabel.fontSize = 16
+        highscoreLabel.blendMode = .replace
+        self.addChild(highscoreLabel)
+    }
+    
     func createTimerLabel() {
         let clock = SKSpriteNode(imageNamed: "Clock")
         clock.setScale(0.75)
-        clock.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 82.0)
+        clock.position = CGPoint(x: frame.minX + 20, y: frame.maxY - 102.0)
         self.addChild(clock)
         
         self.timerLabel.text = "\(self.timerValue / 60):\(String(format: "%02d", self.timerValue % 60))"
@@ -40,7 +53,7 @@ extension GameScene {
         self.timerLabel.horizontalAlignmentMode = .left
         self.timerLabel.fontColor = .white
         self.timerLabel.fontName = self.font
-        self.timerLabel.position = CGPoint(x: frame.minX + 32, y: frame.maxY - 75.0)
+        self.timerLabel.position = CGPoint(x: frame.minX + 32, y: frame.maxY - 95.0)
         self.timerLabel.fontSize = 18
         self.timerLabel.blendMode = .replace
         self.addChild(self.timerLabel)
@@ -63,6 +76,9 @@ extension GameScene {
     
     func createFinalScoreLabel() {
         let finalScore = SKLabelNode(text: "Final Score: \(self.scoreValue)")
+        if self.scoreValue > UserDefaults.standard.integer(forKey: "high_score") {
+            finalScore.text = "✨ New High Score: \(self.scoreValue) ✨"
+        }
         finalScore.name = "finalScore"
         finalScore.position.y += 10.0
         finalScore.fontName = self.font

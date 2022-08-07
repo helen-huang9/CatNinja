@@ -16,6 +16,15 @@ extension GameScene {
         self.run(SKAction.playSoundFileNamed("game_over.wav", waitForCompletion: false))
         createLossLabel()
         createFinalScoreLabel()
+        updateHighScore()
+    }
+    
+    func updateHighScore() {
+        let userDefaults = UserDefaults.standard
+        let oldHighScore = userDefaults.integer(forKey: "high_score")
+        if self.scoreValue > oldHighScore {
+            userDefaults.set(self.scoreValue, forKey: "high_score")
+        }
     }
     
     func restartGame() {

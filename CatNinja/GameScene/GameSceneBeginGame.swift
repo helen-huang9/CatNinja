@@ -25,6 +25,7 @@ extension GameScene {
         self.removeAllActions()
         createBackground()
         createScoreLabel()
+        createHighScoreLabel()
         createTimerLabel()
         createLivesLabel()
         createGameStartCountdownLabel(label: gameStartCountdownLabel)
