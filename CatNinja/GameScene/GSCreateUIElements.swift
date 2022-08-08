@@ -6,11 +6,13 @@
 //
 
 import SpriteKit
+import SwiftUI
 
 extension GameScene {
     
     func createBackground() {
-        self.background.size = CGSize(width: 1000, height: 1000)
+        let height = self.frame.height
+        self.background.size = CGSize(width: height, height: height)
         self.background.position = CGPoint(x: frame.midX + 35, y:frame.midY)
         self.background.blendMode = .replace
         self.addChild(background)
