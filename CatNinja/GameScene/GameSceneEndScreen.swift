@@ -9,8 +9,8 @@ import SpriteKit
 
 extension GameScene {
     
-    func showLossScreen() {
-        self.isShowingLossScreen = true
+    func showEndScreen() {
+        self.isShowingEndScreen = true
         self.livesValue = max(self.livesValue, 0)
         self.livesLabel.text = "x\(self.livesValue)"
         self.run(SKAction.playSoundFileNamed("game_over.wav", waitForCompletion: false))
@@ -35,7 +35,7 @@ extension GameScene {
         self.gameStartTime = Date.now
         deleteAllChildrenAndRespawnUIElements()
         
-        self.isShowingLossScreen = false
+        self.isShowingEndScreen = false
         if let view = self.view { view.isPaused = false }
         self.beginGameCountDown()
     }

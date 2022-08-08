@@ -23,6 +23,10 @@ extension GameScene {
         clawSlice(touches: touches)
         explodeTouchedSprites(touches: touches)
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        updateComboScore()
+    }
 
     func beginTimer() {
         let block = SKAction.run {
@@ -45,7 +49,6 @@ extension GameScene {
             let currLocation = touch.location(in: self)
             let prevLocation = touch.previousLocation(in: self)
             drawClaw(start: currLocation, end: prevLocation)
-//            drawThreeClaws(currLocation: currLocation, prevLocation: prevLocation)
         }
     }
     
@@ -59,37 +62,6 @@ extension GameScene {
         self.addChild(claw)
     }
     
-    func drawThreeClaws(currLocation: CGPoint, prevLocation: CGPoint) {
-        // Parallel
-        let paraTemp = simd_float2(x: Float(currLocation.x - prevLocation.x), y: Float(currLocation.y - prevLocation.y))
-        var para = simd_normalize(paraTemp)
-        para *= 10
-        
-        // Perpendicular
-        let perpTemp = simd_float2(x: Float(currLocation.y - prevLocation.y), y: Float(prevLocation.x - currLocation.x))
-        var perp = simd_normalize(perpTemp)
-        perp *= 10
-        
-        // Middle Claw
-        var x = CGFloat(para.x)
-        var y = CGFloat(para.y)
-        let middleStart = CGPoint(x: currLocation.x + x, y: currLocation.y + y)
-        let middleEnd = CGPoint(x: prevLocation.x + x, y: prevLocation.y + y)
-        drawClaw(start: middleStart, end: middleEnd)
-        
-        // Left Claw
-        x = CGFloat(perp.x)
-        y = CGFloat(perp.y)
-        let leftStart = CGPoint(x: currLocation.x - x, y: currLocation.y - y)
-        let leftEnd = CGPoint(x: prevLocation.x - x, y: prevLocation.y - y)
-        drawClaw(start: leftStart, end: leftEnd)
-        
-        // Right Claw
-        let rightStart = CGPoint(x: currLocation.x + x, y: currLocation.y + y)
-        let rightEnd = CGPoint(x: prevLocation.x + x, y: prevLocation.y + y)
-        drawClaw(start: rightStart, end: rightEnd)
-    }
-    
     func explodeTouchedSprites(touches: Set<UITouch>) {
         if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
@@ -99,6 +71,7 @@ extension GameScene {
             touchedNodes.forEach { node in
                 if let spriteNode = node as? SKSpriteNode {
                     if let name = spriteNode.name {
+                        updateCombo(name: name)
                         updateScore(name: name)
                         updateLives(name: name)
                         updateTime(name: name)
@@ -110,22 +83,64 @@ extension GameScene {
     }
     
     func explodeSprite(node: SKSpriteNode) {
+        // Particle and sound effects
         if let emitter = SKEmitterNode(fileNamed: "spark") {
-            let sound = node.name!.contains("Bomb") ? SKAction.playSoundFileNamed("glass_break.m4a", waitForCompletion: false) : SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false)
-            
+            let sound = node.name!.contains("Bomb") ? self.glassBreakSound : self.spriteBreakSound
+
             emitter.position = node.position
             emitter.particleColorSequence = nil
             emitter.particleColor = node.color
             self.addChild(emitter)
-            
+
             let wait = SKAction.wait(forDuration: emitter.particleLifetime)
             let remove = SKAction.removeFromParent()
             let sequence = SKAction.sequence([sound, wait, remove])
             emitter.run(sequence)
         }
         
-        // Remove object sprite
+        // Combo label
+        if self.combo > 2 && !node.name!.contains("Bomb") {
+            let combo = SKLabelNode(text: "x\(self.combo)")
+            combo.fontName = "Chalkduster"
+            combo.fontSize = 28
+            combo.fontColor = UIColor(red: 1, green: 0.64, blue: 0.3, alpha: 1)
+            combo.position = node.position
+            combo.position.x -= 25
+            combo.position.y += 25
+            self.addChild(combo)
+            let group = SKAction.group([SKAction.fadeOut(withDuration: 1), SKAction.move(by: CGVector(dx: 0, dy: 50), duration: 1)])
+            combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+        }
+        
+        // Remove node
         node.removeFromParent()
+    }
+    
+    func updateCombo(name: String) {
+        if name.contains("Bomb") {
+            updateComboScore()
+        } else {
+            self.combo += 1
+        }
+    }
+    
+    func updateComboScore() {
+        if self.combo > 2 {
+            let bonus = self.combo * 10
+            self.scoreValue += bonus
+            self.scoreLabel.text = "\(self.scoreValue)"
+            let combo = SKLabelNode(text: "+\(bonus) Bonus")
+            combo.verticalAlignmentMode = .top
+            combo.fontName = "Chalkduster"
+            combo.fontSize = 40
+            combo.fontColor = UIColor(red: 1, green: 0.64, blue: 0.3, alpha: 1)
+            combo.position.y += 250
+            self.addChild(combo)
+            let group = SKAction.group([SKAction.fadeOut(withDuration: 2), SKAction.move(by: CGVector(dx: 0, dy: 40), duration: 2)])
+            combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+        }
+            
+        self.combo = 0
     }
     
     func updateTime(name: String) {
@@ -156,7 +171,7 @@ extension GameScene {
             self.gameStatus = GameState.end
             self.removeAction(forKey: "spawnSprites")
             self.removeAction(forKey: "timer")
-            showLossScreen()
+            showEndScreen()
         }
     }
 }

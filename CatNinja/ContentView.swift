@@ -143,6 +143,12 @@ struct SpriteInfoView: View {
                     .font(Font.custom("Chalkduster", size: 24))
                     .foregroundColor(.black)
                     .position(x: width/2 + 35, y: height/3 + 280)
+                
+                Text("* Combos can be achieved by destroying sprites \n without lifting the finger. Lifting the finger or \n destroying a bomb restarts the combo.")
+                    .lineLimit(nil)
+                    .font(Font.custom("Chalkduster", size: 10))
+                    .foregroundColor(.black)
+                    .position(x: width/2, y: height/3 + 330)
             }
         }
     }

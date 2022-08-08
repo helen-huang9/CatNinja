@@ -20,10 +20,17 @@ class GameScene: SKScene, ObservableObject {
     // Game State
     @Published var gameStatus: GameState = GameState.start
     var gameStartTime: Date = Date.now
-    var isShowingLossScreen = false
+    var isShowingEndScreen = false
     
     // Game Screen size
     var bufferFrame: CGRect?
+    
+    // Combos
+    var combo = 0
+    
+    // Sounds
+    let glassBreakSound = SKAction.playSoundFileNamed("glass_break.m4a", waitForCompletion: false)
+    let spriteBreakSound = SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false)
     
     // Labels
     let font = "Copperplate"
@@ -46,6 +53,7 @@ class GameScene: SKScene, ObservableObject {
                         UIColor(red: 0.9647, green: 0.863, blue: 0.365, alpha: 1.0),
                         UIColor(red: 0.68, green: 0.56, blue: 0.43, alpha: 1.0),
                         UIColor(red: 0.19, green: 0.39, blue: 0.254, alpha: 1.0)]
+    
     
     override func update(_ currentTime: TimeInterval) {
         checkForEndCondition()

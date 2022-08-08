@@ -11,13 +11,16 @@ extension GameScene {
     
     override func didMove(to view: SKView) {
         self.isUserInteractionEnabled = true
-        self.spriteAtlas.preload {}
         deleteAllChildrenAndRespawnUIElements()
         // Define buffer frame used for deleting sprites off screen
         self.bufferFrame = CGRect(x: self.view!.frame.origin.x, y: self.view!.frame.origin.y,
                                   width: self.view!.frame.width + 50.0, height: self.view!.frame.height + 50.0)
         
         self.beginGameCountDown()
+    }
+    
+    func loadTexturesAndSound() {
+        self.spriteAtlas.preload {}
     }
     
     func deleteAllChildrenAndRespawnUIElements() {
