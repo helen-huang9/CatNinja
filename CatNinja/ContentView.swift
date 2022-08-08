@@ -17,7 +17,7 @@ struct ContentView: View {
         ZStack {
             // Home Screen
             if !showingGame {
-                // Background Image
+                // Background view
                 BackgroundView(w: width, h: height)
                 
                 // New Game button
@@ -28,28 +28,20 @@ struct ContentView: View {
                     }
                 }) {
                     Image("New_Game_Button")
-                        .scaleEffect(x: 0.2, y: 0.2, anchor: .center)
+                        .scaleEffect(x: 0.22, y: 0.22, anchor: .center)
                 }
                 .buttonStyle(IndentButtonStyle())
-                .position(x: width/2, y: height/2 - 100)
-                
-                // Settings button
-                Button(action: {}) {
-                    Image("Settings_Button")
-                        .scaleEffect(x: 0.2, y: 0.2, anchor: .center)
-                }
-                .buttonStyle(IndentButtonStyle())
-                .position(x: width/2, y: height/2)
+                .position(x: width/2, y: height/2 - 50)
                 
                 // Sprite Info button
                 Button(action: {
                     withAnimation{showingSpriteInfo = true}
                 }) {
                     Image("Sprite_Info_Button")
-                        .scaleEffect(x: 0.22, y: 0.22, anchor: .center)
+                        .scaleEffect(x: 0.24, y: 0.24, anchor: .center)
                 }
                 .buttonStyle(IndentButtonStyle())
-                .position(x: width/2, y: height/2 + 100)
+                .position(x: width/2, y: height/2 + 60)
                 
                 // Sprite Info View
                 if showingSpriteInfo {
@@ -93,13 +85,14 @@ struct BackgroundView: View {
                 .resizable()
                 .frame(width: width, height: height, alignment: .center)
                 .ignoresSafeArea()
-            
             Image("Left_Katana")
-                .scaleEffect(x: 0.4, y: 0.4, anchor: .center)
-                .position(x: width/2 - 150, y: height/2 + 3)
+                .scaleEffect(x: 0.5, y: 0.5, anchor: .center)
+                .position(x: width/2, y: height/2 + 5)
+                .rotationEffect(Angle(degrees: 35))
             Image("Right_Katana")
-                .scaleEffect(x: 0.4, y: 0.4, anchor: .center)
-                .position(x: width/2 + 150, y: height/2)
+                .scaleEffect(x: 0.5, y: 0.5, anchor: .center)
+                .position(x: width/2, y: height/2)
+                .rotationEffect(Angle(degrees: -35))
         }
     }
 }

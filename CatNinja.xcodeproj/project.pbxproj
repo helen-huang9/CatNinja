@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF127C2A288EF3F100849D38 /* GameSceneGamePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */; };
+		BF127C2A288EF3F100849D38 /* GSGamePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF127C29288EF3F100849D38 /* GSGamePlay.swift */; };
 		BF127C2C288F2DD800849D38 /* smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF127C2B288F2DD800849D38 /* smoke.sks */; };
 		BF127C2E288F31D300849D38 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF127C2D288F31D300849D38 /* magic.sks */; };
 		BF28A30F289DD47E0053A3C7 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A30E289DD47E0053A3C7 /* ButtonStyles.swift */; };
-		BF28A311289E15D80053A3C7 /* GameSceneEndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A310289E15D80053A3C7 /* GameSceneEndScreen.swift */; };
-		BF28A314289E16E10053A3C7 /* GameSceneBeginGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A313289E16E10053A3C7 /* GameSceneBeginGame.swift */; };
-		BF28A316289EC8630053A3C7 /* GameScenePaused.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A315289EC8630053A3C7 /* GameScenePaused.swift */; };
+		BF28A311289E15D80053A3C7 /* GSEndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A310289E15D80053A3C7 /* GSEndScreen.swift */; };
+		BF28A314289E16E10053A3C7 /* GSBeginGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A313289E16E10053A3C7 /* GSBeginGame.swift */; };
+		BF28A316289EC8630053A3C7 /* GSPaused.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28A315289EC8630053A3C7 /* GSPaused.swift */; };
 		BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2792881C86500C62C1C /* sprites.atlas */; };
 		BF2FA2842881E6F600C62C1C /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF2FA2832881E6F600C62C1C /* spark.sks */; };
 		BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */; };
@@ -27,18 +27,18 @@
 		BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */; };
 		BF6099E0289D9BE00026F3FE /* glass_break.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DB289D914D0026F3FE /* glass_break.m4a */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
-		BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GameSceneLabels.swift */; };
-		BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */; };
+		BFA583442882171F009E7FB7 /* GSCreateUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */; };
+		BFE45EBA27B85BF200600F56 /* GSCreateSpriteNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneGamePlay.swift; sourceTree = "<group>"; };
+		BF127C29288EF3F100849D38 /* GSGamePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSGamePlay.swift; sourceTree = "<group>"; };
 		BF127C2B288F2DD800849D38 /* smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smoke.sks; sourceTree = "<group>"; };
 		BF127C2D288F31D300849D38 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
 		BF28A30E289DD47E0053A3C7 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
-		BF28A310289E15D80053A3C7 /* GameSceneEndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneEndScreen.swift; sourceTree = "<group>"; };
-		BF28A313289E16E10053A3C7 /* GameSceneBeginGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneBeginGame.swift; sourceTree = "<group>"; };
-		BF28A315289EC8630053A3C7 /* GameScenePaused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScenePaused.swift; sourceTree = "<group>"; };
+		BF28A310289E15D80053A3C7 /* GSEndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSEndScreen.swift; sourceTree = "<group>"; };
+		BF28A313289E16E10053A3C7 /* GSBeginGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSBeginGame.swift; sourceTree = "<group>"; };
+		BF28A315289EC8630053A3C7 /* GSPaused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSPaused.swift; sourceTree = "<group>"; };
 		BF2FA2792881C86500C62C1C /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
 		BF2FA2832881E6F600C62C1C /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		BF5FB4EA2798F00A003570B9 /* CatNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,8 +53,8 @@
 		BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprite_destroyed.m4a; sourceTree = "<group>"; };
 		BF6099DD289D91880026F3FE /* item_acquired.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = item_acquired.m4a; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		BFA583432882171F009E7FB7 /* GameSceneLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneLabels.swift; sourceTree = "<group>"; };
-		BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteNodeFactory.swift; sourceTree = "<group>"; };
+		BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCreateUIElements.swift; sourceTree = "<group>"; };
+		BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCreateSpriteNodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,14 +71,14 @@
 		BF28A312289E162F0053A3C7 /* GameScene */ = {
 			isa = PBXGroup;
 			children = (
-				BFE45EB927B85BF200600F56 /* SpriteNodeFactory.swift */,
+				BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
-				BF28A315289EC8630053A3C7 /* GameScenePaused.swift */,
-				BF28A313289E16E10053A3C7 /* GameSceneBeginGame.swift */,
-				BFA583432882171F009E7FB7 /* GameSceneLabels.swift */,
-				BF127C29288EF3F100849D38 /* GameSceneGamePlay.swift */,
-				BF28A310289E15D80053A3C7 /* GameSceneEndScreen.swift */,
+				BF28A315289EC8630053A3C7 /* GSPaused.swift */,
+				BF28A313289E16E10053A3C7 /* GSBeginGame.swift */,
+				BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */,
+				BF127C29288EF3F100849D38 /* GSGamePlay.swift */,
+				BF28A310289E15D80053A3C7 /* GSEndScreen.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -224,16 +224,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFE45EBA27B85BF200600F56 /* SpriteNodeFactory.swift in Sources */,
+				BFE45EBA27B85BF200600F56 /* GSCreateSpriteNodes.swift in Sources */,
 				BF5FB4F02798F00A003570B9 /* ContentView.swift in Sources */,
-				BF28A314289E16E10053A3C7 /* GameSceneBeginGame.swift in Sources */,
-				BFA583442882171F009E7FB7 /* GameSceneLabels.swift in Sources */,
-				BF28A316289EC8630053A3C7 /* GameScenePaused.swift in Sources */,
-				BF127C2A288EF3F100849D38 /* GameSceneGamePlay.swift in Sources */,
+				BF28A314289E16E10053A3C7 /* GSBeginGame.swift in Sources */,
+				BFA583442882171F009E7FB7 /* GSCreateUIElements.swift in Sources */,
+				BF28A316289EC8630053A3C7 /* GSPaused.swift in Sources */,
+				BF127C2A288EF3F100849D38 /* GSGamePlay.swift in Sources */,
 				BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */,
 				BF28A30F289DD47E0053A3C7 /* ButtonStyles.swift in Sources */,
 				BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */,
-				BF28A311289E15D80053A3C7 /* GameSceneEndScreen.swift in Sources */,
+				BF28A311289E15D80053A3C7 /* GSEndScreen.swift in Sources */,
 				BF5FB4EE2798F00A003570B9 /* CatNinjaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -46,6 +46,7 @@ class GameScene: SKScene, ObservableObject {
     var gameStartCountdownValue = 3 // in seconds
         
     // Textures
+    let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
     let spriteAtlas = SKTextureAtlas(named: "sprites")
     let spriteNames = ["Yarn_Ball", "Red_Ball", "Yellow_Ball", "Treat", "Bomb"]
     let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),

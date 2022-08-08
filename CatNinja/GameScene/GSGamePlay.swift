@@ -52,16 +52,6 @@ extension GameScene {
         }
     }
     
-    func drawClaw(start: CGPoint, end: CGPoint) {
-        let path = CGMutablePath()
-        path.move(to: start)
-        path.addLine(to: end)
-        let claw = SKShapeNode(path: path)
-        claw.lineWidth = 4
-        claw.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
-        self.addChild(claw)
-    }
-    
     func explodeTouchedSprites(touches: Set<UITouch>) {
         if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
@@ -83,36 +73,10 @@ extension GameScene {
     }
     
     func explodeSprite(node: SKSpriteNode) {
-        // Particle and sound effects
-        if let emitter = SKEmitterNode(fileNamed: "spark") {
-            let sound = node.name!.contains("Bomb") ? self.glassBreakSound : self.spriteBreakSound
-
-            emitter.position = node.position
-            emitter.particleColorSequence = nil
-            emitter.particleColor = node.color
-            self.addChild(emitter)
-
-            let wait = SKAction.wait(forDuration: emitter.particleLifetime)
-            let remove = SKAction.removeFromParent()
-            let sequence = SKAction.sequence([sound, wait, remove])
-            emitter.run(sequence)
-        }
-        
-        // Combo label
+        createParticleEmitterAndSound(node: node)
         if self.combo > 2 && !node.name!.contains("Bomb") {
-            let combo = SKLabelNode(text: "x\(self.combo)")
-            combo.fontName = "Chalkduster"
-            combo.fontSize = 28
-            combo.fontColor = UIColor(red: 1, green: 0.64, blue: 0.3, alpha: 1)
-            combo.position = node.position
-            combo.position.x -= 25
-            combo.position.y += 25
-            self.addChild(combo)
-            let group = SKAction.group([SKAction.fadeOut(withDuration: 1), SKAction.move(by: CGVector(dx: 0, dy: 50), duration: 1)])
-            combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+            createComboLabel(pos: node.position)
         }
-        
-        // Remove node
         node.removeFromParent()
     }
     
@@ -126,20 +90,11 @@ extension GameScene {
     
     func updateComboScore() {
         if self.combo > 2 {
-            let bonus = self.combo * 10
+            let bonus = self.combo * 20
             self.scoreValue += bonus
             self.scoreLabel.text = "\(self.scoreValue)"
-            let combo = SKLabelNode(text: "+\(bonus) Bonus")
-            combo.verticalAlignmentMode = .top
-            combo.fontName = "Chalkduster"
-            combo.fontSize = 40
-            combo.fontColor = UIColor(red: 1, green: 0.64, blue: 0.3, alpha: 1)
-            combo.position.y += 250
-            self.addChild(combo)
-            let group = SKAction.group([SKAction.fadeOut(withDuration: 2), SKAction.move(by: CGVector(dx: 0, dy: 40), duration: 2)])
-            combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+            createBonusScoreLabel(bonus: bonus)
         }
-            
         self.combo = 0
     }
     
@@ -161,8 +116,10 @@ extension GameScene {
         if name.contains("Bomb") {
             self.lives[self.livesValue].removeFromParent()
             livesValue -= 1
-            self.lives[self.livesValue].position = CGPoint(x: frame.maxX - 45.0, y: frame.maxY - 40.0)
-            self.addChild(self.lives[self.livesValue])
+            let livesIndex = max(self.livesValue, 0)
+            self.lives[livesIndex].position = CGPoint(x: frame.maxX - 45.0, y: frame.maxY - 40.0)
+            self.addChild(self.lives[livesIndex])
+            flashScreenRed()
         }
     }
     

@@ -10,10 +10,9 @@ import SpriteKit
 extension GameScene {
     
     func createBackground() {
-        let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
-        background.size = CGSize(width: 1000, height: 1000)
-        background.position = CGPoint(x: frame.midX + 35, y:frame.midY)
-        background.blendMode = .replace
+        self.background.size = CGSize(width: 1000, height: 1000)
+        self.background.position = CGPoint(x: frame.midX + 35, y:frame.midY)
+        self.background.blendMode = .replace
         self.addChild(background)
     }
     
@@ -93,5 +92,65 @@ extension GameScene {
         label.fontSize = 48
         label.blendMode = .replace
         self.addChild(label)
+    }
+    
+    func createComboLabel(pos: CGPoint) {
+        let combo = SKLabelNode(text: "x\(self.combo)")
+        combo.fontName = "Chalkduster"
+        combo.fontSize = 28
+        combo.fontColor = UIColor(red: 1, green: 0.64, blue: 0.3, alpha: 1)
+        combo.position = pos
+        combo.position.x -= 25
+        combo.position.y += 25
+        self.addChild(combo)
+        let group = SKAction.group([SKAction.fadeOut(withDuration: 1), SKAction.move(by: CGVector(dx: 0, dy: 50), duration: 1)])
+        combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+    }
+    
+    func createBonusScoreLabel(bonus: Int) {
+        let combo = SKLabelNode(text: "+\(bonus) Bonus")
+        combo.verticalAlignmentMode = .top
+        combo.fontName = "Chalkduster"
+        combo.fontSize = 40
+        combo.fontColor = UIColor(red: 1, green: 0.64, blue: 0.3, alpha: 1)
+        combo.position.y += 250
+        self.addChild(combo)
+        let group = SKAction.group([SKAction.fadeOut(withDuration: 2), SKAction.move(by: CGVector(dx: 0, dy: 40), duration: 2)])
+        combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+    }
+    
+    func createParticleEmitterAndSound(node: SKSpriteNode) {
+        if let emitter = SKEmitterNode(fileNamed: "spark") {
+            let sound = node.name!.contains("Bomb") ? self.glassBreakSound : self.spriteBreakSound
+
+            emitter.position = node.position
+            emitter.particleColorSequence = nil
+            emitter.particleColor = node.color
+            self.addChild(emitter)
+
+            let wait = SKAction.wait(forDuration: emitter.particleLifetime)
+            let remove = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([sound, wait, remove])
+            emitter.run(sequence)
+        }
+    }
+    
+    func drawClaw(start: CGPoint, end: CGPoint) {
+        let path = CGMutablePath()
+        path.move(to: start)
+        path.addLine(to: end)
+        let claw = SKShapeNode(path: path)
+        claw.lineWidth = 4
+        claw.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
+        self.addChild(claw)
+    }
+    
+    func flashScreenRed() {
+        let pulseRed = SKAction.sequence([
+            SKAction.colorize(with: .red, colorBlendFactor: 0.4, duration: 0.15),
+            SKAction.wait(forDuration: 0.1),
+            SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.15)
+        ])
+        self.background.run(pulseRed)
     }
 }
