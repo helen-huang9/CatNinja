@@ -36,7 +36,7 @@ struct ContentView: View {
                             .scaleEffect(buttonScale)
                     }
                     .buttonStyle(IndentButtonStyle())
-                    .position(x: width/2, y: height/2 - 50)
+                    .position(x: width/2, y: (3*height)/7)
                     
                     // Sprite Info button
                     Button(action: {
@@ -46,17 +46,19 @@ struct ContentView: View {
                             .scaleEffect(buttonScale)
                     }
                     .buttonStyle(IndentButtonStyle())
-                    .position(x: width/2, y: height/2 + 60)
+                    .position(x: width/2, y: (4*height)/7)
                     
                     // Sprite Info View
                     if showingSpriteInfo {
+                        let infoScale = ((5*height)/9)/450
                         ZStack {
                             SpriteInfoView(w: width, h: height)
                             Button("X") { showingSpriteInfo = false }
                                 .font(Font.custom("Chalkduster", size: 40))
                                 .foregroundColor(.black)
-                                .position(x: width/2 + 150, y: height/2 - 185)
+                                .position(x: width/2 + 135, y: height/2 - 185)
                         }
+                        .scaleEffect(infoScale)
                     }
                 }
                 // Game Scene Screen
@@ -120,11 +122,12 @@ struct SpriteInfoView: View {
             ZStack {
                 Image("Sprite_Info")
                     .scaleEffect(0.9)
+                    .position(x: width/2, y: height/2)
                 
                 Text("Sprite Info")
                     .font(Font.custom("Chalkduster", size: 28))
                     .foregroundColor(.black)
-                    .position(x: width/2 - 65, y: height/2 - 190)
+                    .position(x: width/2 - 60, y: height/2 - 190)
                 
                 Text("= +10")
                     .font(Font.custom("Chalkduster", size: 24))
@@ -145,7 +148,7 @@ struct SpriteInfoView: View {
                 Text("= +10 seconds")
                     .font(Font.custom("Chalkduster", size: 24))
                     .foregroundColor(.black)
-                    .position(x: width/2 + 38, y: height/2 + 140)
+                    .position(x: width/2 + 40, y: height/2 + 140)
                 
                 Text("* Combos can be achieved by destroying sprites \n without lifting the finger. Lifting the finger or \n destroying a bomb restarts the combo.")
                     .lineLimit(nil)

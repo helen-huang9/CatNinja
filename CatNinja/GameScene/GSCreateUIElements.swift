@@ -109,6 +109,17 @@ extension GameScene {
         combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
     }
     
+    func createTreatAddTimeLabel(pos: CGPoint) {
+        let time = SKLabelNode(text: "+10⏱")
+        time.fontName = "Chalkduster"
+        time.fontSize = 20
+        time.fontColor = .white
+        time.position = pos
+        self.addChild(time)
+        let group = SKAction.group([SKAction.fadeOut(withDuration: 1), SKAction.move(by: CGVector(dx: 0, dy: 50), duration: 1)])
+        time.run(SKAction.sequence([group, SKAction.removeFromParent()]))
+    }
+    
     func createBonusScoreLabel(bonus: Int) {
         let combo = SKLabelNode(text: "+\(bonus) Bonus")
         combo.verticalAlignmentMode = .top

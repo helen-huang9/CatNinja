@@ -77,6 +77,9 @@ extension GameScene {
         if self.combo > 2 && !node.name!.contains("Bomb") {
             createComboLabel(pos: node.position)
         }
+        if node.name!.contains("Treat") {
+            createTreatAddTimeLabel(pos: node.position)
+        }
         node.removeFromParent()
     }
     
