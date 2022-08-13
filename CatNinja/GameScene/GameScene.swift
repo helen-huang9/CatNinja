@@ -20,7 +20,6 @@ class GameScene: SKScene, ObservableObject {
     // Game State
     @Published var gameStatus: GameState = GameState.start
     var gameStartTime: Date = Date.now
-    var isShowingEndScreen = false
     
     // Game Screen size
     var bufferFrame: CGRect?

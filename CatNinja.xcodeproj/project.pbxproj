@@ -23,11 +23,11 @@
 		BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4FB2798F067003570B9 /* GameSceneView.swift */; };
 		BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4FF2798F7FB003570B9 /* GameScene.sks */; };
 		BF6099DA289D911D0026F3FE /* game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BF6099D9289D911D0026F3FE /* game_over.wav */; };
-		BF6099DE289D9BD90026F3FE /* item_acquired.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DD289D91880026F3FE /* item_acquired.m4a */; };
 		BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */; };
 		BF6099E0289D9BE00026F3FE /* glass_break.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DB289D914D0026F3FE /* glass_break.m4a */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
 		BFA583442882171F009E7FB7 /* GSCreateUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */; };
+		BFDD978E28A6FA7D002C699E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDD978D28A6FA7D002C699E /* README.md */; };
 		BFE45EBA27B85BF200600F56 /* GSCreateSpriteNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,9 +51,9 @@
 		BF6099D9289D911D0026F3FE /* game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = game_over.wav; sourceTree = "<group>"; };
 		BF6099DB289D914D0026F3FE /* glass_break.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = glass_break.m4a; sourceTree = "<group>"; };
 		BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprite_destroyed.m4a; sourceTree = "<group>"; };
-		BF6099DD289D91880026F3FE /* item_acquired.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = item_acquired.m4a; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCreateUIElements.swift; sourceTree = "<group>"; };
+		BFDD978D28A6FA7D002C699E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCreateSpriteNodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +86,7 @@
 		BF5FB4E12798F009003570B9 = {
 			isa = PBXGroup;
 			children = (
+				BFDD978D28A6FA7D002C699E /* README.md */,
 				BF5FB4EC2798F00A003570B9 /* CatNinja */,
 				BF5FB4EB2798F00A003570B9 /* Products */,
 			);
@@ -127,7 +128,6 @@
 		BF6099D6289D90FF0026F3FE /* SoundEffects */ = {
 			isa = PBXGroup;
 			children = (
-				BF6099DD289D91880026F3FE /* item_acquired.m4a */,
 				BF6099D9289D911D0026F3FE /* game_over.wav */,
 				BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */,
 				BF6099DB289D914D0026F3FE /* glass_break.m4a */,
@@ -203,7 +203,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF6099DE289D9BD90026F3FE /* item_acquired.m4a in Resources */,
 				BF6099E0289D9BE00026F3FE /* glass_break.m4a in Resources */,
 				BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */,
 				BF127C2E288F31D300849D38 /* magic.sks in Resources */,
@@ -213,6 +212,7 @@
 				BF2FA2842881E6F600C62C1C /* spark.sks in Resources */,
 				BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */,
 				BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */,
+				BFDD978E28A6FA7D002C699E /* README.md in Resources */,
 				BF5FB4F22798F00B003570B9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,8 +380,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = helenhuang.CatNinja;
+				PRODUCT_BUNDLE_IDENTIFIER = helenhuang569.CatNinja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_DOCUMENTATION_COMPILER = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -411,8 +412,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = helenhuang.CatNinja;
+				PRODUCT_BUNDLE_IDENTIFIER = helenhuang569.CatNinja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_DOCUMENTATION_COMPILER = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

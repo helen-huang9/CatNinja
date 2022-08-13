@@ -7,7 +7,13 @@
 
 import SpriteKit
 
-/// Defines a set of components needed to create a whole object
+enum Direction: CaseIterable {
+    case left
+    case right
+    case top
+    case bottom
+}
+
 struct Sprite {
     var pos: CGPoint
     var velocity: CGVector
@@ -31,7 +37,7 @@ extension GameScene {
                 self.addSpriteToSceneWithRandomization(num: Int.random(in: 1...100))
             }
         }
-        let wait = SKAction.wait(forDuration: 1)
+        let wait = SKAction.wait(forDuration: 0.9)
         let sequence = SKAction.sequence([block, wait])
         self.run(SKAction.repeatForever(sequence), withKey: "spawnSprites")
     }
@@ -50,9 +56,9 @@ extension GameScene {
         self.run(SKAction.repeatForever(sequence), withKey: "removeSprites")
     }
     
-    /// Initialize a Sprite  w/ image texture from indexed self.spriteNames
+    
     func addSpriteToSceneWithRandomization(num: Int) {
-        var index = 4
+        var index: Int?
         switch num {
         case 1...30:
             index = 2 // Yellow Ball
@@ -67,12 +73,12 @@ extension GameScene {
         }
         
         let pos = getRandPointInScene()
-        let sprite = Sprite(pos: pos, velocity: getRandVelocityTowardsCenterOfScene(pos: pos),
-                            imgName: self.spriteNames[index], texColor: self.spriteColors[index], scale: 3.0)
+        let vel = getRandVelocityTowardsCenterOfScene(pos: pos)
+        let sprite = Sprite(pos: pos, velocity: vel, imgName: self.spriteNames[index!], texColor: self.spriteColors[index!], scale: 3.0)
         addSpriteToScene(obj: sprite)
     }
     
-    /// Add inputed Sprite to Scene
+    
     func addSpriteToScene(obj: Sprite) {
         let spriteNode = SKSpriteNode(texture: self.spriteAtlas.textureNamed(obj.imgName))
         spriteNode.color = obj.texColor
@@ -100,41 +106,48 @@ extension GameScene {
         self.addChild(spriteNode)
     }
     
-    /// Returns a random point in the scene's frame
-    /// - Returns: CGPoint representing a random point within the scene's frame and buffer
+    
     func getRandPointInScene() -> CGPoint {
-        let location = Int.random(in: 0...3)
+        let location = Direction.allCases.randomElement()!
         let buffer = 30.0
         var randPt: CGPoint?
         switch location {
-        case 0: // Left
-            randPt = CGPoint(x: self.frame.minX,
+        case Direction.left:
+            randPt = CGPoint(x: self.frame.minX - 10,
                              y: Double.random(in: (self.frame.minY + buffer)...(self.frame.maxY - buffer)))
-        case 1: // Right
-            randPt = CGPoint(x: self.frame.maxX,
+        case Direction.right:
+            randPt = CGPoint(x: self.frame.maxX + 10,
                              y: Double.random(in: (self.frame.minY + buffer)...(self.frame.maxY - buffer)))
-        case 2: // Top
+        case Direction.top:
             randPt = CGPoint(x: Double.random(in: (self.frame.minX + buffer)...(self.frame.maxX - buffer)),
-                             y: self.frame.maxY)
-        default: // Bottom
+                             y: self.frame.maxY + 10)
+        case Direction.bottom:
             randPt = CGPoint(x: Double.random(in: (self.frame.minX + buffer)...(self.frame.maxX - buffer)),
-                             y: self.frame.minY)
+                             y: self.frame.minY - 10)
         }
         return randPt!
     }
     
-    /// Given a point in the scene, returns a velocity in the general direction of the center of the scene. The velocity will have slight noise.
-    /// - Parameter pos: CGPoint point in the scene
-    /// - Returns: CGVector representing a velocity that points to the center of the scene
+    
     func getRandVelocityTowardsCenterOfScene(pos: CGPoint) -> CGVector {
-        let magX = self.frame.width / 3
-        let magY = self.frame.height / 3
-        let noiseX = Double.random(in: -magX...magX)
-        let noiseY = Double.random(in: -magY...magY)
+        var noiseMagX: Double?
+        var noiseMagY: Double?
+        if pos.x < self.frame.minX || pos.x > self.frame.maxX { // pos is on Left or Right sides
+            noiseMagX = 20
+            noiseMagY = self.frame.height / 3
+        } else { // pos is on Top or Bottom sides
+            noiseMagX = self.frame.width / 3
+            noiseMagY = 20
+        }
+        
+        let noiseX = Double.random(in: -noiseMagX!...noiseMagX!)
+        let noiseY = Double.random(in: -noiseMagY!...noiseMagY!)
         
         var velocity = CGVector(dx: noiseX - pos.x, dy: noiseY - pos.y)
-        velocity.dx *= 1.5
-        velocity.dy *= 1.5
+        let speedIncrease = CGFloat(self.scoreValue)/10000.0
+        velocity.dx *= 1.2 + speedIncrease
+        velocity.dy *= 1.2 + speedIncrease
+    
         return velocity
     }
 }
