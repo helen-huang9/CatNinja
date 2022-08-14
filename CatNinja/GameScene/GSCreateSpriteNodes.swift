@@ -60,16 +60,14 @@ extension GameScene {
     func addSpriteToSceneWithRandomization(num: Int) {
         var index: Int?
         switch num {
-        case 1...30:
-            index = 2 // Yellow Ball
-        case 31...60:
-            index = 1 // Red Ball
-        case 61...85:
-            index = 4 // Splash Bomb
-        case 86...95:
-            index = 0 // Yarn Ball
-        default:
-            index = 3 // Treat
+        case 1...40: /// 40%
+            index = Int.random(in: 0...2) // Yellow, Red, Yarn
+        case 41...70: /// 30%
+            index = Int.random(in: 3...5) // Mouse, Feather, Butterfly
+        case 71...95: /// 25%
+            index = 6 // Bomb
+        default: /// 5%
+            index = 7 // Treat
         }
         
         let pos = getRandPointInScene()

@@ -42,7 +42,7 @@ struct ContentView: View {
                     Button(action: {
                         withAnimation{showingSpriteInfo = true}
                     }) {
-                        Image("Sprite_Info_Button")
+                        Image("Game_Info_Button")
                             .scaleEffect(buttonScale)
                     }
                     .buttonStyle(IndentButtonStyle())
@@ -56,7 +56,7 @@ struct ContentView: View {
                             Button("X") { showingSpriteInfo = false }
                                 .font(Font.custom("Chalkduster", size: 40))
                                 .foregroundColor(.black)
-                                .position(x: width/2 + 135, y: height/2 - 185)
+                                .position(x: width/2 + 135, y: height/2 - 205)
                         }
                         .scaleEffect(infoScale)
                     }
@@ -120,41 +120,37 @@ struct SpriteInfoView: View {
     var body: some View {
         ZStack {
             ZStack {
-                Image("Sprite_Info")
+                Image("Sprite_Info-1")
                     .scaleEffect(0.9)
                     .position(x: width/2, y: height/2)
                 
                 Text("Sprite Info")
                     .font(Font.custom("Chalkduster", size: 28))
                     .foregroundColor(.black)
-                    .position(x: width/2 - 60, y: height/2 - 190)
+                    .position(x: width/2 - 60, y: height/2 - 210)
                 
-                Text("= +10")
+                Text("= +50")
                     .font(Font.custom("Chalkduster", size: 24))
                     .foregroundColor(.black)
-                    .position(x: width/2 - 20, y: height/2 - 145)
-                Text("= +20")
-                    .font(Font.custom("Chalkduster", size: 24))
-                    .foregroundColor(.black)
-                    .position(x: width/2 - 20, y: height/2 - 72)
+                    .position(x: width/2, y: height/2 - 155)
                 Text("= +100")
                     .font(Font.custom("Chalkduster", size: 24))
                     .foregroundColor(.black)
-                    .position(x: width/2 - 12, y: height/2 - 2)
+                    .position(x: width/2 + 10, y: height/2 - 60)
                 Text("= -1 life")
                     .font(Font.custom("Chalkduster", size: 24))
                     .foregroundColor(.black)
-                    .position(x: width/2, y: height/2 + 70)
+                    .position(x: width/2 + 10, y: height/2 + 25)
                 Text("= +10 seconds")
                     .font(Font.custom("Chalkduster", size: 24))
                     .foregroundColor(.black)
-                    .position(x: width/2 + 40, y: height/2 + 140)
+                    .position(x: width/2 + 45, y: height/2 + 95)
                 
-                Text("* Combos can be achieved by destroying sprites \n without lifting the finger. Lifting the finger or \n destroying a bomb restarts the combo.")
+                Text("* Combos can be achieved by destroying \n sprites without lifting the finger. Lifting \n the finger or destroying a bomb restarts \n the combo.")
                     .lineLimit(nil)
-                    .font(Font.custom("Chalkduster", size: 10))
+                    .font(Font.custom("Chalkduster", size: 12))
                     .foregroundColor(.black)
-                    .position(x: width/2, y: height/2 + 190)
+                    .position(x: width/2, y: height/2 + 180)
             }
         }
     }

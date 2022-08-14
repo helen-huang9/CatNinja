@@ -109,9 +109,8 @@ extension GameScene {
     }
     
     func updateScore(name: String) {
-        if name.contains("Yarn") { scoreValue += 100 }
-        else if name.contains("Yellow") { scoreValue += 20 }
-        else if name.contains("Red") { scoreValue += 10 }
+        if name.contains("Ball") { scoreValue += 30 }
+        else if name.contains("Toy") { scoreValue += 50 }
         scoreLabel.text = "\(scoreValue)"
     }
     
