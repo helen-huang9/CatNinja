@@ -7,14 +7,11 @@
 
 import SpriteKit
 
-enum TouchState {
-    case began
-    case moved
-    case ended
-}
-
 extension GameScene {
-
+    override func update(_ currentTime: TimeInterval) {
+        checkForEndCondition()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         explodeTouchedSprites(touches: touches)
     }
@@ -25,9 +22,10 @@ extension GameScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        updateComboScore()
+        endCombo()
     }
 
+    /// Creates and runs the SKAction in charge of counting-down the game scene timer.
     func beginTimer() {
         let block = SKAction.run {
             if (self.timerValue <= 10) {
@@ -43,15 +41,26 @@ extension GameScene {
         self.run(SKAction.repeatForever(sequence), withKey: "timer")
     }
     
+    /// Draws the claw shapes paths where the user swipes the screen.
+    /// - Parameters:
+    ///   - start: The starting point of the path to draw.
+    ///   - end: The end point of the path to draw.
     func clawSlice(touches: Set<UITouch>) {
         if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
-            let currLocation = touch.location(in: self)
-            let prevLocation = touch.previousLocation(in: self)
-            drawClaw(start: currLocation, end: prevLocation)
+            let start = touch.location(in: self)
+            let end = touch.previousLocation(in: self)
+            let path = CGMutablePath()
+            path.move(to: start)
+            path.addLine(to: end)
+            let claw = SKShapeNode(path: path)
+            claw.lineWidth = 4
+            claw.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
+            self.addChild(claw)
         }
     }
     
+    /// Iterates through all touched sprites and destroys it. Updates any relevant game info like the score, llives, time, etc.
     func explodeTouchedSprites(touches: Set<UITouch>) {
         if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
@@ -72,6 +81,9 @@ extension GameScene {
         }
     }
     
+    
+    /// Deletes the inputted node and plays its destroy particle effect and sound in place of it.
+    /// - Parameter node: The SKSpriteNode to be removed from the game scene.
     func explodeSprite(node: SKSpriteNode) {
         createParticleEmitterAndSound(node: node)
         if self.combo > 2 && !node.name!.contains("Bomb") {
@@ -83,15 +95,17 @@ extension GameScene {
         node.removeFromParent()
     }
     
+    /// Updates the combo.
     func updateCombo(name: String) {
         if name.contains("Bomb") {
-            updateComboScore()
+            endCombo()
         } else {
             self.combo += 1
         }
     }
     
-    func updateComboScore() {
+    /// Ends the combo and updates the score value.
+    func endCombo() {
         if self.combo > 2 {
             let bonus = self.combo * 20
             self.scoreValue += bonus
@@ -101,6 +115,8 @@ extension GameScene {
         self.combo = 0
     }
     
+    /// Updates the time if any time-related sprites are destroyed.
+    /// - Parameter name: The name of the sprite to check.
     func updateTime(name: String) {
         if name.contains("Treat") {
             timerValue += 10
@@ -108,12 +124,16 @@ extension GameScene {
         }
     }
     
+    /// Updates the time if any score-related sprites are destroyed.
+    /// - Parameter name: The name of the sprite to check.
     func updateScore(name: String) {
         if name.contains("Ball") { scoreValue += 30 }
         else if name.contains("Toy") { scoreValue += 50 }
         scoreLabel.text = "\(scoreValue)"
     }
     
+    /// Updates the lives if any life-related sprites are destroyed.
+    /// - Parameter name: The name of the sprite to check.
     func updateLives(name: String) {
         if name.contains("Bomb") {
             self.lives[self.livesValue].removeFromParent()
@@ -125,6 +145,7 @@ extension GameScene {
         }
     }
     
+    /// Check for the end condition, which is when either the timer or the number of lives left reaches 0.
     func checkForEndCondition() {
         if ((self.livesValue <= 0 || self.timerValue < 0) && self.gameStatus != GameState.end) {
             self.gameStatus = GameState.end

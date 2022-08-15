@@ -8,7 +8,7 @@
 import SpriteKit
 
 extension GameScene {
-    
+    /// Shows the End screen of the game scene.
     func showEndScreen() {
         self.livesValue = max(self.livesValue, 0)
         self.livesLabel.text = "x\(self.livesValue)"
@@ -18,6 +18,7 @@ extension GameScene {
         updateHighScore()
     }
     
+    /// Updates the high score if the user beat their high score.
     func updateHighScore() {
         let userDefaults = UserDefaults.standard
         let oldHighScore = userDefaults.integer(forKey: "high_score")
@@ -26,6 +27,7 @@ extension GameScene {
         }
     }
     
+    /// Restarts the game from the beginning.
     func restartGame() {
         self.scoreValue = 0
         self.livesValue = 3

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// The Home Screen View. Contains the buttons for starting a New Game and viewing the Game Info.
 struct ContentView: View {
     @State private var showingGame = false
     @State private var showingSpriteInfo = false
@@ -22,7 +23,7 @@ struct ContentView: View {
                 
                 // Home Screen
                 if !showingGame {
-                    // Background view
+                    // Background
                     BackgroundView(w: width, h: height)
                     
                     // New Game button
@@ -80,6 +81,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+/// Displays the background image with katanas.
 struct BackgroundView: View {
     var width: CGFloat
     var height: CGFloat
@@ -109,6 +111,7 @@ struct BackgroundView: View {
     }
 }
 
+/// Displays the meanings of the sprites.
 struct SpriteInfoView: View {
     var width: CGFloat
     var height: CGFloat

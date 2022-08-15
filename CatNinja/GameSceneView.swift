@@ -8,6 +8,7 @@
 import SwiftUI
 import SpriteKit
 
+/// The GameScene View that contains the Pause Button and Pause Screen.
 struct GameSceneView: View {
     @Binding public var showingGame: Bool
     @ObservedObject private var scene = GameScene(fileNamed: "GameScene")!

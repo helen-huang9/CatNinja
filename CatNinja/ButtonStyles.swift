@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Button Style for the Buttons on the GameScene end screen.
 struct EndGameButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -20,6 +21,7 @@ struct EndGameButtonStyle: ButtonStyle {
     }
 }
 
+/// Button Style for the Buttons on the GameSceneView pause screen.
 struct PauseScreenButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -32,6 +34,7 @@ struct PauseScreenButtonStyle: ButtonStyle {
     }
 }
 
+/// Button Style for the Buttons on the ContentView home screen.
 struct IndentButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

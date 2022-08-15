@@ -9,7 +9,7 @@ import SpriteKit
 import SwiftUI
 
 extension GameScene {
-    
+    /// Adds the background image to the game scene.
     func createBackground() {
         let height = self.frame.height
         self.background.size = CGSize(width: height, height: height)
@@ -18,6 +18,7 @@ extension GameScene {
         self.addChild(background)
     }
     
+    /// Adds the score label  to the game scene.
     func createScoreLabel() {
         self.scoreLabel.text = "\(self.scoreValue)"
         self.scoreLabel.verticalAlignmentMode = .top
@@ -30,6 +31,7 @@ extension GameScene {
         self.addChild(self.scoreLabel)
     }
     
+    /// Adds the high score label the the game scene.
     func createHighScoreLabel() {
         let highscoreVal = UserDefaults.standard.integer(forKey: "high_score")
         let highscoreLabel = SKLabelNode(text: "High score: \(highscoreVal)")
@@ -43,6 +45,7 @@ extension GameScene {
         self.addChild(highscoreLabel)
     }
     
+    /// Add the timer label to the game scene.
     func createTimerLabel() {
         let clock = SKSpriteNode(imageNamed: "Clock")
         clock.setScale(0.75)
@@ -60,11 +63,13 @@ extension GameScene {
         self.addChild(self.timerLabel)
     }
     
+    /// Adds the lives label to the game scene.
     func createLivesLabel() {
         self.lives[self.livesValue].position = CGPoint(x: frame.maxX - 45.0, y: frame.maxY - 40.0)
         self.addChild(self.lives[self.livesValue])
     }
     
+    /// Adds the "GAME OVER" label to the end game scene.
     func createLossLabel() {
         let lossLabel = SKLabelNode(text: "GAME OVER")
         lossLabel.name = "lossLabel"
@@ -75,6 +80,7 @@ extension GameScene {
         self.addChild(lossLabel)
     }
     
+    /// Adds the final score label to the end game scene.
     func createFinalScoreLabel() {
         let finalScore = SKLabelNode(text: "Final Score: \(self.scoreValue)")
         if self.scoreValue > UserDefaults.standard.integer(forKey: "high_score") {
@@ -88,14 +94,17 @@ extension GameScene {
         self.addChild(finalScore)
     }
     
-    func createGameStartCountdownLabel(label: SKLabelNode) {
-        label.position.y += 10.0
-        label.fontName = self.font
-        label.fontSize = 48
-        label.blendMode = .replace
-        self.addChild(label)
+    /// Adds the countdown label to the beginning of the game scene.
+    func createGameStartCountdownLabel() {
+        self.gameStartCountdownLabel.position.y += 10.0
+        self.gameStartCountdownLabel.fontName = self.font
+        self.gameStartCountdownLabel.fontSize = 48
+        self.gameStartCountdownLabel.blendMode = .replace
+        self.addChild(self.gameStartCountdownLabel)
     }
     
+    /// Adds the combo label to the game scene that removes itself from the scene after a second.
+    /// - Parameter pos: Position of the label in the game scene.
     func createComboLabel(pos: CGPoint) {
         let combo = SKLabelNode(text: "x\(self.combo)")
         combo.fontName = "Chalkduster"
@@ -109,6 +118,8 @@ extension GameScene {
         combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
     }
     
+    /// Adds the +10 label to the game scene that removes itself from the scene after a second.
+    /// - Parameter pos: Position of the label in the game scene.
     func createTreatAddTimeLabel(pos: CGPoint) {
         let time = SKLabelNode(text: "+10⏱")
         time.fontName = "Chalkduster"
@@ -120,6 +131,8 @@ extension GameScene {
         time.run(SKAction.sequence([group, SKAction.removeFromParent()]))
     }
     
+    /// Adds the bonus score label to the game scene that removes itself from the scene after a two seconds.
+    /// - Parameter bonus: The score bonus to be added to the game scene score.
     func createBonusScoreLabel(bonus: Int) {
         let combo = SKLabelNode(text: "+\(bonus) Bonus")
         combo.verticalAlignmentMode = .top
@@ -132,32 +145,23 @@ extension GameScene {
         combo.run(SKAction.sequence([group, SKAction.removeFromParent()]))
     }
     
+    /// Creates a particle emitter and plays a sound at the position of the inputted node. Self deletes after completion.
+    /// - Parameter node: The SKSpriteNode to be replaced by the SKEmitterNode
     func createParticleEmitterAndSound(node: SKSpriteNode) {
-        if let emitter = SKEmitterNode(fileNamed: "spark") {
-            let sound = node.name!.contains("Bomb") ? self.glassBreakSound : self.spriteBreakSound
-
-            emitter.position = node.position
-            emitter.particleColorSequence = nil
-            emitter.particleColor = node.color
-            self.addChild(emitter)
-
-            let wait = SKAction.wait(forDuration: emitter.particleLifetime)
-            let remove = SKAction.removeFromParent()
-            let sequence = SKAction.sequence([sound, wait, remove])
-            emitter.run(sequence)
-        }
+        guard let emitter = SKEmitterNode(fileNamed: "spark") else { return }
+        emitter.position = node.position
+        emitter.particleColorSequence = nil
+        emitter.particleColor = node.color
+        self.addChild(emitter)
+        
+        let sound = node.name!.contains("Bomb") ? self.glassBreakSound : self.spriteBreakSound
+        let wait = SKAction.wait(forDuration: emitter.particleLifetime)
+        let remove = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([sound, wait, remove])
+        emitter.run(sequence)
     }
     
-    func drawClaw(start: CGPoint, end: CGPoint) {
-        let path = CGMutablePath()
-        path.move(to: start)
-        path.addLine(to: end)
-        let claw = SKShapeNode(path: path)
-        claw.lineWidth = 4
-        claw.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
-        self.addChild(claw)
-    }
-    
+    /// Flashes the background red. Called when the user swipes a bomb.
     func flashScreenRed() {
         let pulseRed = SKAction.sequence([
             SKAction.colorize(with: .red, colorBlendFactor: 0.4, duration: 0.15),
