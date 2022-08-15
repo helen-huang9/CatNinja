@@ -120,7 +120,7 @@ struct SpriteInfoView: View {
     var body: some View {
         ZStack {
             ZStack {
-                Image("Sprite_Info-1")
+                Image("Sprite_Info")
                     .scaleEffect(0.9)
                     .position(x: width/2, y: height/2)
                 
