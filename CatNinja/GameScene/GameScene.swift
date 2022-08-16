@@ -46,13 +46,14 @@ class GameScene: SKScene, ObservableObject {
     // Textures
     let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
     let spriteAtlas = SKTextureAtlas(named: "sprites")
-    let spriteNames = ["Blue_Yarn_Ball", "Pink_Yarn_Ball", "Orange_Yarn_Ball", "Butterfly_Toy", "Feather_Toy", "Mouse_Toy", "Bomb", "Treat"]
-    let spriteColors = [UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0),
-                        UIColor(red: 0.969, green: 0.616, blue: 0.867, alpha: 1.0),
-                        UIColor(red: 0.984, green: 0.494, blue: 0.267, alpha: 1.0),
-                        UIColor(red: 0.925, green: 0.267, blue: 0.298, alpha: 1.0),
-                        UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0),
-                        UIColor(red: 0.878, green: 0.816, blue: 0.365, alpha: 1.0),
-                        UIColor(red: 0.19, green: 0.39, blue: 0.254, alpha: 1.0),
-                        UIColor(red: 0.68, green: 0.56, blue: 0.43, alpha: 1.0)]
+    let sprites = [
+        Sprite(imgName: "Blue_Yarn_Ball", color: UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Pink_Yarn_Ball", color: UIColor(red: 0.969, green: 0.616, blue: 0.867, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Orange_Yarn_Ball", color: UIColor(red: 0.984, green: 0.494, blue: 0.267, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Butterfly_Toy", color: UIColor(red: 0.925, green: 0.267, blue: 0.298, alpha: 1.0), scale: 3.5),
+        Sprite(imgName: "Feather_Toy", color: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Mouse_Toy", color: UIColor(red: 0.878, green: 0.816, blue: 0.365, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Bomb", color: UIColor(red: 0.19, green: 0.39, blue: 0.254, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Treat", color: UIColor(red: 0.68, green: 0.56, blue: 0.43, alpha: 1.0), scale: 3)
+    ]
 }

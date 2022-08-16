@@ -23,6 +23,14 @@ enum SpawnRateRange {
     static let treatRate = 96...100
 }
 
+
+/// Sprite-specific information
+struct Sprite {
+    var imgName: String
+    var color: UIColor
+    var scale: CGFloat
+}
+
 extension GameScene {
     /// Creates and runs an SKAction that spawns a random tappable sprites into the GameScene every 0.9 seconds.
     /// The spawned sprites have random initial positions out of frame with random initial velocities that generally point
@@ -56,25 +64,23 @@ extension GameScene {
     /// Creates a tappable sprite with a random initial position and velocity and adds it to the GameScene.
     /// - Parameter num: An int within [1, 100] that determines which sprite to create based on the SpawnRateRange.
     func addSpriteToSceneWithRandomization(num: Int) {
-        var index: Int?
+        var sprite: Sprite?
         switch num {
         case SpawnRateRange.ballRate:
-            index = Int.random(in: 0...2) // Blue, Pink, Orange
+            sprite = self.sprites[Int.random(in: 0...2)] // Blue, Pink, Orange
         case SpawnRateRange.toyRate:
-            index = Int.random(in: 3...5) // Mouse, Feather, Butterfly
+            sprite = self.sprites[Int.random(in: 3...5)] // Mouse, Feather, Butterfly
         case SpawnRateRange.bombRate:
-            index = 6 // Bomb
+            sprite = self.sprites[6] // Bomb
         case SpawnRateRange.treatRate:
-            index = 7 // Treat
+            sprite = self.sprites[7] // Treat
         default:
             return
         }
         
         let posDir = getRandPointAndDirInScene()
         let vel = getRandVelocityTowardsCenterOfScene(posDir: posDir)
-        let imgName = self.spriteNames[index!]
-        let color = self.spriteColors[index!]
-        addSpriteToScene(pos: posDir.pos, velocity: vel, imgName: imgName, texColor: color, scale: 3.0)
+        addSpriteToScene(pos: posDir.pos, velocity: vel, sprite: sprite!)
     }
 
     /// Initializes an SKSpriteNode with the inputted parameters and a physicsBody and adds it to the GameScene.
@@ -85,24 +91,24 @@ extension GameScene {
     ///   - imgName: File name of the sprite image.
     ///   - texColor: Base color of the sprite. Used for particle effects.
     ///   - scale: How much to scale the size of the SKSpriteNode by.
-    func addSpriteToScene(pos: CGPoint, velocity: CGVector, imgName: String, texColor: UIColor, scale: CGFloat) {
-        let spriteNode = SKSpriteNode(texture: self.spriteAtlas.textureNamed(imgName))
-        spriteNode.color = texColor
-        spriteNode.name = imgName
-        spriteNode.setScale(scale)
+    func addSpriteToScene(pos: CGPoint, velocity: CGVector, sprite: Sprite) {
+        let spriteNode = SKSpriteNode(texture: self.spriteAtlas.textureNamed(sprite.imgName))
+        spriteNode.color = sprite.color
+        spriteNode.name = sprite.imgName
+        spriteNode.setScale(sprite.scale)
         spriteNode.position = pos
-        spriteNode.physicsBody = SKPhysicsBody(texture: self.spriteAtlas.textureNamed(imgName), size: spriteNode.size)
+        spriteNode.physicsBody = SKPhysicsBody(texture: self.spriteAtlas.textureNamed(sprite.imgName), size: spriteNode.size)
         spriteNode.physicsBody!.velocity = velocity
         spriteNode.physicsBody!.angularVelocity = CGFloat.random(in: -3.0...3.0)
         spriteNode.physicsBody!.collisionBitMask = 0x0 // prevents collision with other sprites
         
-        if (imgName.contains("Bomb")) {
+        if (sprite.imgName.contains("Bomb")) {
             if let emitter = SKEmitterNode(fileNamed: "smoke") {
                 emitter.name = "smoke"
                 emitter.isUserInteractionEnabled = false
                 spriteNode.addChild(emitter)
             }
-        } else if (imgName.contains("Treat")) {
+        } else if (sprite.imgName.contains("Treat")) {
             if let emitter = SKEmitterNode(fileNamed: "magic") {
                 emitter.isUserInteractionEnabled = false
                 spriteNode.addChild(emitter)
