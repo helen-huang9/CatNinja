@@ -103,9 +103,10 @@ extension GameScene {
         spriteNode.physicsBody!.collisionBitMask = 0x0 // prevents collision with other sprites
         
         if (sprite.imgName.contains("Bomb")) {
-            if let emitter = SKEmitterNode(fileNamed: "smoke") {
-                emitter.name = "smoke"
+            if let emitter = SKEmitterNode(fileNamed: "water_droplets") {
+                emitter.name = "water_droplets"
                 emitter.isUserInteractionEnabled = false
+                emitter.position.y = -9
                 spriteNode.addChild(emitter)
             }
         } else if (sprite.imgName.contains("Treat")) {

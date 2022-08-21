@@ -73,7 +73,7 @@ extension GameScene {
     func createLossLabel() {
         let lossLabel = SKLabelNode(text: "GAME OVER")
         lossLabel.name = "lossLabel"
-        lossLabel.position.y += 50.0
+        lossLabel.position.y += 70.0
         lossLabel.fontName = self.font
         lossLabel.fontSize = 48
         lossLabel.blendMode = .replace
@@ -87,7 +87,7 @@ extension GameScene {
             finalScore.text = "✨ New High Score: \(self.scoreValue) ✨"
         }
         finalScore.name = "finalScore"
-        finalScore.position.y += 10.0
+        finalScore.position.y += 30.0
         finalScore.fontName = self.font
         finalScore.fontSize = 24
         finalScore.blendMode = .replace
@@ -148,17 +148,41 @@ extension GameScene {
     /// Creates a particle emitter and plays a sound at the position of the inputted node. Self deletes after completion.
     /// - Parameter node: The SKSpriteNode to be replaced by the SKEmitterNode
     func createParticleEmitterAndSound(node: SKSpriteNode) {
-        guard let emitter = SKEmitterNode(fileNamed: "spark") else { return }
-        emitter.position = node.position
-        emitter.particleColorSequence = nil
-        emitter.particleColor = node.color
-        self.addChild(emitter)
+        var emitter: SKEmitterNode?
+        if node.name!.contains("Bomb") {
+            emitter = SKEmitterNode(fileNamed: "rain")
+        } else {
+            emitter = SKEmitterNode(fileNamed: "spark")
+            emitter!.particleColorSequence = nil
+            emitter!.particleColor = node.color
+        }
+        emitter!.position = node.position
+        self.addChild(emitter!)
         
-        let sound = node.name!.contains("Bomb") ? self.glassBreakSound : self.spriteBreakSound
-        let wait = SKAction.wait(forDuration: emitter.particleLifetime)
+        /// Sequence
+        let wait = SKAction.wait(forDuration: emitter!.particleLifetime)
         let remove = SKAction.removeFromParent()
-        let sequence = SKAction.sequence([sound, wait, remove])
-        emitter.run(sequence)
+        if node.name!.contains("Bomb") {
+            emitter!.run(SKAction.sequence([
+                self.waterSplashSound,
+                self.yowlSound,
+                wait,
+                remove
+            ]))
+        } else if node.name!.contains("Toy") {
+            emitter!.run(SKAction.sequence([
+                self.spriteBreakSound,
+                Int.random(in: 1...2) == 1 ? self.toy1 : self.toy2,
+                wait,
+                remove
+            ]))
+        } else {
+            emitter!.run(SKAction.sequence([
+                self.spriteBreakSound,
+                wait,
+                remove
+            ]))
+        }
     }
     
     /// Flashes the background red. Called when the user swipes a bomb.

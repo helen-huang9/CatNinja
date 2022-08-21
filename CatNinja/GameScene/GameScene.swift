@@ -40,8 +40,13 @@ class GameScene: SKScene, ObservableObject {
     var combo = 0
         
     // Sounds
-    var glassBreakSound = SKAction.playSoundFileNamed("glass_break.m4a", waitForCompletion: false)
-    var spriteBreakSound = SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false)
+    let waterSplashSound = SKAction.playSoundFileNamed("splash.m4a", waitForCompletion: false)
+    let spriteBreakSound = SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false)
+    let meow1Sound = SKAction.playSoundFileNamed("meow1.m4a", waitForCompletion: false)
+    let meow2Sound = SKAction.playSoundFileNamed("meow2.m4a", waitForCompletion: false)
+    let yowlSound = SKAction.playSoundFileNamed("yowl.m4a", waitForCompletion: false)
+    let toy1 = SKAction.playSoundFileNamed("toy1.m4a", waitForCompletion: false)
+    let toy2 = SKAction.playSoundFileNamed("toy2.m4a", waitForCompletion: false)
     
     // Textures
     let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
@@ -53,7 +58,7 @@ class GameScene: SKScene, ObservableObject {
         Sprite(imgName: "Butterfly_Toy", color: UIColor(red: 0.925, green: 0.267, blue: 0.298, alpha: 1.0), scale: 3.5),
         Sprite(imgName: "Feather_Toy", color: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), scale: 3),
         Sprite(imgName: "Mouse_Toy", color: UIColor(red: 0.878, green: 0.816, blue: 0.365, alpha: 1.0), scale: 3),
-        Sprite(imgName: "Bomb", color: UIColor(red: 0.19, green: 0.39, blue: 0.254, alpha: 1.0), scale: 3),
-        Sprite(imgName: "Treat", color: UIColor(red: 0.68, green: 0.56, blue: 0.43, alpha: 1.0), scale: 3)
+        Sprite(imgName: "Bomb", color: UIColor(red: 0.765, green: 0.869, blue: 0.933, alpha: 1.0), scale: 3),
+        Sprite(imgName: "Treat", color: UIColor(red: 0.68, green: 0.56, blue: 0.43, alpha: 1.0), scale: 2)
     ]
 }
