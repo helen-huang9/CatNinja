@@ -17,8 +17,8 @@ extension GameScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        clawSlice(touches: touches)
         explodeTouchedSprites(touches: touches)
+        clawSlice(touches: touches)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -159,8 +159,10 @@ extension GameScene {
         let noiseY = Double.random(in: -noiseMagY!...noiseMagY!)
         var velocity = CGVector(dx: noiseX - posDir.pos.x, dy: noiseY - posDir.pos.y)
         let speedIncrease = CGFloat(self.scoreValue)/10000.0
-        velocity.dx *= 1.2 + speedIncrease
-        velocity.dy *= 1.2 + speedIncrease
+        
+        velocity.dx *= self.velocityMultiplier + speedIncrease
+        velocity.dy *= self.velocityMultiplier + speedIncrease
+        
         return velocity
     }
 }

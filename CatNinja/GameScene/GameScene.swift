@@ -25,6 +25,9 @@ class GameScene: SKScene, ObservableObject {
     // Game Screen size
     var bufferFrame: CGRect?
     
+    // iPhone vs iPad values
+    let velocityMultiplier = UIDevice.current.userInterfaceIdiom == .phone ? 1.1 : 0.8
+    
     // Labels, Score, Lives, Timer, Combo
     let font = "Copperplate"
     var scoreLabel = SKLabelNode()
