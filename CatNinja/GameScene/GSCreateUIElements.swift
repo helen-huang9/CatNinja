@@ -165,18 +165,26 @@ extension GameScene {
         if node.name!.contains("Bomb") {
             emitter!.run(SKAction.sequence([
                 self.waterSplashSound,
-                self.yowlSound,
+                Int.random(in: 1...2) == 1 ? self.angry1Sound : self.angry2Sound,
                 wait,
                 remove
             ]))
-        } else if node.name!.contains("Toy") {
+        } else if node.name!.contains("Mouse") {
             emitter!.run(SKAction.sequence([
                 self.spriteBreakSound,
-                Int.random(in: 1...2) == 1 ? self.toy1 : self.toy2,
+                Int.random(in: 1...2) == 1 ? self.toy1Sound : self.toy2Sound,
                 wait,
                 remove
             ]))
-        } else {
+        } else if node.name!.contains("Treat") {
+            emitter!.run(SKAction.sequence([
+                self.spriteBreakSound,
+                self.collectSound,
+                wait,
+                remove
+            ]))
+        }
+        else {
             emitter!.run(SKAction.sequence([
                 self.spriteBreakSound,
                 wait,

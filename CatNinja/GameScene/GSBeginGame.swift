@@ -54,5 +54,22 @@ extension GameScene {
         self.beginTimer()
         self.continuouslySpawnSprites()
         self.continuouslyDeleteSpritesOutOfFrame()
+        self.beginMeowing()
+    }
+    
+    /// Begins meowing SKAction loop that lasts throughout the game play.
+    func beginMeowing() {
+        let sequence = SKAction.sequence([
+            SKAction.run { self.randomlyMeow() },
+            SKAction.wait(forDuration: 10)
+        ])
+        self.run(SKAction.repeatForever(sequence), withKey: "meowing")
+    }
+    
+    /// Randomly play a meow sound
+    func randomlyMeow() {
+        if Int.random(in: 1...3) == 1 {
+            if Int.random(in: 1...2) == 1 { self.run(self.meow1Sound) } else { self.run(self.meow2Sound) }
+        }
     }
 }

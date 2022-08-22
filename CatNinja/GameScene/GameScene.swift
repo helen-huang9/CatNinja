@@ -44,9 +44,11 @@ class GameScene: SKScene, ObservableObject {
     let spriteBreakSound = SKAction.playSoundFileNamed("sprite_destroyed.m4a", waitForCompletion: false)
     let meow1Sound = SKAction.playSoundFileNamed("meow1.m4a", waitForCompletion: false)
     let meow2Sound = SKAction.playSoundFileNamed("meow2.m4a", waitForCompletion: false)
-    let yowlSound = SKAction.playSoundFileNamed("yowl.m4a", waitForCompletion: false)
-    let toy1 = SKAction.playSoundFileNamed("toy1.m4a", waitForCompletion: false)
-    let toy2 = SKAction.playSoundFileNamed("toy2.m4a", waitForCompletion: false)
+    let angry1Sound = SKAction.playSoundFileNamed("angry1.m4a", waitForCompletion: false)
+    let angry2Sound = SKAction.playSoundFileNamed("angry2.m4a", waitForCompletion: false)
+    let toy1Sound = SKAction.playSoundFileNamed("toy1.m4a", waitForCompletion: false)
+    let toy2Sound = SKAction.playSoundFileNamed("toy2.m4a", waitForCompletion: false)
+    let collectSound = SKAction.playSoundFileNamed("collect.m4a", waitForCompletion: false)
     
     // Textures
     let background = SKSpriteNode(imageNamed: "CatNinja_Background2")

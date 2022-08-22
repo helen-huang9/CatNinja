@@ -22,17 +22,19 @@
 		BF5FB4FC2798F067003570B9 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FB4FB2798F067003570B9 /* GameSceneView.swift */; };
 		BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF5FB4FF2798F7FB003570B9 /* GameScene.sks */; };
 		BF6099DA289D911D0026F3FE /* game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BF6099D9289D911D0026F3FE /* game_over.wav */; };
-		BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */; };
 		BF73113327A22BF4003AFAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73113227A22BF4003AFAA3 /* GameScene.swift */; };
 		BF739A4028B2A6FE00F8E879 /* water_droplets.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF739A3E28B2A6FE00F8E879 /* water_droplets.sks */; };
 		BF739A4128B2A6FE00F8E879 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF739A3F28B2A6FE00F8E879 /* Assets.xcassets */; };
 		BF739A4328B2ADED00F8E879 /* rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF739A4228B2ADED00F8E879 /* rain.sks */; };
-		BF739A5B28B2C0B600F8E879 /* meow1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF739A5A28B2C0B600F8E879 /* meow1.m4a */; };
 		BF739A5D28B2C10F00F8E879 /* meow2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF739A5C28B2C10F00F8E879 /* meow2.m4a */; };
 		BF739A5F28B2C17300F8E879 /* splash.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF739A5E28B2C17300F8E879 /* splash.m4a */; };
-		BF739A6128B2C1D700F8E879 /* toy1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF739A6028B2C1D700F8E879 /* toy1.m4a */; };
-		BF739A6328B2C23400F8E879 /* toy2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF739A6228B2C23400F8E879 /* toy2.m4a */; };
-		BF739A6528B2C27F00F8E879 /* yowl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF739A6428B2C27F00F8E879 /* yowl.m4a */; };
+		BF9045AD28B40305001FFBE2 /* meow1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045AC28B40305001FFBE2 /* meow1.m4a */; };
+		BF9045B428B4062A001FFBE2 /* sprite_destroyed.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045B328B4062A001FFBE2 /* sprite_destroyed.m4a */; };
+		BF9045BD28B40D6A001FFBE2 /* angry1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045B928B40D6A001FFBE2 /* angry1.m4a */; };
+		BF9045BE28B40D6A001FFBE2 /* toy1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045BA28B40D6A001FFBE2 /* toy1.m4a */; };
+		BF9045BF28B40D6A001FFBE2 /* angry2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045BB28B40D6A001FFBE2 /* angry2.m4a */; };
+		BF9045C028B40D6A001FFBE2 /* toy2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045BC28B40D6A001FFBE2 /* toy2.m4a */; };
+		BF9045C428B41258001FFBE2 /* collect.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BF9045C328B41258001FFBE2 /* collect.m4a */; };
 		BFA583442882171F009E7FB7 /* GSCreateUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */; };
 		BFDD978E28A6FA7D002C699E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFDD978D28A6FA7D002C699E /* README.md */; };
 		BFE45EBA27B85BF200600F56 /* GSCreateSpriteNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */; };
@@ -55,17 +57,19 @@
 		BF5FB4FB2798F067003570B9 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		BF5FB4FF2798F7FB003570B9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		BF6099D9289D911D0026F3FE /* game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = game_over.wav; sourceTree = "<group>"; };
-		BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprite_destroyed.m4a; sourceTree = "<group>"; };
 		BF73113227A22BF4003AFAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		BF739A3E28B2A6FE00F8E879 /* water_droplets.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = water_droplets.sks; sourceTree = "<group>"; };
 		BF739A3F28B2A6FE00F8E879 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF739A4228B2ADED00F8E879 /* rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = rain.sks; sourceTree = "<group>"; };
-		BF739A5A28B2C0B600F8E879 /* meow1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = meow1.m4a; sourceTree = "<group>"; };
 		BF739A5C28B2C10F00F8E879 /* meow2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = meow2.m4a; sourceTree = "<group>"; };
 		BF739A5E28B2C17300F8E879 /* splash.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = splash.m4a; sourceTree = "<group>"; };
-		BF739A6028B2C1D700F8E879 /* toy1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = toy1.m4a; sourceTree = "<group>"; };
-		BF739A6228B2C23400F8E879 /* toy2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = toy2.m4a; sourceTree = "<group>"; };
-		BF739A6428B2C27F00F8E879 /* yowl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = yowl.m4a; sourceTree = "<group>"; };
+		BF9045AC28B40305001FFBE2 /* meow1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = meow1.m4a; sourceTree = "<group>"; };
+		BF9045B328B4062A001FFBE2 /* sprite_destroyed.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sprite_destroyed.m4a; sourceTree = "<group>"; };
+		BF9045B928B40D6A001FFBE2 /* angry1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = angry1.m4a; sourceTree = "<group>"; };
+		BF9045BA28B40D6A001FFBE2 /* toy1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = toy1.m4a; sourceTree = "<group>"; };
+		BF9045BB28B40D6A001FFBE2 /* angry2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = angry2.m4a; sourceTree = "<group>"; };
+		BF9045BC28B40D6A001FFBE2 /* toy2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = toy2.m4a; sourceTree = "<group>"; };
+		BF9045C328B41258001FFBE2 /* collect.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = collect.m4a; sourceTree = "<group>"; };
 		BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCreateUIElements.swift; sourceTree = "<group>"; };
 		BFDD978D28A6FA7D002C699E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCreateSpriteNodes.swift; sourceTree = "<group>"; };
@@ -85,9 +89,9 @@
 		BF28A312289E162F0053A3C7 /* GameScene */ = {
 			isa = PBXGroup;
 			children = (
-				BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */,
 				BF5FB4FF2798F7FB003570B9 /* GameScene.sks */,
 				BF73113227A22BF4003AFAA3 /* GameScene.swift */,
+				BFE45EB927B85BF200600F56 /* GSCreateSpriteNodes.swift */,
 				BF28A315289EC8630053A3C7 /* GSPaused.swift */,
 				BF28A313289E16E10053A3C7 /* GSBeginGame.swift */,
 				BFA583432882171F009E7FB7 /* GSCreateUIElements.swift */,
@@ -117,16 +121,16 @@
 		BF5FB4EC2798F00A003570B9 /* CatNinja */ = {
 			isa = PBXGroup;
 			children = (
-				BF6099D6289D90FF0026F3FE /* SoundEffects */,
+				BF5FB4F12798F00B003570B9 /* Assets.xcassets */,
 				BF2FA2792881C86500C62C1C /* sprites.atlas */,
+				BFFA523728904A27002D3C45 /* ParticleEffects */,
+				BF6099D6289D90FF0026F3FE /* SoundEffects */,
 				BF5FB4ED2798F00A003570B9 /* CatNinjaApp.swift */,
 				BF5FB4EF2798F00A003570B9 /* ContentView.swift */,
-				BF5FB4F12798F00B003570B9 /* Assets.xcassets */,
-				BF5FB4F32798F00B003570B9 /* Preview Content */,
 				BF5FB4FB2798F067003570B9 /* GameSceneView.swift */,
 				BF28A30E289DD47E0053A3C7 /* ButtonStyles.swift */,
 				BF28A312289E162F0053A3C7 /* GameScene */,
-				BFFA523728904A27002D3C45 /* ParticleEffects */,
+				BF5FB4F32798F00B003570B9 /* Preview Content */,
 			);
 			path = CatNinja;
 			sourceTree = "<group>";
@@ -142,14 +146,16 @@
 		BF6099D6289D90FF0026F3FE /* SoundEffects */ = {
 			isa = PBXGroup;
 			children = (
+				BF9045C328B41258001FFBE2 /* collect.m4a */,
 				BF6099D9289D911D0026F3FE /* game_over.wav */,
-				BF6099DC289D91820026F3FE /* sprite_destroyed.m4a */,
 				BF739A5E28B2C17300F8E879 /* splash.m4a */,
-				BF739A5A28B2C0B600F8E879 /* meow1.m4a */,
+				BF9045AC28B40305001FFBE2 /* meow1.m4a */,
 				BF739A5C28B2C10F00F8E879 /* meow2.m4a */,
-				BF739A6428B2C27F00F8E879 /* yowl.m4a */,
-				BF739A6028B2C1D700F8E879 /* toy1.m4a */,
-				BF739A6228B2C23400F8E879 /* toy2.m4a */,
+				BF9045B328B4062A001FFBE2 /* sprite_destroyed.m4a */,
+				BF9045B928B40D6A001FFBE2 /* angry1.m4a */,
+				BF9045BB28B40D6A001FFBE2 /* angry2.m4a */,
+				BF9045BA28B40D6A001FFBE2 /* toy1.m4a */,
+				BF9045BC28B40D6A001FFBE2 /* toy2.m4a */,
 			);
 			path = SoundEffects;
 			sourceTree = "<group>";
@@ -224,21 +230,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF739A5B28B2C0B600F8E879 /* meow1.m4a in Resources */,
-				BF739A6528B2C27F00F8E879 /* yowl.m4a in Resources */,
-				BF6099DF289D9BDE0026F3FE /* sprite_destroyed.m4a in Resources */,
+				BF9045AD28B40305001FFBE2 /* meow1.m4a in Resources */,
+				BF9045C428B41258001FFBE2 /* collect.m4a in Resources */,
 				BF127C2E288F31D300849D38 /* magic.sks in Resources */,
 				BF5FB4F52798F00B003570B9 /* Preview Assets.xcassets in Resources */,
 				BF6099DA289D911D0026F3FE /* game_over.wav in Resources */,
-				BF739A6128B2C1D700F8E879 /* toy1.m4a in Resources */,
-				BF739A6328B2C23400F8E879 /* toy2.m4a in Resources */,
+				BF9045B428B4062A001FFBE2 /* sprite_destroyed.m4a in Resources */,
 				BF739A4128B2A6FE00F8E879 /* Assets.xcassets in Resources */,
+				BF9045C028B40D6A001FFBE2 /* toy2.m4a in Resources */,
 				BF739A4328B2ADED00F8E879 /* rain.sks in Resources */,
 				BF739A5D28B2C10F00F8E879 /* meow2.m4a in Resources */,
 				BF739A5F28B2C17300F8E879 /* splash.m4a in Resources */,
 				BF2FA2842881E6F600C62C1C /* spark.sks in Resources */,
+				BF9045BE28B40D6A001FFBE2 /* toy1.m4a in Resources */,
+				BF9045BF28B40D6A001FFBE2 /* angry2.m4a in Resources */,
 				BF5FB5002798F7FB003570B9 /* GameScene.sks in Resources */,
 				BF739A4028B2A6FE00F8E879 /* water_droplets.sks in Resources */,
+				BF9045BD28B40D6A001FFBE2 /* angry1.m4a in Resources */,
 				BF2FA27A2881C86500C62C1C /* sprites.atlas in Resources */,
 				BFDD978E28A6FA7D002C699E /* README.md in Resources */,
 				BF5FB4F22798F00B003570B9 /* Assets.xcassets in Resources */,

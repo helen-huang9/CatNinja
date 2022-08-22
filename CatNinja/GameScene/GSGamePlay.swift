@@ -42,9 +42,7 @@ extension GameScene {
     }
     
     /// Draws the claw shapes paths where the user swipes the screen.
-    /// - Parameters:
-    ///   - start: The starting point of the path to draw.
-    ///   - end: The end point of the path to draw.
+    /// - Parameter touches: Set of UITouches used to calculate the claw path.
     func clawSlice(touches: Set<UITouch>) {
         if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
@@ -61,6 +59,7 @@ extension GameScene {
     }
     
     /// Iterates through all touched sprites and destroys it. Updates any relevant game info like the score, llives, time, etc.
+    /// - Parameter touches: Set of UITouches to get all the sprites touched.
     func explodeTouchedSprites(touches: Set<UITouch>) {
         if self.gameStatus == GameState.isPlaying {
             guard let touch = touches.first else { return }
@@ -96,6 +95,7 @@ extension GameScene {
     }
     
     /// Updates the combo.
+    /// - Parameter name: Name of the sprite.
     func updateCombo(name: String) {
         if name.contains("Bomb") {
             endCombo()
@@ -151,6 +151,7 @@ extension GameScene {
             self.gameStatus = GameState.end
             self.removeAction(forKey: "spawnSprites")
             self.removeAction(forKey: "timer")
+            self.removeAction(forKey: "meowing")
             showEndScreen()
         }
     }

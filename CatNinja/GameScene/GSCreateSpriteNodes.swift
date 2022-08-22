@@ -84,13 +84,11 @@ extension GameScene {
     }
 
     /// Initializes an SKSpriteNode with the inputted parameters and a physicsBody and adds it to the GameScene.
-    ///  If the sprite is a Bomb or Treat, add a child SKEmitterNode to the SKSpriteNode for particle effects.
+    /// If the sprite is a Bomb or Treat, add a child SKEmitterNode to the SKSpriteNode for particle effects.
     /// - Parameters:
     ///   - pos: Initial position of the SKSpriteNode.
     ///   - velocity: Initial velocity of the SKSpriteNode.
-    ///   - imgName: File name of the sprite image.
-    ///   - texColor: Base color of the sprite. Used for particle effects.
-    ///   - scale: How much to scale the size of the SKSpriteNode by.
+    ///   - sprite: Sprite containing texture information.
     func addSpriteToScene(pos: CGPoint, velocity: CGVector, sprite: Sprite) {
         let spriteNode = SKSpriteNode(texture: self.spriteAtlas.textureNamed(sprite.imgName))
         spriteNode.color = sprite.color
@@ -119,7 +117,7 @@ extension GameScene {
     }
     
     /// Returns a tuple of a random point off-screen and the corresponding ScreenSide the point is located.
-    /// - Returns: A random point off-screen and the corresponding ScreenSide.
+    /// - Returns: A tuple containing a random point off-screen and the corresponding ScreenSide.
     func getRandPointAndDirInScene() -> (pos: CGPoint, dir: ScreenSide) {
         let dir = ScreenSide.allCases.randomElement()!
         let buffer = 30.0
