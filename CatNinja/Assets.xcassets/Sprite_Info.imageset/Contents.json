@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Sprite_Info.jpg",
+      "filename" : "Sprite_Info.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Sprite_Info-1.jpg",
+      "filename" : "Sprite_Info-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Sprite_Info-2.jpg",
+      "filename" : "Sprite_Info-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

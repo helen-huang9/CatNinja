@@ -54,7 +54,8 @@ class GameScene: SKScene, ObservableObject {
     let collectSound = SKAction.playSoundFileNamed("collect.m4a", waitForCompletion: false)
     
     // Textures
-    let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
+//    let background = SKSpriteNode(imageNamed: "CatNinja_Background2")
+    let background = SKSpriteNode(imageNamed: "CatNinja_Background")
     let spriteAtlas = SKTextureAtlas(named: "sprites")
     let sprites = [
         Sprite(imgName: "Blue_Yarn_Ball", color: UIColor(red: 0.495, green: 0.639, blue: 0.788, alpha: 1.0), scale: 3),
