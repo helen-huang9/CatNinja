@@ -7,3 +7,5 @@ Cat Ninja is an iOS game created in Swift using SwiftUI and SpriteKit. As a cat 
 *Soon to be released on the app store as* Samurai Cat
 
 https://user-images.githubusercontent.com/77767589/188294515-2932c573-0a4b-4f1b-a011-e1593bf668f4.mov
+
+Copyright 2022 Helen Huang
